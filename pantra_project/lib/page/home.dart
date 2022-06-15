@@ -1,8 +1,9 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace, prefer_const_literals_to_create_immutables
 
 import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -87,7 +88,16 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(197, 93, 80, 1),
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Color.fromRGBO(255,255,255,1),
+        color: Color.fromRGBO(251,203,92,1),
+        items: [
+        Icon(Icons.home,color: Color.fromRGBO(60,108,180,1),),
+        Icon(Icons.search,color: Color.fromRGBO(60,108,180,1),),
+        Icon(Icons.person,color: Color.fromRGBO(60,108,180,1),),
+        Icon(Icons.delete,color: Color.fromRGBO(60,108,180,1),),
+      ]),
+      backgroundColor: Color.fromRGBO(255,255,255,1),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -99,7 +109,7 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.height * 0.04,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Color.fromRGBO(60,108,180,1)),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.01,
@@ -109,12 +119,11 @@ class _HomeState extends State<Home> {
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.height * 0.02,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                  color: Color.fromRGBO(60,108,180,1)),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            
+            ),          
             //make a carousel with 10 images from the web
             Container(
               child: CarouselSlider(
@@ -133,7 +142,7 @@ class _HomeState extends State<Home> {
                         //change background to black
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color.fromRGBO(214, 124, 85, 1),
+                          //color: Color.fromRGBO(253,205,95, 1),
                         ),
                         margin: EdgeInsets.fromLTRB(
                             MediaQuery.of(context).size.height * 0.05,
