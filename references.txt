@@ -1,0 +1,5 @@
+delayed animation - https://www.youtube.com/watch?v=yVTjoy9sK1k
+splash screen - https://codingwithdhrumil.com/2020/04/how-to-create-flutter-splash-screen.html
+animation - https://www.youtube.com/watch?v=q0BBk9gDGT8
+slide animation - https://api.flutter.dev/flutter/widgets/SlideTransition-class.html
+svg - https://www.developerlibs.com/2019/06/flutter-draw-svg-vector-drawables.html
