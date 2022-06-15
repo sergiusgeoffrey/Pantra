@@ -66,7 +66,7 @@ flutter:
   fonts:
     - family: Recoleta
       fonts:
-        - asset: assets/Recoleta.otf
+        - asset: assets/fonts/Recoleta.otf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

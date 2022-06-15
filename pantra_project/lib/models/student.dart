@@ -1,16 +1,10 @@
-class Student{
-  // "nrp": "d11200468",
-  //           "nama": "Timothy Jefferson",
-  //           "fakultas": "Bisnis dan Ekonomi",
-  //           "program": "International Business Management",
-  //           "angkatan": 2020,
-  //           "photo_filepath": "https://bem-internal.petra.ac.id/reach/uploads/cv_photo/d11200468_Timothy JeffersonBlhziP1lX8.jpg"
+class Student {
   String nrp;
   String nama;
   String fakultas;
   String program;
   int angkatan;
-  String photo_filepath;
+  String photoFilepath;
 
   Student({
     required this.nrp,
@@ -18,7 +12,7 @@ class Student{
     required this.fakultas,
     required this.program,
     required this.angkatan,
-    required this.photo_filepath,
+    required this.photoFilepath,
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {
@@ -28,7 +22,7 @@ class Student{
       fakultas: json['fakultas'],
       program: json['program'],
       angkatan: json['angkatan'],
-      photo_filepath: json['photo_filepath'],
+      photoFilepath: json['photo_filepath'],
     );
   }
 }

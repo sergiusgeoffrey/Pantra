@@ -1,14 +1,10 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
-import 'package:pantra_project/class/event.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:pantra_project/class/student.dart';
+import 'package:pantra_project/models/student.dart';
 
-class studentService {
+class StudentService {
   Future<List<Student>> getAllData() async {
     DateTime nowJakarta = DateTime.now().toUtc().add(const Duration(hours: 7));
     String day = DateFormat('dd').format(nowJakarta);
@@ -21,8 +17,7 @@ class studentService {
         Uri.parse(
             "https://bem-internal.petra.ac.id/reach/api/student/index.php"),
         headers: {
-          'Header'
-              'Accept': 'application/json',
+          'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         });
 
@@ -37,7 +32,7 @@ class studentService {
             fakultas: jsonData['data'][i]['fakultas'],
             program: jsonData['data'][i]['program'],
             angkatan: jsonData['data'][i]['angkatan'],
-            photo_filepath: jsonData['data'][i]['photo_filepath'],
+            photoFilepath: jsonData['data'][i]['photo_filepath'],
           ),
         );
       }

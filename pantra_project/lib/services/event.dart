@@ -1,14 +1,10 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
-import 'package:pantra_project/class/event.dart';
+import 'package:pantra_project/models/event.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
 
-// ignore: camel_case_types
-class eventService {
+class EventService {
   Future<List<Event>> getAllData() async {
     DateTime nowJakarta = DateTime.now().toUtc().add(const Duration(hours: 7));
 
@@ -20,8 +16,7 @@ class eventService {
     final response = await http.get(
         Uri.parse("https://bem-internal.petra.ac.id/reach/api/event/index.php"),
         headers: {
-          'Header'
-              'Accept': 'application/json',
+          'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         });
 

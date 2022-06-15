@@ -114,7 +114,12 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 8,
             ),
-            const Text("PANTRA 2022", style: TextStyle(color: Colors.grey)),
+            const Text(
+              "est. MMXXII",
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
           ],
         ),
       ),
