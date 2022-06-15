@@ -20,23 +20,27 @@ class eventService {
     final response = await http.get(
         Uri.parse("https://bem-internal.petra.ac.id/reach/api/event/index.php"),
         headers: {
-          'Accept': 'application/json',
+          'Header'
+              'Accept': 'application/json',
           'Authorization': 'Bearer $token',
         });
 
-    print(response.statusCode);
-
     if (response.statusCode == 200) {
-      final json = "[${response.body}]";
-      final data = jsonDecode(json);
-      List<Event> list = [];
-      for (Map<String, dynamic> obj in data) {
-        Event event = Event.fromJson(obj);
-        list.add(event);
+      final Map jsonData = json.decode(response.body);
+      List<Event> events = [];
+      for (var i = 0; i < jsonData['data'].length; i++) {
+        events.add(Event(
+            name: jsonData['data'][i]['name'],
+            type: jsonData['data'][i]['type'],
+            status: jsonData['data'][i]['status'],
+            organizer: jsonData['data'][i]['organizer'],
+            url: jsonData['data'][i]['url'],
+            year: jsonData['data'][i]['year'],
+            posterFilepath: jsonData['data'][i]['posterFilepath']));
       }
-      return list;
+      return events;
     } else {
-      throw Exception("Failed to load data");
+      throw Exception('Failed to load album');
     }
   }
 }
