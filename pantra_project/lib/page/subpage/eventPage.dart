@@ -22,7 +22,7 @@ List<Event> events = [
       organizer: 'BEM UK Petra',
       url: 'http://unitedforothers.org/index.html',
       year: 2021,
-      poster_filepath:
+      posterFilepath:
           'https://bem-internal.petra.ac.id/reach/uploads/poster/United%20for%20Others%202021_trgJjOibeE.jpg'),
   Event(
       name: 'Linked Through LinkedIn 2021',
@@ -31,7 +31,7 @@ List<Event> events = [
       organizer: 'BEM UK Petra',
       url: 'https://www.instagram.com/lifeatbempetra/',
       year: 2021,
-      poster_filepath:
+      posterFilepath:
           'https://marketplace.canva.com/EAE5t9abmqM/1/0/1131w/canva-poster-restoran-ramah-lingkungan-bebas-sedotan-plastik-ilustrasi-polos-lucu-hijau-zamrud-B9l9LTbzQUI.jpg'),
   Event(
       name: 'Sosialisasi Pilkada 2020',
@@ -40,7 +40,7 @@ List<Event> events = [
       organizer: 'BEM UK Petra',
       url: 'https://www.instagram.com/bempetra/',
       year: 2021,
-      poster_filepath:
+      posterFilepath:
           'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/covid-19-corona-virus-prevention-poster-design-template-7eafeb97181606ad03bbe2e56324593c_screen.jpg?ts=1637005703'),
   Event(
       name: 'LKMM-TM XXX',
@@ -49,7 +49,7 @@ List<Event> events = [
       organizer: 'BEM UK Petra',
       url: 'http://lkmm-tm.petra.ac.id/XXX/',
       year: 2021,
-      poster_filepath:
+      posterFilepath:
           'https://marketplace.canva.com/EAE5t9abmqM/1/0/1131w/canva-poster-restoran-ramah-lingkungan-bebas-sedotan-plastik-ilustrasi-polos-lucu-hijau-zamrud-B9l9LTbzQUI.jpg'),
   Event(
       name: 'Ini Talkshow Edukasi Movie 2021',
@@ -58,7 +58,7 @@ List<Event> events = [
       organizer: 'BEM UK Petra',
       url: 'https://www.instagram.com/item.2021/',
       year: 2021,
-      poster_filepath:
+      posterFilepath:
           'https://marketplace.canva.com/EAE5t9abmqM/1/0/1131w/canva-poster-restoran-ramah-lingkungan-bebas-sedotan-plastik-ilustrasi-polos-lucu-hijau-zamrud-B9l9LTbzQUI.jpg'),
 ];
 
@@ -143,7 +143,7 @@ class _eventPageState extends State<eventPage> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image.network(
-                                        item.poster_filepath,
+                                        item.posterFilepath!,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -152,28 +152,28 @@ class _eventPageState extends State<eventPage> {
                                     height: 10,
                                   ),
                                   Text(
-                                    item.name,
+                                    item.name!,
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    item.type,
+                                    item.type!,
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    item.status,
+                                    item.status!,
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Text(
-                                    item.organizer,
+                                    item.organizer!,
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -228,7 +228,7 @@ class _eventPageState extends State<eventPage> {
           //                   child: ClipRRect(
           //                     borderRadius: BorderRadius.circular(10),
           //                     child: Image.network(
-          //                       item.poster_filepath,
+          //                       item.posterFilepath,
           //                       fit: BoxFit.cover,
           //                     ),
           //                   ),

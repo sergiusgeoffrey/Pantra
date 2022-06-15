@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -25,35 +23,35 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(249, 234, 213, 1),
+      backgroundColor: const Color.fromRGBO(249, 234, 213, 1),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Namaste",
               style: TextStyle(
                   fontSize: 30,
                   color: Color.fromRGBO(60, 108, 180, 1),
                   fontFamily: 'Recoleta'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Container(
+            SizedBox(
               width: 300,
               child: TextField(
                 controller: _accountController,
                 decoration: InputDecoration(
                   filled: true,
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                   labelText: "NRP",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                     //make the border transparent
                   ),
-                  fillColor: Color.fromRGBO(253, 205, 95, 1),
+                  fillColor: const Color.fromRGBO(253, 205, 95, 1),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                         color: Color.fromRGBO(253, 126, 20, 1), width: 2.0),
@@ -62,24 +60,24 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Container(
+            SizedBox(
               width: 300,
               child: TextField(
                 obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(
                   filled: true,
-                  prefixIcon: Icon(Icons.lock),
+                  prefixIcon: const Icon(Icons.lock),
                   labelText: "Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                     //make the border transparent
                   ),
-                  fillColor: Color.fromRGBO(253, 205, 95, 1),
+                  fillColor: const Color.fromRGBO(253, 205, 95, 1),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                         color: Color.fromRGBO(253, 126, 20, 1), width: 2.0),
@@ -88,10 +86,10 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Container(
+            SizedBox(
               width: 300,
               height: 50,
               child: ElevatedButton(
@@ -99,24 +97,24 @@ class _LoginState extends State<Login> {
                   log("username: ${_accountController.text}");
                   log("password: ${_passwordController.text}");
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                child: const Text(
                   "LOGIN",
                   style: TextStyle(
                       fontSize: 30,
                       color: Colors.white,
                       fontFamily: 'Recoleta'),
                 ),
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
-            Text("PANTRA 2022", style: TextStyle(color: Colors.grey)),
+            const Text("PANTRA 2022", style: TextStyle(color: Colors.grey)),
           ],
         ),
       ),

@@ -1,20 +1,20 @@
 class Event {
-  String name;
-  String type;
-  String status;
-  String organizer;
-  int year;
-  String url;
-  String poster_filepath;
+  String? name;
+  String? type;
+  String? status;
+  String? organizer;
+  int? year;
+  String? url;
+  String? posterFilepath;
 
   Event(
-      {required this.name,
-      required this.type,
-      required this.status,
-      required this.organizer,
-      required this.year,
-      required this.url,
-      required this.poster_filepath});
+      {this.name,
+      this.type,
+      this.status,
+      this.organizer,
+      this.year,
+      this.url,
+      this.posterFilepath});
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
@@ -24,7 +24,7 @@ class Event {
       organizer: json['organizer'],
       year: json['year'],
       url: json['url'],
-      poster_filepath: json['poster_filepath'],
+      posterFilepath: json['poster_filepath'],
     );
   }
 }
