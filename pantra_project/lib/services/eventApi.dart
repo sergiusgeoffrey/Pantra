@@ -36,7 +36,7 @@ class eventService {
             organizer: jsonData['data'][i]['organizer'],
             url: jsonData['data'][i]['url'],
             year: jsonData['data'][i]['year'],
-            posterFilepath: jsonData['data'][i]['posterFilepath']));
+            posterFilepath: jsonData['data'][i]['poster_filepath']));
       }
       return events;
     } else {
