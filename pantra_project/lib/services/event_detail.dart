@@ -20,7 +20,7 @@ class EventDetailService {
 
     String idStr = "";
 
-    if (id != 0) idStr = "&id=$id";
+    if (id != 0) idStr = "&id=${id}";
 
     final response = await http.get(
         Uri.parse(
@@ -32,26 +32,53 @@ class EventDetailService {
 
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
-
+      //print json data name
+      print("id: " +
+          jsonData['data'][0]['id'].toString() +
+          jsonData['data'][0]['id'].runtimeType.toString());
+      print("name: " +
+          jsonData['data'][0]['name'] +
+          jsonData['data'][0]['name'].runtimeType.toString());
+      print("type: " +
+          jsonData['data'][0]['type'] +
+          jsonData['data'][0]['type'].runtimeType.toString());
+      print("status: " +
+          jsonData['data'][0]['status'] +
+          jsonData['data'][0]['status'].runtimeType.toString());
+      print("organizer: " +
+          jsonData['data'][0]['organizer'] +
+          jsonData['data'][0]['organizer'].runtimeType.toString());
+      print("url: " +
+          jsonData['data'][0]['url'] +
+          jsonData['data'][0]['url'].runtimeType.toString());
+      print("year: " +
+          jsonData['data'][0]['year'].toString() +
+          jsonData['data'][0]['year'].runtimeType.toString());
+      print("poster_filepath: " +
+          jsonData['data'][0]['poster_filepath'] +
+          jsonData['data'][0]['poster_filepath'].runtimeType.toString());
+      // for (String division in jsonData['data'][0]['divisions']) {
+      //   print("division: " + division);
+      // }
       Event events;
       events = Event(
-        id: jsonData['data']['id'],
-        name: jsonData['data']['name'],
-        type: jsonData['data']['type'],
-        status: jsonData['data']['status'],
-        organizer: jsonData['data']['organizer'],
-        url: jsonData['data']['url'],
-        year: jsonData['data']['year'],
-        posterFilepath: jsonData['data']['poster_filepath'],
-        divisions: jsonData['data']['divisions'] != null
-            ? (jsonData['data']['divisions'] as List)
-                .map((e) => StringObj.fromJson(e))
-                .toList()
-            : null,
+        id: jsonData['data'][0]['id'],
+        name: jsonData['data'][0]['name'],
+        type: jsonData['data'][0]['type'],
+        status: jsonData['data'][0]['status'],
+        organizer: jsonData['data'][0]['organizer'],
+        url: jsonData['data'][0]['url'],
+        year: jsonData['data'][0]['year'],
+        posterFilepath: jsonData['data'][0]['poster_filepath'],
+        // divisions: jsonData['data'][0]['divisions'] != null
+        //     ? (jsonData['data'][0]['divisions'] as List)
+        //         .map((e) => StringObj.fromJson(e))
+        //         .toList()
+        //     : null,
       );
+      print(events.name);
       return events;
     } else {
-      print(response.body);
       throw Exception('Failed to load data');
     }
   }
