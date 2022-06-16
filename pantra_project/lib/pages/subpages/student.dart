@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student.dart';
+import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student.dart';
 
 class StudentPage extends StatefulWidget {
@@ -95,17 +98,29 @@ class _StudentPageState extends State<StudentPage> {
                               SizedBox(
                                 width: 250,
                                 height: 300,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: item.photoFilepath != null
-                                      ? Image.network(
-                                          item.photoFilepath,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Image.network(
-                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
-                                          fit: BoxFit.cover,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return StudentDetail(nrp:item.nrp,name:item.nama);
+                                          },
                                         ),
+                                      );
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: item.photoFilepath != null
+                                        ? Image.network(
+                                            item.photoFilepath,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.network(
+                                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(
