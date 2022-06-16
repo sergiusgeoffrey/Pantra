@@ -5,7 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class EventService {
-  Future<List<Event>> getAllData() async {
+  Future<List<Event>> getAllData({
+    int eventYear = 0,
+    String type = "",
+    String organizer = "",
+    String status = "",
+  }) async {
     DateTime nowJakarta = DateTime.now().toUtc().add(const Duration(hours: 7));
 
     String day = DateFormat('dd').format(nowJakarta);
@@ -13,8 +18,17 @@ class EventService {
     int year = nowJakarta.year;
 
     String token = "RwG${month}ne${year}Kc${day}C9w";
+
+    String yearStr = "";
+
+    if (eventYear != 0) yearStr = "&year=$eventYear";
+    if (type != "") type = "&type=$type";
+    if (organizer != "") organizer = "&organizer=$organizer";
+    if (status != "") status = "&status=$status";
+
     final response = await http.get(
-        Uri.parse("https://bem-internal.petra.ac.id/reach/api/event/index.php"),
+        Uri.parse(
+            "https://bem-internal.petra.ac.id/reach/api/event/index.php?$yearStr$type$organizer$status"),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',

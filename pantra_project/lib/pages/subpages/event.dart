@@ -14,10 +14,21 @@ class _EventPageState extends State<EventPage> {
   final EventService _eventService = EventService();
   late Future<List<Event>> _futureEvents;
 
+  // TODO: add filters to update these values
+  int year = 0;
+  String type = "";
+  String organizer = "";
+  String status = "";
+
   @override
   void initState() {
     super.initState();
-    _futureEvents = _eventService.getAllData();
+    _futureEvents = _eventService.getAllData(
+      eventYear: year,
+      type: type,
+      organizer: organizer,
+      status: status,
+    );
   }
 
   @override

@@ -14,10 +14,21 @@ class _StudentPageState extends State<StudentPage> {
   final StudentService _studentService = StudentService();
   late Future<List<Student>> _students;
 
+  // TODO: add filters to update these values
+  int year = 0;
+  String experience = "";
+  String faculty = "";
+  String major = "";
+
   @override
   void initState() {
     super.initState();
-    _students = _studentService.getAllData();
+    _students = _studentService.getAllData(
+      studentYear: year,
+      experience: experience,
+      faculty: faculty,
+      major: major,
+    );
   }
 
   @override

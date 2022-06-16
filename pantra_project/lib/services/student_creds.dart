@@ -5,7 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class StudentCredsService {
-  Future<List<StudentCreds>> getAllData(String name, String nrp) async {
+  Future<List<StudentCreds>> getAllData({
+    String name = "",
+    String nrp = "",
+  }) async {
     DateTime nowJakarta = DateTime.now().toUtc().add(const Duration(hours: 7));
 
     String day = DateFormat('dd').format(nowJakarta);
@@ -13,10 +16,13 @@ class StudentCredsService {
     int year = nowJakarta.year;
 
     String token = "RwG${month}ne${year}Kc${day}C9w";
+
+    if (name != "") name = "&name=$name";
+    if (nrp != "") nrp = "&nrp=$nrp";
+
     final response = await http.get(
       Uri.parse(
-          """https://bem-internal.petra.ac.id/reach/api/student/creds/index.php
-            ?name=$name&nrp=$nrp"""),
+          "https://bem-internal.petra.ac.id/reach/api/student/creds/index.php?$name$nrp"),
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token',
