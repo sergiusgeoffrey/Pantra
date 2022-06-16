@@ -12,9 +12,8 @@ class Event {
   List<StringObj>? divisions;
 
   Event(
-      {
-        required this.id,
-        required this.name,
+      {required this.id,
+      required this.name,
       required this.type,
       required this.status,
       required this.organizer,

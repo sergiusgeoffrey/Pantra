@@ -33,25 +33,29 @@ class EventDetailService {
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
 
+      List<StringObj> divisions = [];
+      if (jsonData['data'][0]['divisions'].length > 0) {
+        for (var i = 0; i < jsonData['data'][0]['divisions'].length; i++) {
+          divisions.add(StringObj(
+            data: jsonData['data'][0]['divisions'][i]['division'],
+          ));
+        }
+      }
+
       Event events;
       events = Event(
-        id: jsonData['data']['id'],
-        name: jsonData['data']['name'],
-        type: jsonData['data']['type'],
-        status: jsonData['data']['status'],
-        organizer: jsonData['data']['organizer'],
-        url: jsonData['data']['url'],
-        year: jsonData['data']['year'],
-        posterFilepath: jsonData['data']['poster_filepath'],
-        divisions: jsonData['data']['divisions'] != null
-            ? (jsonData['data']['divisions'] as List)
-                .map((e) => StringObj.fromJson(e))
-                .toList()
-            : null,
+        id: jsonData['data'][0]['id'],
+        name: jsonData['data'][0]['name'],
+        type: jsonData['data'][0]['type'],
+        status: jsonData['data'][0]['status'],
+        organizer: jsonData['data'][0]['organizer'],
+        url: jsonData['data'][0]['url'],
+        year: jsonData['data'][0]['year'],
+        posterFilepath: jsonData['data'][0]['poster_filepath'],
+        divisions: divisions,
       );
       return events;
     } else {
-      print(response.body);
       throw Exception('Failed to load data');
     }
   }

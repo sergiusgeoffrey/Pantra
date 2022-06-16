@@ -18,31 +18,32 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-          color: const Color.fromRGBO(251, 203, 92, 1),
-          onTap: (value) {
-            setState(() {
-              pageIndex = value;
-            });
-          },
-          items: const [
-            Icon(
-              Icons.home,
-              color: Color.fromRGBO(60, 108, 180, 1),
-            ),
-            Icon(
-              Icons.search,
-              color: Color.fromRGBO(60, 108, 180, 1),
-            ),
-            Icon(
-              Icons.person,
-              color: Color.fromRGBO(60, 108, 180, 1),
-            ),
-            Icon(
-              Icons.delete,
-              color: Color.fromRGBO(60, 108, 180, 1),
-            ),
-          ]),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        color: const Color.fromRGBO(251, 203, 92, 1),
+        onTap: (value) {
+          setState(() {
+            pageIndex = value;
+          });
+        },
+        items: const [
+          Icon(
+            Icons.home,
+            color: Color.fromRGBO(60, 108, 180, 1),
+          ),
+          Icon(
+            Icons.search,
+            color: Color.fromRGBO(60, 108, 180, 1),
+          ),
+          Icon(
+            Icons.person,
+            color: Color.fromRGBO(60, 108, 180, 1),
+          ),
+          Icon(
+            Icons.delete,
+            color: Color.fromRGBO(60, 108, 180, 1),
+          ),
+        ],
+      ),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: pageList[pageIndex],
     );
