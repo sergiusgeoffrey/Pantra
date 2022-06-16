@@ -3,13 +3,13 @@ import 'package:pantra_project/models/student.dart';
 import 'package:pantra_project/models/student_creds.dart';
 import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/services/student_creds.dart';
-import 'package:pantra_project/services/student_detail.dart';
 
 class StudentDetail extends StatefulWidget {
   final String nrp;
-  final String name;
-  const StudentDetail({Key? key, required this.nrp, required this.name})
-      : super(key: key);
+  const StudentDetail({
+    Key? key,
+    required this.nrp,
+  }) : super(key: key);
 
   @override
   State<StudentDetail> createState() => _StudentDetailState();
@@ -22,8 +22,7 @@ class _StudentDetailState extends State<StudentDetail> {
   @override
   void initState() {
     super.initState();
-    _studentDetails =
-    _studentDetailService.getAllData(nrp: widget.nrp);
+    _studentDetails = _studentDetailService.getAllData(nrp: widget.nrp);
   }
 
   @override
@@ -38,9 +37,10 @@ class _StudentDetailState extends State<StudentDetail> {
             child: Text(
               "Student Details",
               style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.height * 0.05,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromRGBO(60, 108, 180, 1)),
+                fontSize: MediaQuery.of(context).size.height * 0.05,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromRGBO(60, 108, 180, 1),
+              ),
             ),
           ),
           Container(
@@ -65,15 +65,16 @@ class _StudentDetailState extends State<StudentDetail> {
                           width: MediaQuery.of(context).size.width * 0.1,
                         ),
                         Text(
-                          snapshot.data![0].name + " - " + snapshot.data![0].nrp,
+                          snapshot.data![0].name +
+                              " - " +
+                              snapshot.data![0].nrp,
                         ),
                       ],
                     ),
                   );
-                } else if(snapshot.hasError){
+                } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
-                }
-                else {
+                } else {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );

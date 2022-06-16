@@ -34,16 +34,17 @@ class StudentCredsService {
       List<StudentCreds> studentCreds = [];
       for (var i = 0; i < jsonData['data'].length; i++) {
         studentCreds.add(StudentCreds(
-            nrp: jsonData['data'][i]['nrp'],
-            name: jsonData['data'][i]['name'],
-            angkatan: jsonData['data'][i]['angkatan'],
-            jurusan: jsonData['data'][i]['jurusan'],
-            pengalaman: jsonData['data'][i]['pengalaman'],
-            portfolio: jsonData['data'][i]['portfolio'],
-            dateofBirth: jsonData['data'][i]['date_of_birth'],
-            instagram: jsonData['data'][i]['instagram'],
-            photoFilepath: jsonData['data'][i]['photo_filepath'],
-            lastUpdated: jsonData['data'][i]['last_updated']));
+          nrp: jsonData['data'][i]['nrp'],
+          name: jsonData['data'][i]['name'],
+          angkatan: jsonData['data'][i]['angkatan'],
+          jurusan: jsonData['data'][i]['jurusan'],
+          pengalaman: jsonData['data'][i]['pengalaman'],
+          portfolio: jsonData['data'][i]['portfolio'],
+          dateofBirth: jsonData['data'][i]['date_of_birth'],
+          instagram: jsonData['data'][i]['instagram'],
+          photoFilepath: jsonData['data'][i]['photo_filepath'],
+          lastUpdated: jsonData['data'][i]['last_updated'],
+        ));
       }
       return studentCreds;
     } else {

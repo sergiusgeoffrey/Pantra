@@ -101,13 +101,13 @@ class _StudentPageState extends State<StudentPage> {
                                 child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return StudentDetail(nrp:item.nrp,name:item.nama);
-                                          },
-                                        ),
-                                      );
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return StudentDetail(nrp: item.nrp);
+                                        },
+                                      ),
+                                    );
                                   },
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),

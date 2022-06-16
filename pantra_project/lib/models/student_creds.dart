@@ -1,7 +1,7 @@
 class StudentCreds {
   String nrp;
   String name;
-  String angkatan;
+  int angkatan;
   String jurusan;
   String pengalaman;
   String? portfolio;
@@ -36,5 +36,5 @@ class StudentCreds {
       photoFilepath: json['photo_filepath'],
       lastUpdated: json['last_updated'],
     );
-}
+  }
 }
