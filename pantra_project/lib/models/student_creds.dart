@@ -22,4 +22,19 @@ class StudentCreds {
     required this.photoFilepath,
     required this.lastUpdated,
   });
+
+  factory StudentCreds.fromJson(Map<String, dynamic> json) {
+    return StudentCreds(
+      nrp: json['nrp'],
+      name: json['name'],
+      angkatan: json['angkatan'],
+      jurusan: json['jurusan'],
+      pengalaman: json['pengalaman'],
+      portfolio: json['portfolio'],
+      dateofBirth: json['date_of_birth'],
+      instagram: json['instagram'],
+      photoFilepath: json['photo_filepath'],
+      lastUpdated: json['last_updated'],
+    );
+}
 }

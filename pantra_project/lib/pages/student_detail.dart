@@ -3,6 +3,7 @@ import 'package:pantra_project/models/student.dart';
 import 'package:pantra_project/models/student_creds.dart';
 import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/services/student_creds.dart';
+import 'package:pantra_project/services/student_detail.dart';
 
 class StudentDetail extends StatefulWidget {
   final String nrp;
@@ -15,14 +16,14 @@ class StudentDetail extends StatefulWidget {
 }
 
 class _StudentDetailState extends State<StudentDetail> {
-  final StudentCredsService _studentCredsService = StudentCredsService();
-  late Future<List<StudentCreds>> _studentCreds;
+  final StudentCredsService _studentDetailService = StudentCredsService();
+  late Future<List<StudentCreds>> _studentDetails;
 
   @override
   void initState() {
     super.initState();
-    _studentCreds =
-        _studentCredsService.getAllData(name: widget.name, nrp: widget.nrp);
+    _studentDetails =
+    _studentDetailService.getAllData(nrp: widget.nrp);
   }
 
   @override
@@ -46,7 +47,7 @@ class _StudentDetailState extends State<StudentDetail> {
             //Foto
             height: MediaQuery.of(context).size.height * 0.8,
             child: FutureBuilder<List<StudentCreds>>(
-              future: _studentCreds,
+              future: _studentDetails,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Container(
