@@ -1,6 +1,7 @@
 import 'package:pantra_project/models/string_obj.dart';
 
 class Event {
+  String id;
   String name;
   String type;
   String status;
@@ -11,7 +12,9 @@ class Event {
   List<StringObj>? divisions;
 
   Event(
-      {required this.name,
+      {
+        required this.id,
+        required this.name,
       required this.type,
       required this.status,
       required this.organizer,
@@ -22,6 +25,7 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
+      id: json['id'],
       name: json['name'],
       type: json['type'],
       status: json['status'],

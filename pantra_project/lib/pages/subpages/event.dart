@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/event.dart';
+import 'package:pantra_project/pages/event_detail.dart';
 import 'package:pantra_project/services/event.dart';
 
 class EventPage extends StatefulWidget {
@@ -98,11 +101,23 @@ class _EventPageState extends State<EventPage> {
                                 SizedBox(
                                   width: 250,
                                   height: 350,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      item.posterFilepath,
-                                      fit: BoxFit.cover,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return eventDetails(event_id: item.id);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                        item.posterFilepath,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
