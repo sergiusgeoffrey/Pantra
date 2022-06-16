@@ -7,7 +7,8 @@ import 'package:pantra_project/services/student_creds.dart';
 class StudentDetail extends StatefulWidget {
   final String nrp;
   final String name;
-  const StudentDetail({Key? key,required this.nrp,required this.name}) : super(key: key);
+  const StudentDetail({Key? key, required this.nrp, required this.name})
+      : super(key: key);
 
   @override
   State<StudentDetail> createState() => _StudentDetailState();
@@ -20,68 +21,75 @@ class _StudentDetailState extends State<StudentDetail> {
   @override
   void initState() {
     super.initState();
-    _studentCreds = _studentCredsService.getAllData(name: widget.name,nrp: widget.nrp);
+    _studentCreds =
+        _studentCredsService.getAllData(name: widget.name, nrp: widget.nrp);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              Center(
-                child: Text(
-                  "Student Details",
-                  style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.05,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(60, 108, 180, 1)),
-                ),
-              ),
-              //Foto
-              Text(
-                "Nama - NRP:",
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.03,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromRGBO(60, 108, 180, 1)),
-              ),
-              //Nama
-              //NRP
-              Text(
-                "Jurusan - Angkatan:",
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.03,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromRGBO(60, 108, 180, 1)),
-              ),
-              //Jurusan Angkatan
-              Text(
-                "Portofolio:",
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.03,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromRGBO(60, 108, 180, 1)),
-              ),
-              //Porto
-              Text(
-                "Pengalaman Panitia:",
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.03,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromRGBO(60, 108, 180, 1)),
-              ),
-              //Pengalaman card/popup
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-
-            ]
+        child: Column(children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
+          Center(
+            child: Text(
+              "Student Details",
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.height * 0.05,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromRGBO(60, 108, 180, 1)),
+            ),
+          ),
+          Container(
+            //Foto
+            height: MediaQuery.of(context).size.height * 0.8,
+            child: FutureBuilder<List<StudentCreds>>(
+              future: _studentCreds,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Container(
+                    child: Row(
+                      children: [
+                        Text(
+                          "Nama - NRP:",
+                          style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.03,
+                              fontWeight: FontWeight.bold,
+                              color: const Color.fromRGBO(60, 108, 180, 1)),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.1,
+                        ),
+                        Text(
+                          snapshot.data![0].name + " - " + snapshot.data![0].nrp,
+                        ),
+                      ],
+                    ),
+                  );
+                } else if(snapshot.hasError){
+                  return Text("${snapshot.error}");
+                }
+                else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+          ),
+          //Nama
+          //NRP
+          //Jurusan Angkatan
+          //Porto
+          //Pengalaman card/popup
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+        ]),
       ),
-    );  
+    );
   }
 }
