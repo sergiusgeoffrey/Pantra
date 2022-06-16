@@ -8,7 +8,7 @@ import '../models/string_obj.dart';
 
 class EventDetailService {
   Future<Event> getAllData({
-    String id = "",
+    int id = 0,
   }) async {
     DateTime nowJakarta = DateTime.now().toUtc().add(const Duration(hours: 7));
 
@@ -35,7 +35,7 @@ class EventDetailService {
 
       Event events;
       events = Event(
-        id: jsonData['data']['id'].toString(),
+        id: jsonData['data']['id'],
         name: jsonData['data']['name'],
         type: jsonData['data']['type'],
         status: jsonData['data']['status'],

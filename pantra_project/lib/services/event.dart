@@ -44,7 +44,7 @@ class EventService {
       List<Event> events = [];
       for (var i = 0; i < jsonData['data'].length; i++) {
         events.add(Event(
-          id: jsonData['data'][i]['id'].toString(),
+          id: jsonData['data'][i]['id'],
           name: jsonData['data'][i]['name'],
           type: jsonData['data'][i]['type'],
           status: jsonData['data'][i]['status'],

@@ -1,7 +1,7 @@
 import 'package:pantra_project/models/string_obj.dart';
 
 class Event {
-  String id;
+  int id;
   String name;
   String type;
   String status;
@@ -25,7 +25,7 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      id: json['id'],
+      id: json['id'] as int,
       name: json['name'],
       type: json['type'],
       status: json['status'],

@@ -5,7 +5,7 @@ import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/services/event_detail.dart';
 
 class eventDetails extends StatefulWidget {
-  final String event_id;
+  final int event_id;
   const eventDetails({Key? key, required this.event_id}) : super(key: key);
 
   @override
@@ -20,8 +20,7 @@ class _eventDetailsState extends State<eventDetails> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _futureEventDetail =
-        _eventDetailService.getAllData(id: widget.event_id);
+    _futureEventDetail = _eventDetailService.getAllData(id:widget.event_id);
   }
 
   @override
