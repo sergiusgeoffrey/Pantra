@@ -1,3 +1,5 @@
+import 'package:pantra_project/models/string_obj.dart';
+
 class Event {
   String name;
   String type;
@@ -6,6 +8,7 @@ class Event {
   int year;
   String url;
   String posterFilepath;
+  List<StringObj>? divisions;
 
   Event(
       {required this.name,
@@ -14,7 +17,8 @@ class Event {
       required this.organizer,
       required this.year,
       required this.url,
-      required this.posterFilepath});
+      required this.posterFilepath,
+      this.divisions});
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
@@ -25,6 +29,11 @@ class Event {
       year: json['year'],
       url: json['url'],
       posterFilepath: json['poster_filepath'],
+      divisions: json['divisions'] != null
+          ? (json['divisions'] as List)
+              .map((e) => StringObj.fromJson(e))
+              .toList()
+          : null,
     );
   }
 }

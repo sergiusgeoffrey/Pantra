@@ -8,7 +8,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MyApp(),
+      home: const Home(),
       theme: ThemeData(fontFamily: 'Recoleta'),
     ),
   );
