@@ -201,7 +201,7 @@ class _EventPageState extends State<EventPage> {
                           : 0.6,
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 300),
-                      autoPlay: false,
+                      autoPlay: true,
                       enlargeCenterPage: true,
                       enableInfiniteScroll: false,
                       disableCenter: true),
