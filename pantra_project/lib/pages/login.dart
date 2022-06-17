@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:pantra_project/utils/color.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -31,9 +32,10 @@ class _LoginState extends State<Login> {
             const Text(
               "Namaste",
               style: TextStyle(
-                  fontSize: 30,
-                  color: Color.fromRGBO(60, 108, 180, 1),
-                  fontFamily: 'Recoleta'),
+                fontSize: 30,
+                color: primary,
+                fontFamily: 'Recoleta',
+              ),
             ),
             const SizedBox(
               height: 8,

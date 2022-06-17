@@ -7,7 +7,7 @@ import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/services/student_batch.dart';
 import 'package:pantra_project/services/student_faculty.dart';
 import 'package:pantra_project/services/student_major.dart';
-import 'package:pantra_project/utils/colors.dart';
+import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/division.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:pantra_project/utils/alignment.dart';
@@ -41,7 +41,6 @@ class _StudentPageState extends State<StudentPage> {
 
   bool showResetFilterButton = false;
 
-  // TODO: add filters to update these values
   int batch = 0;
   String experience = "";
   String faculty = "";
@@ -76,7 +75,7 @@ class _StudentPageState extends State<StudentPage> {
           TextWidget(
               str: "Explore Petranesians",
               size: MediaQuery.of(context).size.height * 0.04,
-              color: blue,
+              color: primary,
               weight: bold,
               alignment: center),
           SizedBox(
@@ -311,7 +310,7 @@ class _StudentPageState extends State<StudentPage> {
               decoration: InputDecoration(
                 labelText: "Filter student by $element",
                 labelStyle: const TextStyle(
-                  color: Color.fromRGBO(60, 108, 180, 1),
+                  color: primary,
                 ),
                 prefixIcon: Icon(
                   icon,
@@ -321,7 +320,7 @@ class _StudentPageState extends State<StudentPage> {
               menuMaxHeight: 500,
               icon: const Icon(
                 Icons.arrow_drop_down,
-                color: Color.fromRGBO(60, 108, 180, 1),
+                color: primary,
               ),
               onChanged: (value) {
                 setState(() {

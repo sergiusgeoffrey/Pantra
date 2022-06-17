@@ -61,9 +61,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       position: generateAnimation(startOffset, endInterval),
       child: Text(thetext,
           style: const TextStyle(
-              fontSize: 50,
-              color: Color.fromRGBO(60, 108, 180, 1),
-              fontFamily: 'Recoleta')),
+              fontSize: 50, color: primary, fontFamily: 'Recoleta')),
     );
   }
 

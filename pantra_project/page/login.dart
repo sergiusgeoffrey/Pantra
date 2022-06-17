@@ -33,9 +33,7 @@ class _LoginState extends State<Login> {
             Text(
               "Namaste",
               style: TextStyle(
-                  fontSize: 30,
-                  color: Color.fromRGBO(60, 108, 180, 1),
-                  fontFamily: 'Recoleta'),
+                  fontSize: 30, color: primary, fontFamily: 'Recoleta'),
             ),
             SizedBox(
               height: 8,

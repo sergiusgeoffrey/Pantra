@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/event.dart';
@@ -9,8 +8,7 @@ import 'package:pantra_project/services/event_organizer.dart';
 import 'package:pantra_project/services/event_status.dart';
 import 'package:pantra_project/services/event_type.dart';
 import 'package:pantra_project/services/event_year.dart';
-
-import 'package:pantra_project/utils/colors.dart';
+import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -77,7 +75,7 @@ class _EventPageState extends State<EventPage> {
           ),
           TextWidget(
               str: "Explore Events",
-              color: blue,
+              color: primary,
               size: MediaQuery.of(context).size.height * 0.04,
               weight: bold,
               alignment: center),
@@ -86,7 +84,7 @@ class _EventPageState extends State<EventPage> {
           ),
           TextWidget(
               str: "Click on any event to see more details",
-              color: blue,
+              color: primary,
               size: MediaQuery.of(context).size.height * 0.02,
               weight: bold,
               alignment: center),
@@ -221,8 +219,8 @@ class _EventPageState extends State<EventPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return eventDetails(
-                                            event_id: item.id,
+                                          return EventDetails(
+                                            eventID: item.id,
                                           );
                                         },
                                       ),
@@ -315,7 +313,7 @@ class _EventPageState extends State<EventPage> {
               decoration: InputDecoration(
                 labelText: "Filter event by $element",
                 labelStyle: const TextStyle(
-                  color: Color.fromRGBO(60, 108, 180, 1),
+                  color: primary,
                 ),
                 prefixIcon: Icon(
                   icon,
@@ -325,7 +323,7 @@ class _EventPageState extends State<EventPage> {
               menuMaxHeight: 500,
               icon: const Icon(
                 Icons.arrow_drop_down,
-                color: Color.fromRGBO(60, 108, 180, 1),
+                color: primary,
               ),
               onChanged: (value) {
                 setState(() {
