@@ -41,7 +41,14 @@ class EventService {
 
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
+
       List<Event> events = [];
+
+      if (jsonData.containsKey('message') &&
+          jsonData["message"] == "No data found") {
+        return events;
+      }
+
       for (var i = 0; i < jsonData['data'].length; i++) {
         events.add(Event(
           id: jsonData['data'][i]['id'],
