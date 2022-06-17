@@ -12,6 +12,8 @@ import 'package:pantra_project/services/event_year.dart';
 
 import 'package:pantra_project/utils/colors.dart';
 import 'package:pantra_project/widget/text.dart';
+import 'package:pantra_project/utils/alignment.dart';
+import 'package:pantra_project/utils/font_weight.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -66,12 +68,6 @@ class _EventPageState extends State<EventPage> {
     _futureEventOrganizers = _eventOrganizerService.getAllData();
     _futureEventStatuses = _eventStatusService.getAllData();
   }
-
-  Color blue = const Color.fromRGBO(60, 108, 180, 1);
-  Color black = const Color.fromRGBO(0, 0, 0, 1);
-  TextAlign left = TextAlign.left;
-  TextAlign center = TextAlign.center;
-  FontWeight bold = FontWeight.bold;
 
   @override
   Widget build(BuildContext context) {

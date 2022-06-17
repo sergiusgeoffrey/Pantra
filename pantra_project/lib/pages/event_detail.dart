@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -6,7 +6,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/services/event_detail.dart';
+import 'package:pantra_project/widget/event_detail_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../widget/text.dart';
 
 class eventDetails extends StatefulWidget {
   final int event_id;
@@ -28,6 +31,11 @@ class _eventDetailsState extends State<eventDetails> {
     );
   }
 
+  Color blue = const Color.fromRGBO(60, 108, 180, 1);
+  Color black = const Color.fromRGBO(0, 0, 0, 1);
+  TextAlign left = TextAlign.left;
+  TextAlign center = TextAlign.center;
+  FontWeight bold = FontWeight.bold;
   Future<void> _showDivisionDialog(
       List<StringObj> divisions, double heightposter) async {
     return showDialog(
@@ -36,14 +44,12 @@ class _eventDetailsState extends State<eventDetails> {
         return AlertDialog(
           //change dialog color
           backgroundColor: const Color.fromRGBO(251, 203, 92, 1),
-          title: Text(
-            'Divisions',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.03,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(60, 108, 180, 1)),
-          ),
+          title: TextWidget(
+              str: 'Divisions',
+              size: MediaQuery.of(context).size.height * 0.03,
+              color: blue,
+              weight: bold,
+              alignment: center),
           content: Container(
             width: heightposter,
             child: ListView.builder(
@@ -51,20 +57,24 @@ class _eventDetailsState extends State<eventDetails> {
               itemCount: divisions.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(divisions[index].data,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(60, 108, 180, 1))),
+                  title: TextWidget(
+                      str: divisions[index].data,
+                      size: 14,
+                      color: blue,
+                      weight: bold,
+                      alignment: center),
                 );
               },
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Close',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(60, 108, 180, 1))),
+              child: TextWidget(
+                str:'Close',
+                size:14,
+                color:blue,
+                weight:bold,
+                alignment:center),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -105,14 +115,12 @@ class _eventDetailsState extends State<eventDetails> {
                 Flexible(
                   flex: 4,
                   fit: FlexFit.tight,
-                  child: Text(
-                    "Event Details",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.04,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(60, 108, 180, 1),
-                    ),
+                  child: TextWidget(
+                    str: 'Event Detail',
+                    size: MediaQuery.of(context).size.height * 0.04,
+                    color: blue,
+                    weight: bold,
+                    alignment: center,
                   ),
                 ),
               ],
@@ -170,170 +178,23 @@ class _eventDetailsState extends State<eventDetails> {
                               MediaQuery.of(context).size.height * 0.05),
                           child: Column(
                             children: [
+                              EventDetailWidget(strJudul: "Event Name", isiSnapshot: snapshot.data!.name),
+                              EventDetailWidget(strJudul: "Event Type", isiSnapshot: snapshot.data!.type),
+                              EventDetailWidget(strJudul: "Event Status", isiSnapshot: snapshot.data!.status),
+                              EventDetailWidget(strJudul: "Event Organizer", isiSnapshot: snapshot.data!.organizer),
+                              EventDetailWidget(strJudul: "Event Year", isiSnapshot: snapshot.data!.year.toString()),
                               SizedBox(
                                 height:
                                     MediaQuery.of(context).size.height * 0.1,
                                 child: Column(
                                   children: [
-                                    Text(
-                                      "Event Name",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.name,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Event Type",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.type,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Event Status",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.status,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Event Date",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.organizer,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Event Year",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      snapshot.data!.year.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "Event URL",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    TextWidget(
+                                      str: "Event URL",
+                                      size: MediaQuery.of(context).size.height *
+                                          0.03,
+                                      color: black,
+                                      weight: bold,
+                                      alignment: center,
                                     ),
                                     Padding(
                                       padding:
@@ -346,34 +207,30 @@ class _eventDetailsState extends State<eventDetails> {
                                           await launchUrl(
                                               Uri.parse(snapshot.data!.url));
                                         },
-                                        child: Text(
-                                          snapshot.data!.url,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
+                                        child: 
+                                        TextWidget(
+                                      str: snapshot.data!.url,
+                                      size: MediaQuery.of(context).size.height *
+                                          0.02,
+                                      color: black,
+                                      weight: bold,
+                                      alignment: center,
+                                    ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 child: Column(
                                   children: [
-                                    Text(
-                                      "Event Divisions",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    TextWidget(
+                                      str: "Event Divisions",
+                                      size: MediaQuery.of(context).size.height *
+                                          0.03,
+                                      color: black,
+                                      weight: bold,
+                                      alignment: center,
                                     ),
                                     //make listview for divisions
                                     ElevatedButton(
@@ -382,16 +239,14 @@ class _eventDetailsState extends State<eventDetails> {
                                             snapshot.data!.divisions!,
                                             heightposter);
                                       },
-                                      child: Text(
-                                        "Click to see divisions",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      child: 
+                                      TextWidget(
+                                        str: "View Divisions",
+                                        size: MediaQuery.of(context).size.height *
+                                            0.02,
+                                        color: black,
+                                        weight: bold,
+                                        alignment: center,
                                       ),
                                     ),
                                   ],

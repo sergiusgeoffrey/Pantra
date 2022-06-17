@@ -7,6 +7,8 @@ import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/utils/colors.dart';
 import 'package:pantra_project/widget/text.dart';
+import 'package:pantra_project/utils/alignment.dart';
+import 'package:pantra_project/utils/font_weight.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -36,11 +38,7 @@ class _StudentPageState extends State<StudentPage> {
     );
   }
 
-  Color blue = const Color.fromRGBO(60, 108, 180, 1);
-  Color black = const Color.fromRGBO(0, 0, 0, 1);
-  TextAlign left = TextAlign.left;
-  TextAlign center = TextAlign.center;
-  FontWeight bold = FontWeight.bold;
+  
 
   @override
   Widget build(BuildContext context) {
