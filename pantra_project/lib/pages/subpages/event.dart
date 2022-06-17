@@ -124,54 +124,63 @@ class _EventPageState extends State<EventPage> {
             _keyStatus,
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.03,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
-          _keyOrganizer.currentState != null ||
-                  _keyStatus.currentState != null ||
-                  _keyType.currentState != null ||
-                  _keyYear.currentState != null
-              ? SizedBox(
-                  width: 150,
-                  height: 50,
-                  child: showResetFilterButton
-                      ? ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: secondary,
-                          ),
-                          child: const Text(
-                            "Reset Filters",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+          showResetFilterButton
+              ? Container(
+                  margin: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.05),
+                  child: SizedBox(
+                    width: 150,
+                    height: 50,
+                    child: showResetFilterButton
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: secondary,
                             ),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              year = 0;
-                              type = "";
-                              organizer = "";
-                              status = "";
+                            child: const Text(
+                              "Reset Filters",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            onPressed: () {
+                              setState(
+                                () {
+                                  year = 0;
+                                  type = "";
+                                  organizer = "";
+                                  status = "";
 
-                              _futureEvents = _eventService.getAllData(
-                                eventYear: year,
-                                type: type,
-                                organizer: organizer,
-                                status: status,
+                                  _futureEvents = _eventService.getAllData(
+                                    eventYear: year,
+                                    type: type,
+                                    organizer: organizer,
+                                    status: status,
+                                  );
+
+                                  _keyYear.currentState?.reset();
+                                  _keyType.currentState?.reset();
+                                  _keyStatus.currentState?.reset();
+                                  _keyOrganizer.currentState?.reset();
+
+                                  showResetFilterButton = false;
+                                },
                               );
-
-                              _keyYear.currentState?.reset();
-                              _keyType.currentState?.reset();
-                              _keyStatus.currentState?.reset();
-                              _keyOrganizer.currentState?.reset();
-
-                              showResetFilterButton = false;
-                            });
-                          },
-                        )
-                      : Container(),
+                            },
+                          )
+                        : const SizedBox(
+                            width: 0,
+                            height: 0,
+                          ),
+                  ),
                 )
-              : const SizedBox(),
+              : const SizedBox(
+                  width: 0,
+                  height: 0,
+                ),
           FutureBuilder<List<Event>>(
             future: _futureEvents,
             builder: (context, snapshot) {
@@ -185,12 +194,15 @@ class _EventPageState extends State<EventPage> {
                 List<Event> events = snapshot.data!;
                 return CarouselSlider(
                   options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height * 0.7,
-                      viewportFraction: 1,
+                      height: MediaQuery.of(context).size.height * 0.6,
+                      viewportFraction: MediaQuery.of(context).size.width >
+                              MediaQuery.of(context).size.height
+                          ? 0.3
+                          : 0.6,
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 300),
-                      autoPlay: true,
-                      enlargeCenterPage: false,
+                      autoPlay: false,
+                      enlargeCenterPage: true,
                       enableInfiniteScroll: false,
                       disableCenter: true),
                   items: events
@@ -205,11 +217,10 @@ class _EventPageState extends State<EventPage> {
                               MediaQuery.of(context).size.height * 0.05,
                               0),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
                                 width: 250,
-                                height: 350,
                                 child: GestureDetector(
                                   onTap: () {
                                     Navigator.push(
