@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student.dart';
 import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student.dart';
+import 'package:pantra_project/utils/colors.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -112,8 +113,9 @@ class _StudentPageState extends State<StudentPage> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: item.photoFilepath != null
-                                        ? Image.network(
-                                            item.photoFilepath,
+                                        ? FadeInImage.assetNetwork(
+                                            placeholder: "images/ukp.png",
+                                            image: item.photoFilepath,
                                             fit: BoxFit.cover,
                                           )
                                         : Image.network(
@@ -129,8 +131,9 @@ class _StudentPageState extends State<StudentPage> {
                               Text(
                                 item.nama,
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.bold,
+                                  color: primary
                                 ),
                               ),
                               Text(

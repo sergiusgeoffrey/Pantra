@@ -236,8 +236,9 @@ class _EventPageState extends State<EventPage> {
                                   },
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      item.posterFilepath,
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: "images/ukp.png",
+                                      image: item.posterFilepath,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -248,8 +249,8 @@ class _EventPageState extends State<EventPage> {
                               ),
                               TextWidget(
                                   str: item.name,
-                                  color: black,
-                                  size: 20,
+                                  color: primary,
+                                  size: 17,
                                   weight: bold,
                                   alignment: center),
                               TextWidget(
