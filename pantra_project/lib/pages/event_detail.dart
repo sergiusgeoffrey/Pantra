@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_new
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:pantra_project/models/event.dart';
+import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/services/event_detail.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,8 +29,52 @@ class _eventDetailsState extends State<eventDetails> {
     );
   }
 
+  Future<void> _showDivisionDialog(
+      List<StringObj> divisions, double heightposter) async {
+    List<StringObj> _divisions = [];
+    _divisions.add(StringObj(data: "1"));
+    _divisions.add(StringObj(data: "2"));
+    _divisions.add(StringObj(data: "3"));
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: Container(
+            width: heightposter,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: divisions.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(divisions[index].data),
+                );
+              },
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    double heightposter = 0;
+    if (MediaQuery.of(context).size.height <
+        MediaQuery.of(context).size.width) {
+      heightposter = (MediaQuery.of(context).size.width * 0.75) as double;
+    } else {
+      heightposter = (MediaQuery.of(context).size.height * 0.75) as double;
+    }
     return Scaffold(
       body: Column(
         children: [
@@ -71,15 +118,6 @@ class _eventDetailsState extends State<eventDetails> {
                 child: FutureBuilder<Event>(
                   future: _futureEventDetail,
                   builder: (context, snapshot) {
-                    double heightposter = 0;
-                    if (MediaQuery.of(context).size.height <
-                        MediaQuery.of(context).size.width) {
-                      heightposter =
-                          (MediaQuery.of(context).size.width * 0.75) as double;
-                    } else {
-                      heightposter =
-                          (MediaQuery.of(context).size.height * 0.75) as double;
-                    }
                     if (snapshot.hasData) {
                       return Column(children: [
                         SizedBox(
@@ -130,7 +168,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Name",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -140,7 +178,7 @@ class _eventDetailsState extends State<eventDetails> {
                                     ),
                                     Text(
                                       snapshot.data!.name,
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -160,7 +198,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Type",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -170,7 +208,7 @@ class _eventDetailsState extends State<eventDetails> {
                                     ),
                                     Text(
                                       snapshot.data!.type,
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -190,7 +228,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Status",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -200,7 +238,7 @@ class _eventDetailsState extends State<eventDetails> {
                                     ),
                                     Text(
                                       snapshot.data!.status,
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -220,7 +258,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Date",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -230,7 +268,7 @@ class _eventDetailsState extends State<eventDetails> {
                                     ),
                                     Text(
                                       snapshot.data!.organizer,
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -250,7 +288,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Year",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -260,7 +298,7 @@ class _eventDetailsState extends State<eventDetails> {
                                     ),
                                     Text(
                                       snapshot.data!.year.toString(),
-                                      textAlign: TextAlign.right,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontSize: MediaQuery.of(context)
                                                   .size
@@ -280,7 +318,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event URL",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -288,23 +326,27 @@ class _eventDetailsState extends State<eventDetails> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary:
-                                              Color.fromRGBO(60, 108, 180, 1)),
-                                      onPressed: () async {
-                                        await launchUrl(
-                                            Uri.parse(snapshot.data!.url));
-                                      },
-                                      child: Text(
-                                        snapshot.data!.url,
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Color.fromRGBO(
+                                                60, 108, 180, 1)),
+                                        onPressed: () async {
+                                          await launchUrl(
+                                              Uri.parse(snapshot.data!.url));
+                                        },
+                                        child: Text(
+                                          snapshot.data!.url,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -316,7 +358,7 @@ class _eventDetailsState extends State<eventDetails> {
                                   children: [
                                     Text(
                                       "Event Divisions",
-                                      textAlign: TextAlign.left,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize:
                                             MediaQuery.of(context).size.height *
@@ -325,24 +367,23 @@ class _eventDetailsState extends State<eventDetails> {
                                       ),
                                     ),
                                     //make listview for divisions
-                                    ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount:
-                                          snapshot.data!.divisions!.length,
-                                      itemBuilder: (context, index) {
-                                        return Text(
-                                          snapshot.data!.divisions![index].data,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.02,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color.fromRGBO(
-                                                  60, 108, 180, 1)),
-                                        );
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        _showDivisionDialog(
+                                            snapshot.data!.divisions!,
+                                            heightposter);
                                       },
+                                      child: Text(
+                                        "Click to see divisions",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -357,7 +398,11 @@ class _eventDetailsState extends State<eventDetails> {
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }
-                    return CircularProgressIndicator();
+                    return Column(
+                      children: [
+                        CircularProgressIndicator(),
+                      ],
+                    );
                   },
                 ),
               ),

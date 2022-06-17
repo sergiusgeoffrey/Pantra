@@ -76,7 +76,7 @@ class _EventPageState extends State<EventPage> {
                   List<Event> events = snapshot.data!;
                   return CarouselSlider(
                     options: CarouselOptions(
-                        height: 500,
+                        height: MediaQuery.of(context).size.height * 0.8,
                         viewportFraction: 1,
                         autoPlayAnimationDuration:
                             const Duration(milliseconds: 300),
@@ -128,6 +128,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 Text(
                                   item.name,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -135,6 +136,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 Text(
                                   item.type,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -142,6 +144,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 Text(
                                   item.status,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -149,6 +152,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 Text(
                                   item.organizer,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -156,6 +160,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 Text(
                                   item.year.toString(),
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
