@@ -194,7 +194,7 @@ class _EventPageState extends State<EventPage> {
                 List<Event> events = snapshot.data!;
                 return CarouselSlider(
                   options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height * 0.6,
+                      height: 500,
                       viewportFraction: MediaQuery.of(context).size.width >
                               MediaQuery.of(context).size.height
                           ? 0.3

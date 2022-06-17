@@ -6,6 +6,7 @@ import 'package:pantra_project/models/student.dart';
 import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/utils/colors.dart';
+import 'package:pantra_project/widget/text.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -35,6 +36,12 @@ class _StudentPageState extends State<StudentPage> {
     );
   }
 
+  Color blue = const Color.fromRGBO(60, 108, 180, 1);
+  Color black = const Color.fromRGBO(0, 0, 0, 1);
+  TextAlign left = TextAlign.left;
+  TextAlign center = TextAlign.center;
+  FontWeight bold = FontWeight.bold;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -43,23 +50,21 @@ class _StudentPageState extends State<StudentPage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          Text(
-            "Explore Petranesians",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.04,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(60, 108, 180, 1)),
-          ),
+          TextWidget(
+              str: "Explore Petranesians",
+              size: MediaQuery.of(context).size.height * 0.04,
+              color: blue,
+              weight: bold,
+              alignment: center),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
-          Text(
-            "Click on Petranesian to see more details!",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(60, 108, 180, 1)),
-          ),
+          TextWidget(
+              str: "Click on Petranesian to see more details!",
+              size: MediaQuery.of(context).size.height * 0.02,
+              color: black,
+              weight: bold,
+              alignment: center),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
@@ -131,35 +136,30 @@ class _StudentPageState extends State<StudentPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                item.nama,
-                                style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: primary),
-                              ),
-                              Text(
-                                item.angkatan.toString(),
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.program,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.fakultas,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              TextWidget(
+                                  str: item.nama,
+                                  size: 17,
+                                  color: primary,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.angkatan.toString(),
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.program,
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.fakultas,
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
                             ],
                           ),
                         ),
