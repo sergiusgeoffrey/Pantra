@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/pages/home.dart';
 import 'package:pantra_project/pages/login.dart';
+import 'package:pantra_project/utils/color.dart';
 
 void main() {
   runApp(

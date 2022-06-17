@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pantra_project/pages/student_search_result.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
 import 'package:pantra_project/pages/subpages/student.dart';
 import 'package:pantra_project/utils/color.dart';
@@ -12,7 +13,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> pageList = <Widget>[const EventPage(), const StudentPage()];
+  List<Widget> pageList = <Widget>[
+    const EventPage(),
+    const StudentPage(),
+    const StudentSearchResult(),
+  ];
   int pageIndex = 0;
 
   @override

@@ -31,7 +31,14 @@ class StudentCredsService {
 
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
+
       List<StudentCreds> studentCreds = [];
+
+      if (jsonData.containsKey('message') &&
+          jsonData["message"] == "No data found") {
+        return studentCreds;
+      }
+
       for (var i = 0; i < jsonData['data'].length; i++) {
         studentCreds.add(StudentCreds(
           nrp: jsonData['data'][i]['nrp'],

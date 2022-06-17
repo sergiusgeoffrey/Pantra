@@ -233,7 +233,7 @@ class _StudentPageState extends State<StudentPage> {
                                             fit: BoxFit.cover,
                                           )
                                         : Image.network(
-                                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png',
+                                            "images/ukp.png",
                                             fit: BoxFit.cover,
                                           ),
                                   ),
