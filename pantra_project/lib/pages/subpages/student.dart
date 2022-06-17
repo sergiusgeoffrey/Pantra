@@ -75,7 +75,10 @@ class _StudentPageState extends State<StudentPage> {
                 return CarouselSlider(
                   options: CarouselOptions(
                       height: 500,
-                      viewportFraction: 1,
+                      viewportFraction: MediaQuery.of(context).size.width >
+                              MediaQuery.of(context).size.height
+                          ? 0.3
+                          : 0.6,
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 300),
                       autoPlay: true,
@@ -131,10 +134,9 @@ class _StudentPageState extends State<StudentPage> {
                               Text(
                                 item.nama,
                                 style: const TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  color: primary
-                                ),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    color: primary),
                               ),
                               Text(
                                 item.angkatan.toString(),
