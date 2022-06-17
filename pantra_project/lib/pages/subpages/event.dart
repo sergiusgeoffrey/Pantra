@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/event.dart';
@@ -11,7 +10,8 @@ import 'package:pantra_project/services/event_status.dart';
 import 'package:pantra_project/services/event_type.dart';
 import 'package:pantra_project/services/event_year.dart';
 
-import '../../utils/colors.dart';
+import 'package:pantra_project/utils/colors.dart';
+import 'package:pantra_project/widget/text.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -67,6 +67,12 @@ class _EventPageState extends State<EventPage> {
     _futureEventStatuses = _eventStatusService.getAllData();
   }
 
+  Color blue = const Color.fromRGBO(60, 108, 180, 1);
+  Color black = const Color.fromRGBO(0, 0, 0, 1);
+  TextAlign left = TextAlign.left;
+  TextAlign center = TextAlign.center;
+  FontWeight bold = FontWeight.bold;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -75,35 +81,48 @@ class _EventPageState extends State<EventPage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          Text(
-            "Explore Events",
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.04,
-              fontWeight: FontWeight.bold,
-              color: primary,
-            ),
-          ),
+          TextWidget(
+              str: "Explore Events",
+              color: blue,
+              size: MediaQuery.of(context).size.height * 0.04,
+              weight: bold,
+              alignment: center),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
-          Text(
-            "Click on event to see more details!",
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.02,
-              fontWeight: FontWeight.bold,
-              color: primary,
-            ),
-          ),
+          TextWidget(
+              str: "Click on any event to see more details",
+              color: blue,
+              size: MediaQuery.of(context).size.height * 0.02,
+              weight: bold,
+              alignment: center),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.03,
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
           filterEvent(
-              "year", _futureEventYears, Icons.calendar_month, _keyYear),
-          filterEvent("type", _futureEventTypes, Icons.type_specimen, _keyType),
+            "year",
+            _futureEventYears,
+            Icons.calendar_month,
+            _keyYear,
+          ),
           filterEvent(
-              "organizer", _futureEventOrganizers, Icons.people, _keyOrganizer),
+            "type",
+            _futureEventTypes,
+            Icons.type_specimen,
+            _keyType,
+          ),
           filterEvent(
-              "status", _futureEventStatuses, Icons.checklist_rtl, _keyStatus),
+            "organizer",
+            _futureEventOrganizers,
+            Icons.people,
+            _keyOrganizer,
+          ),
+          filterEvent(
+            "status",
+            _futureEventStatuses,
+            Icons.checklist_rtl,
+            _keyStatus,
+          ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.03,
           ),
@@ -216,46 +235,36 @@ class _EventPageState extends State<EventPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                item.name,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.type,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.status,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.organizer,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.year.toString(),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              TextWidget(
+                                  str: item.name,
+                                  color: black,
+                                  size: 20,
+                                  weight: bold,
+                                  alignment: center),
+                              TextWidget(
+                                  str: item.type,
+                                  color: black,
+                                  size: 15,
+                                  weight: bold,
+                                  alignment: center),
+                              TextWidget(
+                                  str: item.status,
+                                  color: black,
+                                  size: 15,
+                                  weight: bold,
+                                  alignment: center),
+                              TextWidget(
+                                  str: item.organizer,
+                                  color: black,
+                                  size: 15,
+                                  weight: bold,
+                                  alignment: center),
+                              TextWidget(
+                                  str: item.year.toString(),
+                                  color: black,
+                                  size: 15,
+                                  weight: bold,
+                                  alignment: center),
                             ],
                           ),
                         ),

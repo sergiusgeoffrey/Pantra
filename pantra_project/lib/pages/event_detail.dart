@@ -22,7 +22,6 @@ class _eventDetailsState extends State<eventDetails> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.event_id,
@@ -31,16 +30,20 @@ class _eventDetailsState extends State<eventDetails> {
 
   Future<void> _showDivisionDialog(
       List<StringObj> divisions, double heightposter) async {
-    List<StringObj> _divisions = [];
-    _divisions.add(StringObj(data: "1"));
-    _divisions.add(StringObj(data: "2"));
-    _divisions.add(StringObj(data: "3"));
-
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('AlertDialog Title'),
+          //change dialog color
+          backgroundColor: const Color.fromRGBO(251, 203, 92, 1),
+          title: Text(
+            'Divisions',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.height * 0.03,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromRGBO(60, 108, 180, 1)),
+          ),
           content: Container(
             width: heightposter,
             child: ListView.builder(
@@ -48,14 +51,20 @@ class _eventDetailsState extends State<eventDetails> {
               itemCount: divisions.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  title: Text(divisions[index].data),
+                  title: Text(divisions[index].data,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(60, 108, 180, 1))),
                 );
               },
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Close'),
+              child: const Text('Close',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromRGBO(60, 108, 180, 1))),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -69,7 +78,7 @@ class _eventDetailsState extends State<eventDetails> {
   @override
   Widget build(BuildContext context) {
     double heightposter = 0;
-    if (MediaQuery.of(context).size.height <
+    if (MediaQuery.of(context).size.height >
         MediaQuery.of(context).size.width) {
       heightposter = (MediaQuery.of(context).size.width * 0.75) as double;
     } else {
@@ -125,7 +134,7 @@ class _eventDetailsState extends State<eventDetails> {
                         ),
                         SizedBox(
                           //make rounded image
-                          height: heightposter,
+                          width: heightposter,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(
                                 MediaQuery.of(context).size.height * 0.05),
