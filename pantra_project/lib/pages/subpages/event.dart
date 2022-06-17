@@ -76,7 +76,7 @@ class _EventPageState extends State<EventPage> {
                   List<Event> events = snapshot.data!;
                   return CarouselSlider(
                     options: CarouselOptions(
-                        height: MediaQuery.of(context).size.height * 0.8,
+                        height: 500,
                         viewportFraction: 1,
                         autoPlayAnimationDuration:
                             const Duration(milliseconds: 300),
