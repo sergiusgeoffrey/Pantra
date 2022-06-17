@@ -33,7 +33,7 @@ class _StudentDetailState extends State<StudentDetail> {
           //change dialog color
           backgroundColor: const Color.fromRGBO(251, 203, 92, 1),
           title: Text(
-            'Pengalaman',
+            'Experience',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: MediaQuery.of(context).size.height * 0.03,
@@ -155,131 +155,198 @@ class _StudentDetailState extends State<StudentDetail> {
                             ),
                             //Nama
                             //NRP
-                            Text(
-                              "Nama - NRP:",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(0, 0, 0, 1)),
-                            ),
-                            Text(
-                                "${snapshot.data![0].name} - ${snapshot.data![0].nrp}",
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.02,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromRGBO(60, 108, 180, 1))),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
-                            ),
-                            //Jurusan
-                            Text(
-                              "Jurusan:",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(0, 0, 0, 1)),
-                            ),
-                            Text(snapshot.data![0].jurusan,
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.02,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromRGBO(60, 108, 180, 1))),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
-                            ),
-                            //Angkatan
-                            Text(
-                              "Angkatan:",
-                              style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(0, 0, 0, 1)),
-                            ),
-                            Text(snapshot.data![0].angkatan.toString(),
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.02,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromRGBO(60, 108, 180, 1))),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
-                            ),
-                            //Porto
-
-                            //if snapshot has portofolio
-                            if (snapshot.data![0].portfolio != null)
-                              Text(
-                                "Portofolio:",
-                                style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.02,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color.fromRGBO(0, 0, 0, 1)),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Color.fromRGBO(60, 108, 180, 1),
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      MediaQuery.of(context).size.height *
+                                          0.05),
+                                ),
+                                color: Color.fromRGBO(255, 255, 255, 0.4),
                               ),
-
-                            //if snapshot has no portofolio
-                            if (snapshot.data![0].portfolio != null)
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      // ignore: prefer_const_constructors
-                                      primary: Color.fromRGBO(60, 108, 180, 1)),
-                                  onPressed: () async {
-                                    if (await canLaunchUrl(Uri.parse(snapshot
-                                        .data![0].portfolio
-                                        .toString()))) {
-                                      await launchUrl(Uri.parse(snapshot
-                                          .data![0].portfolio
-                                          .toString()));
-                                    }
-                                  },
-                                  child: Text(
-                                    snapshot.data![0].portfolio.toString(),
+                              margin: EdgeInsets.fromLTRB(
+                                  MediaQuery.of(context).size.height * 0.05,
+                                  0,
+                                  MediaQuery.of(context).size.height * 0.05,
+                                  0),
+                              padding: EdgeInsets.fromLTRB(
+                                  0,
+                                  MediaQuery.of(context).size.height * 0.05,
+                                  0,
+                                  MediaQuery.of(context).size.height * 0.05),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Nama - NRP:",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontSize:
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            const Color.fromRGBO(0, 0, 0, 1)),
+                                  ),
+                                  Text(
+                                      textAlign: TextAlign.center,
+                                      "${snapshot.data![0].name} - ${snapshot.data![0].nrp}",
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromRGBO(
+                                              60, 108, 180, 1))),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                  ),
+                                  //Jurusan
+                                  Text(
+                                    textAlign: TextAlign.center,
+                                    "Jurusan:",
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            const Color.fromRGBO(0, 0, 0, 1)),
+                                  ),
+                                  Text(snapshot.data![0].jurusan,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromRGBO(
+                                              60, 108, 180, 1))),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                  ),
+                                  //Angkatan
+                                  Text(
+                                    textAlign: TextAlign.center,
+                                    "Angkatan:",
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            const Color.fromRGBO(0, 0, 0, 1)),
+                                  ),
+                                  Text(snapshot.data![0].angkatan.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.02,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromRGBO(
+                                              60, 108, 180, 1))),
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                  ),
+                                  //Porto
+
+                                  //if snapshot has portofolio
+                                  if (snapshot.data![0].portfolio != null)
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      "Portofolio:",
+                                      style: TextStyle(
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.03,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              const Color.fromRGBO(0, 0, 0, 1)),
+                                    ),
+
+                                  //if snapshot has no portofolio
+                                  if (snapshot.data![0].portfolio != null)
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            // ignore: prefer_const_constructors
+                                            primary: Color.fromRGBO(
+                                                60, 108, 180, 1)),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(Uri.parse(
+                                              snapshot.data![0].portfolio
+                                                  .toString()))) {
+                                            await launchUrl(Uri.parse(snapshot
+                                                .data![0].portfolio
+                                                .toString()));
+                                          }
+                                        },
+                                        child: Text(
+                                          snapshot.data![0].portfolio
+                                              .toString(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  if (snapshot.data![0].portfolio != null)
+                                    SizedBox(
+                                      height:
                                           MediaQuery.of(context).size.height *
                                               0.02,
-                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  //Pengalaman card/popup
+                                  Text(
+                                    textAlign: TextAlign.center,
+                                    "Experience:",
+                                    style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            const Color.fromRGBO(0, 0, 0, 1)),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _showDivisionDialog(
+                                          snapshot.data![0].pengalaman
+                                              .toString(),
+                                          heightposter);
+                                    },
+                                    child: Text(
+                                      "See Experience",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            if (snapshot.data![0].portfolio != null)
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02,
-                              ),
-                            //Pengalaman card/popup
-                            ElevatedButton(
-                              onPressed: () {
-                                _showDivisionDialog(
-                                    snapshot.data![0].pengalaman.toString(),
-                                    heightposter);
-                              },
-                              child: Text(
-                                "See Experience",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                ],
                               ),
                             ),
+
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.02,
                             ),
