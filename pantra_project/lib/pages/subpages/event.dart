@@ -12,6 +12,8 @@ import 'package:pantra_project/services/event_year.dart';
 
 import 'package:pantra_project/utils/colors.dart';
 import 'package:pantra_project/widget/text.dart';
+import 'package:pantra_project/utils/alignment.dart';
+import 'package:pantra_project/utils/font_weight.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
@@ -64,12 +66,6 @@ class _EventPageState extends State<EventPage> {
     _futureEventOrganizers = _eventOrganizerService.getAllData();
     _futureEventStatuses = _eventStatusService.getAllData();
   }
-
-  Color blue = const Color.fromRGBO(60, 108, 180, 1);
-  Color black = const Color.fromRGBO(0, 0, 0, 1);
-  TextAlign left = TextAlign.left;
-  TextAlign center = TextAlign.center;
-  FontWeight bold = FontWeight.bold;
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +188,7 @@ class _EventPageState extends State<EventPage> {
                 List<Event> events = snapshot.data!;
                 return CarouselSlider(
                   options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height * 0.6,
+                      height: 500,
                       viewportFraction: MediaQuery.of(context).size.width >
                               MediaQuery.of(context).size.height
                           ? 0.3
@@ -234,8 +230,9 @@ class _EventPageState extends State<EventPage> {
                                   },
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      item.posterFilepath,
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: "images/ukp.png",
+                                      image: item.posterFilepath,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -246,8 +243,8 @@ class _EventPageState extends State<EventPage> {
                               ),
                               TextWidget(
                                   str: item.name,
-                                  color: black,
-                                  size: 20,
+                                  color: primary,
+                                  size: 17,
                                   weight: bold,
                                   alignment: center),
                               TextWidget(

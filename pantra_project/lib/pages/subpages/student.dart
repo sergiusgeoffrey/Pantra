@@ -9,6 +9,9 @@ import 'package:pantra_project/services/student_faculty.dart';
 import 'package:pantra_project/services/student_major.dart';
 import 'package:pantra_project/utils/colors.dart';
 import 'package:pantra_project/utils/division.dart';
+import 'package:pantra_project/widget/text.dart';
+import 'package:pantra_project/utils/alignment.dart';
+import 'package:pantra_project/utils/font_weight.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -70,23 +73,21 @@ class _StudentPageState extends State<StudentPage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
-          Text(
-            "Explore Petranesians",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.04,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(60, 108, 180, 1)),
-          ),
+          TextWidget(
+              str: "Explore Petranesians",
+              size: MediaQuery.of(context).size.height * 0.04,
+              color: blue,
+              weight: bold,
+              alignment: center),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.01,
           ),
-          Text(
-            "Click on Petranesian to see more details!",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontWeight: FontWeight.bold,
-                color: const Color.fromRGBO(60, 108, 180, 1)),
-          ),
+          TextWidget(
+              str: "Click on Petranesian to see more details!",
+              size: MediaQuery.of(context).size.height * 0.02,
+              color: primary,
+              weight: bold,
+              alignment: center),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
@@ -186,7 +187,10 @@ class _StudentPageState extends State<StudentPage> {
                 return CarouselSlider(
                   options: CarouselOptions(
                       height: 500,
-                      viewportFraction: 1,
+                      viewportFraction: MediaQuery.of(context).size.width >
+                              MediaQuery.of(context).size.height
+                          ? 0.3
+                          : 0.6,
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 300),
                       autoPlay: true,
@@ -224,8 +228,9 @@ class _StudentPageState extends State<StudentPage> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: item.photoFilepath != null
-                                        ? Image.network(
-                                            item.photoFilepath,
+                                        ? FadeInImage.assetNetwork(
+                                            placeholder: "images/ukp.png",
+                                            image: item.photoFilepath,
                                             fit: BoxFit.cover,
                                           )
                                         : Image.network(
@@ -238,35 +243,30 @@ class _StudentPageState extends State<StudentPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text(
-                                item.nama,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.angkatan.toString(),
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.program,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                item.fakultas,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              TextWidget(
+                                  str: item.nama,
+                                  size: 17,
+                                  color: primary,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.angkatan.toString(),
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.program,
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
+                              TextWidget(
+                                  str: item.fakultas,
+                                  size: 15,
+                                  color: black,
+                                  weight: bold,
+                                  alignment: left),
                             ],
                           ),
                         ),

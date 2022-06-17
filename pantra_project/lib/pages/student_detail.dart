@@ -56,6 +56,7 @@ class _StudentDetailState extends State<StudentDetail> {
                       fontWeight: FontWeight.bold,
                       color: const Color.fromRGBO(60, 108, 180, 1))),
               onPressed: () {
+                setState(() {});
                 Navigator.of(context).pop();
               },
             ),
@@ -67,6 +68,7 @@ class _StudentDetailState extends State<StudentDetail> {
 
   @override
   Widget build(BuildContext context) {
+    bool testingbro = false;
     double heightposter = 0;
     if (MediaQuery.of(context).size.height >
         MediaQuery.of(context).size.width) {
@@ -76,51 +78,50 @@ class _StudentDetailState extends State<StudentDetail> {
     }
     return Scaffold(
       body: Container(
-        child: Column(children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                Flexible(
-                  flex: 4,
-                  fit: FlexFit.tight,
-                  child: Text(
-                    "Student Details",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * 0.04,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(60, 108, 180, 1),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: IconButton(
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
-                ),
-              ],
+                  Flexible(
+                    flex: 4,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "Student Details",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.04,
+                        fontWeight: FontWeight.bold,
+                        color: const Color.fromRGBO(60, 108, 180, 1),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-
-          Container(
-            color: Color.fromRGBO(251, 203, 92, 1),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.9,
-              width: MediaQuery.of(context).size.width,
-              child: SingleChildScrollView(
-                child: FutureBuilder<List<StudentCreds>>(
-                  future: _studentDetails,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Expanded(
-                        child: Column(
+            Container(
+              color: Color.fromRGBO(251, 203, 92, 1),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.9,
+                width: MediaQuery.of(context).size.width,
+                child: SingleChildScrollView(
+                  child: FutureBuilder<List<StudentCreds>>(
+                    future: _studentDetails,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Column(
                           children: [
                             SizedBox(
                               height: MediaQuery.of(context).size.height * 0.05,
@@ -338,21 +339,21 @@ class _StudentDetailState extends State<StudentDetail> {
                               height: MediaQuery.of(context).size.height * 0.02,
                             ),
                           ],
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text("${snapshot.error}");
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-        ],),
+          ],
+        ),
       ),
     );
   }
