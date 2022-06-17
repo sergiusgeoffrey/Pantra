@@ -26,28 +26,26 @@ class _EventPageState extends State<EventPage> {
 
   final EventYearService _eventYearService = EventYearService();
   late Future<List<StringObj>> _futureEventYears;
+  final GlobalKey<FormFieldState> _keyYear = GlobalKey<FormFieldState>();
 
   final EventTypeService _eventTypeService = EventTypeService();
   late Future<List<StringObj>> _futureEventTypes;
+  final GlobalKey<FormFieldState> _keyType = GlobalKey<FormFieldState>();
 
   final EventOrganizerService _eventOrganizerService = EventOrganizerService();
   late Future<List<StringObj>> _futureEventOrganizers;
+  final GlobalKey<FormFieldState> _keyOrganizer = GlobalKey<FormFieldState>();
 
   final EventStatusService _eventStatusService = EventStatusService();
   late Future<List<StringObj>> _futureEventStatuses;
+  final GlobalKey<FormFieldState> _keyStatus = GlobalKey<FormFieldState>();
 
-  // TODO: add filters to update these values
+  bool showResetFilterButton = false;
+
   int year = 0;
   String type = "";
   String organizer = "";
   String status = "";
-
-  final GlobalKey<FormFieldState> _keyYear = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _keyType = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _keyStatus = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _keyOrganizer = GlobalKey<FormFieldState>();
-
-  bool showResetFilterButton = false;
 
   @override
   void initState() {
@@ -327,7 +325,7 @@ class _EventPageState extends State<EventPage> {
                   color: primary,
                 ),
               ),
-              value: null,
+              menuMaxHeight: 500,
               icon: const Icon(
                 Icons.arrow_drop_down,
                 color: Color.fromRGBO(60, 108, 180, 1),

@@ -6,7 +6,7 @@ import 'package:pantra_project/models/student.dart';
 
 class StudentService {
   Future<List<Student>> getAllData({
-    int studentYear = 0,
+    int studentBatch = 0,
     String experience = "",
     String faculty = "",
     String major = "",
@@ -18,16 +18,16 @@ class StudentService {
 
     String token = "RwG${month}ne${year}Kc${day}C9w";
 
-    String yearStr = "";
+    String batchStr = "";
 
-    if (studentYear != 0) yearStr = "&student_year=$studentYear";
-    if (experience != "") experience = "&experience=$experience";
+    if (studentBatch != 0) batchStr = "&batch=$studentBatch";
+    if (experience != "") experience = "&division=$experience";
     if (faculty != "") faculty = "&faculty=$faculty";
     if (major != "") major = "&major=$major";
 
     final response = await http.get(
         Uri.parse(
-            "https://bem-internal.petra.ac.id/reach/api/student/index.php?$yearStr$experience$faculty$major"),
+            "https://bem-internal.petra.ac.id/reach/api/student/index.php?$batchStr$experience$faculty$major"),
         headers: {
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
@@ -35,7 +35,14 @@ class StudentService {
 
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
+
       List<Student> students = [];
+
+      if (jsonData.containsKey('message') &&
+          jsonData["message"] == "No data found") {
+        return students;
+      }
+
       for (var i = 0; i < jsonData['data'].length; i++) {
         students.add(
           Student(

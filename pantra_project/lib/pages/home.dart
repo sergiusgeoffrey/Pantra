@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
 import 'package:pantra_project/pages/subpages/student.dart';
+import 'package:pantra_project/utils/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -27,20 +28,20 @@ class _HomeState extends State<Home> {
         },
         items: const [
           Icon(
-            Icons.home,
-            color: Color.fromRGBO(60, 108, 180, 1),
+            Icons.celebration_rounded,
+            color: primary,
           ),
           Icon(
-            Icons.search,
-            color: Color.fromRGBO(60, 108, 180, 1),
+            Icons.people_alt,
+            color: primary,
           ),
           Icon(
             Icons.person,
-            color: Color.fromRGBO(60, 108, 180, 1),
+            color: primary,
           ),
           Icon(
             Icons.delete,
-            color: Color.fromRGBO(60, 108, 180, 1),
+            color: primary,
           ),
         ],
       ),
