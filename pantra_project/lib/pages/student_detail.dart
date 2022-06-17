@@ -108,19 +108,6 @@ class _StudentDetailState extends State<StudentDetail> {
               ],
             ),
           ),
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height * 0.05,
-          // ),
-          // Center(
-          //   child: Text(
-          //     "Student Details",
-          //     style: TextStyle(
-          //       fontSize: MediaQuery.of(context).size.height * 0.05,
-          //       fontWeight: FontWeight.bold,
-          //       color: const Color.fromRGBO(60, 108, 180, 1),
-          //     ),
-          //   ),
-          // ),
 
           Container(
             color: Color.fromRGBO(251, 203, 92, 1),
@@ -365,7 +352,7 @@ class _StudentDetailState extends State<StudentDetail> {
               ),
             ),
           ),
-        ]),
+        ],),
       ),
     );
   }
