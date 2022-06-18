@@ -42,7 +42,7 @@ class _LoginState extends State<Login> {
   final LoginService _loginService = LoginService();
   late Future<bool> _futureLogin;
 
-  final _accountController = TextEditingController();
+  final _nrpController = TextEditingController();
   final _passwordController = TextEditingController();
 
   final List<String> greeting = <String>[
@@ -63,10 +63,12 @@ class _LoginState extends State<Login> {
   final _random = Random();
 
   String buttonText = "L O G I N";
+  bool _validateNRP = false;
+  bool _validatePass = false;
 
   @override
   void dispose() {
-    _accountController.dispose();
+    _nrpController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -83,7 +85,7 @@ class _LoginState extends State<Login> {
               greeting[_random.nextInt(greeting.length)],
               style: const TextStyle(
                 fontSize: 40,
-                color: secondary,
+                color: primary,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Recoleta',
               ),
@@ -96,20 +98,24 @@ class _LoginState extends State<Login> {
               child: TextField(
                 maxLength: 9,
                 maxLengthEnforcement: MaxLengthEnforcement.enforced,
-                controller: _accountController,
+                controller: _nrpController,
                 decoration: InputDecoration(
                   counterText: "",
                   filled: true,
                   prefixIcon: const Icon(Icons.person),
                   labelText: "NRP",
+                  errorText: _validateNRP ? 'NRP is required' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
-                    //make the border transparent
                   ),
-                  fillColor: primary,
+                  fillColor: secondary,
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: orange, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: red, width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
@@ -127,6 +133,7 @@ class _LoginState extends State<Login> {
                   filled: true,
                   prefixIcon: const Icon(Icons.lock),
                   labelText: "Password",
+                  errorText: _validatePass ? 'Password is required' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
@@ -135,6 +142,10 @@ class _LoginState extends State<Login> {
                   fillColor: secondary,
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: orange, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: red, width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
@@ -150,74 +161,86 @@ class _LoginState extends State<Login> {
                 onPressed: () {
                   setState(() {
                     buttonText = "LOGGING IN...";
+                    _nrpController.text.isEmpty
+                        ? _validateNRP = true
+                        : _validateNRP = false;
+                    _passwordController.text.isEmpty
+                        ? _validatePass = true
+                        : _validatePass = false;
                   });
 
-                  String nrp = _accountController.text;
+                  String nrp = _nrpController.text;
                   String password = _passwordController.text;
 
-                  _futureLogin = _loginService.login(
-                    nrp: nrp,
-                    password: password,
-                  );
+                  if (nrp.isNotEmpty && password.isNotEmpty) {
+                    _futureLogin = _loginService.login(
+                      nrp: nrp,
+                      password: password,
+                    );
 
-                  _futureLogin.then((bool success) {
-                    if (success) {
-                      String email = "$nrp@john.petra.ac.id";
+                    _futureLogin.then((bool success) {
+                      if (success) {
+                        String email = "$nrp@john.petra.ac.id";
 
-                      setState(() {
-                        buttonText = "LOGGING IN...";
-                      });
+                        setState(() {
+                          buttonText = "LOGGING IN...";
+                        });
 
-                      firebaseAuth(email: email, password: password).then(
-                        (value) {
-                          value == "Success"
-                              ? Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Home(),
-                                  ),
-                                )
-                              : ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      value,
+                        firebaseAuth(email: email, password: password).then(
+                          (value) {
+                            value == "Success"
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const Home(),
                                     ),
-                                    backgroundColor: red,
-                                    action: SnackBarAction(
-                                      label: "DISMISS",
-                                      textColor: Colors.white,
-                                      onPressed: () {
-                                        ScaffoldMessenger.of(context)
-                                            .hideCurrentSnackBar();
-                                      },
+                                  )
+                                : ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        value,
+                                      ),
+                                      backgroundColor: red,
+                                      action: SnackBarAction(
+                                        label: "DISMISS",
+                                        textColor: Colors.white,
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                );
-                        },
-                      );
-                    } else {
-                      setState(() {
-                        buttonText = "L O G I N";
-                      });
+                                  );
+                          },
+                        );
+                      } else {
+                        setState(() {
+                          buttonText = "L O G I N";
+                        });
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: const Text(
-                            "Invalid NRP or Password. Please try again.",
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text(
+                              "Invalid NRP or Password. Please try again.",
+                            ),
+                            backgroundColor: red,
+                            action: SnackBarAction(
+                              label: "DISMISS",
+                              textColor: Colors.white,
+                              onPressed: () {
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              },
+                            ),
                           ),
-                          backgroundColor: red,
-                          action: SnackBarAction(
-                            label: "DISMISS",
-                            textColor: Colors.white,
-                            onPressed: () {
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                            },
-                          ),
-                        ),
-                      );
-                    }
-                  });
+                        );
+                      }
+                    });
+                  } else {
+                    setState(() {
+                      buttonText = "L O G I N";
+                    });
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student_creds.dart';
-import 'package:pantra_project/services/firestoreservices.dart';
+import 'package:pantra_project/services/firestore.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/utils/color.dart';
 

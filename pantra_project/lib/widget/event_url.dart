@@ -6,8 +6,8 @@ import '../utils/font_weight.dart';
 import 'text.dart';
 
 class EventURLWidget extends StatelessWidget {
-  final String URL;
-  const EventURLWidget({Key? key, required this.URL}) : super(key: key);
+  final String url;
+  const EventURLWidget({Key? key, required this.url}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class EventURLWidget extends StatelessWidget {
             ),
             onPressed: () async {
               await launchUrl(
-                Uri.parse(URL),
+                Uri.parse(url),
               );
             },
             child: TextWidget(

@@ -4,7 +4,7 @@ import 'package:like_button/like_button.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/services/event_details.dart';
-import 'package:pantra_project/services/firestoreservices.dart';
+import 'package:pantra_project/services/firestore.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -29,8 +29,7 @@ class _EventDetailsState extends State<EventDetails> {
   Future<bool> _onLikeButtonTapped(bool istapped) async {
     //get nrp from authentication
 
-    await Database.updateWishlist(
-        nrp: nrp, event_id: widget.eventID.toString());
+    await Database.updateWishlist(nrp: nrp, eventID: widget.eventID.toString());
     setState(() {
       wishlist = !wishlist;
     });
@@ -43,8 +42,8 @@ class _EventDetailsState extends State<EventDetails> {
 
     nrp = FirebaseAuth.instance.currentUser!.email.toString().split('@')[0];
 
-    // wishlist = Database.getSpesificWishlist(
-    //     nrp: nrp, event_id: widget.eventID.toString()) as bool;
+    // wishlist = Database.getSpecificWishlist(
+    //     nrp: nrp, eventID: widget.eventID.toString()) as bool;
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.eventID,
     );
@@ -165,8 +164,8 @@ class _EventDetailsState extends State<EventDetails> {
                   future: _futureEventDetail,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      Database.getSpesificWishlist(
-                              nrp: nrp, event_id: widget.eventID.toString())
+                      Database.getSpecificWishlist(
+                              nrp: nrp, eventID: widget.eventID.toString())
                           .then((value) => setState(() {
                                 wishlist = value as bool;
                               }));
@@ -222,7 +221,7 @@ class _EventDetailsState extends State<EventDetails> {
                                   strJudul: "Status",
                                   isiSnapshot: snapshot.data!.status,
                                 ),
-                                EventURLWidget(URL: snapshot.data!.url),
+                                EventURLWidget(url: snapshot.data!.url),
                                 const SizedBox(
                                   height: 20,
                                 ),

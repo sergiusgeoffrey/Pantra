@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pantra_project/models/student_creds.dart';
 
@@ -20,10 +18,8 @@ class Database {
         .catchError((e) => print(e.toString()));
   }
 
-  //get spesific user by nrp
   static Future<StudentCreds?> getUserByNrp({required String nrp}) async {
     DocumentSnapshot doc = await tbUser.doc(nrp).get();
-    //map doc to student creds
     if (doc.exists) {
       final testing = StudentCreds(
           nrp: doc["nrp"],
@@ -41,39 +37,37 @@ class Database {
     }
   }
 
-  //update wishlist array
   static Future<void> updateWishlist(
-      {required String nrp, required String event_id}) async {
-    DocumentReference docRef = await tbWishlist.doc(nrp);
-    //update array field in firestore
+      {required String nrp, required String eventID}) async {
+    DocumentReference docRef = tbWishlist.doc(nrp);
     DocumentSnapshot doc = await docRef.get();
     if (doc.exists) {
-      doc["acara"].contains(event_id)
+      doc["acara"].contains(eventID)
           ? docRef.update({
-              "acara": FieldValue.arrayRemove([event_id])
+              "acara": FieldValue.arrayRemove([eventID])
             })
           : docRef.update({
-              "acara": FieldValue.arrayUnion([event_id])
+              "acara": FieldValue.arrayUnion([eventID])
             });
     } else {
       docRef.set({
-        "acara": [event_id]
+        "acara": [eventID]
       });
     }
 
     // await docRef
     //     .update({
-    //       "acara": FieldValue.arrayUnion(["$event_id"]),
+    //       "acara": FieldValue.arrayUnion(["$eventID"]),
     //     })
     //     .whenComplete(() => print("wishlist updated"))
     //     .catchError((e) => print(e.toString()));
   }
 
-  static Future<bool> getSpesificWishlist(
-      {required String nrp, required String event_id}) async {
+  static Future<bool> getSpecificWishlist(
+      {required String nrp, required String eventID}) async {
     DocumentSnapshot doc = await tbWishlist.doc(nrp).get();
     if (doc.exists) {
-      return doc["acara"].contains(event_id) ? true : false;
+      return doc["acara"].contains(eventID) ? true : false;
     } else {
       return false;
     }
