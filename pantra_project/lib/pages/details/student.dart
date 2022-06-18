@@ -9,6 +9,7 @@ import 'package:pantra_project/widget/text.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/font_weight.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StudentDetail extends StatefulWidget {
   final String nrp;
@@ -28,6 +29,8 @@ class _StudentDetailState extends State<StudentDetail> {
   final StudentTestimonialService _studentTestimonialService =
       StudentTestimonialService();
   late Future<List<StudentTestimonial>> _studentTestimonials;
+
+  String instagramURL = "";
 
   @override
   void initState() {
@@ -95,6 +98,18 @@ class _StudentDetailState extends State<StudentDetail> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await launchUrl(
+            Uri.parse('https://www.instagram.com/$instagramURL'),
+          );
+        },
+        backgroundColor: primary,
+        child: const Icon(
+          FontAwesomeIcons.instagram,
+          color: secondary,
+        ),
+      ),
       body: Column(
         children: [
           Container(
@@ -139,6 +154,12 @@ class _StudentDetailState extends State<StudentDetail> {
                       future: _studentDetails,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            setState(() {
+                              instagramURL = snapshot.data![0].instagram;
+                            });
+                          });
+
                           return Column(
                             children: [
                               SizedBox(
@@ -170,14 +191,19 @@ class _StudentDetailState extends State<StudentDetail> {
                                 child: Column(
                                   children: [
                                     StudentDetailWidget(
-                                        strJudul: 'Name',
-                                        isiSnapshot: snapshot.data![0].name),
+                                      strJudul: 'Name',
+                                      isiSnapshot: snapshot.data![0].name,
+                                    ),
                                     StudentDetailWidget(
-                                        strJudul: 'NRP',
-                                        isiSnapshot: snapshot.data![0].nrp),
+                                      strJudul: 'NRP',
+                                      isiSnapshot:
+                                          snapshot.data![0].nrp.toUpperCase(),
+                                    ),
                                     StudentDetailWidget(
-                                        strJudul: 'Major',
-                                        isiSnapshot: snapshot.data![0].jurusan),
+                                      strJudul: 'Major',
+                                      isiSnapshot: snapshot.data![0].jurusan
+                                          .split(" - ")[1],
+                                    ),
                                     StudentDetailWidget(
                                         strJudul: 'Batch',
                                         isiSnapshot: snapshot.data![0].angkatan
@@ -193,28 +219,41 @@ class _StudentDetailState extends State<StudentDetail> {
                                         alignment: center,
                                       ),
                                     if (snapshot.data![0].portfolio != null)
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            8, 0, 8, 0),
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: secondary,
-                                          ),
-                                          onPressed: () async {
-                                            if (await canLaunchUrl(
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                    if (snapshot.data![0].portfolio != null)
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: secondary,
+                                        ),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(
+                                            Uri.parse(
+                                              snapshot.data![0].portfolio
+                                                  .toString(),
+                                            ),
+                                          )) {
+                                            await launchUrl(
                                               Uri.parse(
                                                 snapshot.data![0].portfolio
                                                     .toString(),
                                               ),
-                                            )) {
-                                              await launchUrl(
-                                                Uri.parse(
-                                                  snapshot.data![0].portfolio
-                                                      .toString(),
-                                                ),
-                                              );
-                                            }
-                                          },
+                                            );
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                              0,
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.01,
+                                              0,
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.01),
                                           child: TextWidget(
                                             str: "See Portfolio",
                                             size: MediaQuery.of(context)
@@ -241,6 +280,9 @@ class _StudentDetailState extends State<StudentDetail> {
                                       weight: bold,
                                       alignment: center,
                                     ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                         primary: secondary,
@@ -252,14 +294,24 @@ class _StudentDetailState extends State<StudentDetail> {
                                           heightposter,
                                         );
                                       },
-                                      child: TextWidget(
-                                        str: "See Experiences",
-                                        size:
+                                      child: Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            0,
                                             MediaQuery.of(context).size.height *
-                                                0.025,
-                                        color: primary,
-                                        weight: bold,
-                                        alignment: center,
+                                                0.01,
+                                            0,
+                                            MediaQuery.of(context).size.height *
+                                                0.01),
+                                        child: TextWidget(
+                                          str: "See Experiences",
+                                          size: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.025,
+                                          color: primary,
+                                          weight: bold,
+                                          alignment: center,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -275,6 +327,21 @@ class _StudentDetailState extends State<StudentDetail> {
                           );
                         }
                       },
+                    ),
+                    Container(
+                      height: 2,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      color: Colors.purple,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextWidget(
+                      str: "Testimonials",
+                      size: MediaQuery.of(context).size.height * 0.03,
+                      color: black,
+                      weight: bold,
+                      alignment: center,
                     ),
                     FutureBuilder<List<StudentTestimonial>>(
                       future: _studentTestimonials,
@@ -303,56 +370,63 @@ class _StudentDetailState extends State<StudentDetail> {
                                               0.02,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: primary,
-                                        ),
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05),
+                                          Radius.circular(10),
                                         ),
-                                        color: grey,
+                                        color: secondary,
                                       ),
                                       margin: EdgeInsets.fromLTRB(
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          0,
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          0),
+                                        MediaQuery.of(context).size.height *
+                                            0.05,
+                                        0,
+                                        MediaQuery.of(context).size.height *
+                                            0.05,
+                                        0,
+                                      ),
                                       padding: EdgeInsets.fromLTRB(
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                          MediaQuery.of(context).size.height *
-                                              0.05),
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                        MediaQuery.of(context).size.height *
+                                            0.02,
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                        MediaQuery.of(context).size.height *
+                                            0.02,
+                                      ),
                                       child: Column(
                                         children: [
                                           TextWidget(
-                                              str: snapshot.data![index].event,
-                                              size: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.03,
-                                              color: black,
-                                              weight: bold,
-                                              alignment: center),
-                                          SizedBox(height: 8),
+                                            str: snapshot.data![index].event,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
+                                            color: primary,
+                                            weight: bold,
+                                            alignment: center,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            color: Colors.purple,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
                                           TextWidget(
-                                              str: snapshot
-                                                  .data![index].testimonial,
-                                              size: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.03,
-                                              color: primary,
-                                              weight: bold,
-                                              alignment: justify),
+                                            str: snapshot
+                                                .data![index].testimonial,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02,
+                                            color: black,
+                                            weight: regular,
+                                            alignment: left,
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -368,10 +442,10 @@ class _StudentDetailState extends State<StudentDetail> {
                             height: MediaQuery.of(context).size.height * 0.2,
                             child: Center(
                               child: TextWidget(
-                                str: "No Testimonials Found",
-                                size: 16,
+                                str: "No testimonials",
+                                size: MediaQuery.of(context).size.height * 0.02,
                                 color: red,
-                                weight: bold,
+                                weight: regular,
                                 alignment: center,
                               ),
                             ),

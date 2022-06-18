@@ -6,9 +6,16 @@ class TextWidget extends StatelessWidget {
   final Color color;
   final FontWeight weight;
   final TextAlign alignment;
-  
-  const TextWidget({Key? key, required this.str, required this.size, required this.color, required this.weight, required this.alignment}) : super(key: key);
-  
+
+  const TextWidget(
+      {Key? key,
+      required this.str,
+      required this.size,
+      required this.color,
+      required this.weight,
+      required this.alignment})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -21,6 +28,4 @@ class TextWidget extends StatelessWidget {
       ),
     );
   }
-
-  
 }

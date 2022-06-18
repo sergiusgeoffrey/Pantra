@@ -45,22 +45,22 @@ class _LoginState extends State<Login> {
   final _nrpController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final List<String> greeting = <String>[
-    "Welcome!",
-    "Bonjour!",
-    "Hola!",
-    "Privyet!",
-    "Ni Hao!",
-    "Hallo!",
-    "Ola!",
-    "Anyoung!",
-    "Ahlan!",
-    "Guten Tag!",
-    "Namaste",
-    "Shalom!",
-    "Aloha!",
-  ];
-  final _random = Random();
+  // final List<String> greeting = <String>[
+  //   "Welcome!",
+  //   "Bonjour!",
+  //   "Hola!",
+  //   "Privyet!",
+  //   "Ni Hao!",
+  //   "Hallo!",
+  //   "Ola!",
+  //   "Anyoung!",
+  //   "Ahlan!",
+  //   "Guten Tag!",
+  //   "Namaste",
+  //   "Shalom!",
+  //   "Aloha!",
+  // ];
+  // final _random = Random();
 
   String buttonText = "L O G I N";
   bool _validateNRP = false;
@@ -81,9 +81,9 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              greeting[_random.nextInt(greeting.length)],
-              style: const TextStyle(
+            const Text(
+              "Welcome!",
+              style: TextStyle(
                 fontSize: 40,
                 color: primary,
                 fontWeight: FontWeight.bold,
@@ -141,11 +141,17 @@ class _LoginState extends State<Login> {
                   ),
                   fillColor: secondary,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: orange, width: 2.0),
+                    borderSide: const BorderSide(
+                      color: orange,
+                      width: 2.0,
+                    ),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: red, width: 2.0),
+                    borderSide: const BorderSide(
+                      color: red,
+                      width: 2.0,
+                    ),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),

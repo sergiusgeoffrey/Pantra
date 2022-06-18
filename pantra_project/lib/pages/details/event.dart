@@ -42,8 +42,8 @@ class _EventDetailsState extends State<EventDetails> {
 
     nrp = FirebaseAuth.instance.currentUser!.email.toString().split('@')[0];
 
-    // wishlist = Database.getSpecificWishlist(
-    //     nrp: nrp, eventID: widget.eventID.toString()) as bool;
+    wishlist = Database.getSpecificWishlist(
+        nrp: nrp, eventID: widget.eventID.toString()) as bool;
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.eventID,
     );
@@ -167,7 +167,7 @@ class _EventDetailsState extends State<EventDetails> {
                       Database.getSpecificWishlist(
                               nrp: nrp, eventID: widget.eventID.toString())
                           .then((value) => setState(() {
-                                wishlist = value as bool;
+                                wishlist = value;
                               }));
 
                       return Column(
@@ -234,6 +234,9 @@ class _EventDetailsState extends State<EventDetails> {
                                       color: black,
                                       weight: bold,
                                       alignment: center,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
                                     ),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(

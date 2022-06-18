@@ -25,14 +25,14 @@ class _HomeState extends State<Home> {
   ];
   int pageIndex = 0;
 
+  final _nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-
     @override
     // ignore: unused_element
     void dispose() {
-      nameController.dispose();
+      _nameController.dispose();
       super.dispose();
     }
 
@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
             content: SizedBox(
               width: heightposter,
               child: TextField(
+                controller: _nameController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
@@ -59,18 +60,28 @@ class _HomeState extends State<Home> {
                       color: primary,
                     ),
                   ),
-                  focusColor: primary,
                   labelText: 'Ex: Sergius Tanalandi',
-                  labelStyle: TextStyle(
-                    color: primary,
-                  ),
                   suffixIcon: Icon(Icons.search),
                   suffixIconColor: primary,
                 ),
-                controller: nameController,
               ),
             ),
             actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(red),
+                ),
+                child: TextWidget(
+                  str: 'CLOSE',
+                  size: 14,
+                  color: white,
+                  weight: bold,
+                  alignment: center,
+                ),
+              ),
               TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(primary),
@@ -83,21 +94,58 @@ class _HomeState extends State<Home> {
                   alignment: center,
                 ),
                 onPressed: () {
-                  var name = nameController.text;
-                  Navigator.of(context).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => StudentSearchResult(
-                        name: name,
+                  if (_nameController.text.isEmpty &&
+                      _nameController.text.length < 4) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: secondary,
+                          title: TextWidget(
+                            str: 'Please enter at least 4 characters!',
+                            size: 16,
+                            color: red,
+                            weight: bold,
+                            alignment: center,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  primary,
+                                ),
+                              ),
+                              child: TextWidget(
+                                str: 'OK',
+                                size: 14,
+                                color: white,
+                                weight: bold,
+                                alignment: center,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    var name = _nameController.text;
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StudentSearchResult(
+                          name: name,
+                        ),
                       ),
-                    ),
-                  );
-                  setState(
-                    () {
-                      nameController.clear();
-                    },
-                  );
+                    );
+
+                    setState(() {
+                      _nameController.clear();
+                    });
+                  }
                 },
               ),
             ],

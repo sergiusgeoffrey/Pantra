@@ -20,6 +20,9 @@ class EventURLWidget extends StatelessWidget {
           weight: bold,
           alignment: center,
         ),
+        const SizedBox(
+          height: 5,
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
           child: ElevatedButton(

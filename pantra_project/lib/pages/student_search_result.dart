@@ -10,10 +10,9 @@ import 'package:pantra_project/widget/text.dart';
 class StudentSearchResult extends StatefulWidget {
   final String name;
 
-  // NOTE: use only one either nrp or name (don't combine them)
   const StudentSearchResult({
     Key? key,
-    this.name = "handrian", // this is a default value
+    this.name = "handrian",
   }) : super(key: key);
 
   @override

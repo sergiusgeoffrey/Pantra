@@ -4,7 +4,11 @@ import 'package:pantra_project/models/student_creds.dart';
 import 'package:pantra_project/models/student_testimonial.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/services/student_testimonial.dart';
+import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
+import 'package:pantra_project/utils/font_weight.dart';
+import 'package:pantra_project/widget/student_details.dart';
+import 'package:pantra_project/widget/text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountDetail extends StatefulWidget {
@@ -47,29 +51,33 @@ class _AccountDetailState extends State<AccountDetail> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: secondary,
-          title: Text(
-            'Experience',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.03,
-                fontWeight: FontWeight.bold,
-                color: primary),
+          title: TextWidget(
+            str: 'View Experiences',
+            size: MediaQuery.of(context).size.height * 0.025,
+            color: primary,
+            weight: bold,
+            alignment: center,
           ),
-          content: Text(
-            pengalaman,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontWeight: FontWeight.bold,
-                color: primary),
+          content: TextWidget(
+            str: pengalaman,
+            size: 18,
+            color: black,
+            weight: regular,
+            alignment: center,
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Close',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, color: primary)),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.red),
+              ),
+              child: TextWidget(
+                str: 'CLOSE',
+                size: 14,
+                color: white,
+                weight: bold,
+                alignment: center,
+              ),
               onPressed: () {
-                setState(() {});
                 Navigator.of(context).pop();
               },
             ),
@@ -84,31 +92,48 @@ class _AccountDetailState extends State<AccountDetail> {
     double heightposter = 0;
     if (MediaQuery.of(context).size.height >
         MediaQuery.of(context).size.width) {
-      heightposter = (MediaQuery.of(context).size.width * 0.9);
+      heightposter = (MediaQuery.of(context).size.width * 0.75);
     } else {
-      heightposter = (MediaQuery.of(context).size.height * 0.9);
+      heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
-    return SingleChildScrollView(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+          Container(
+            height: MediaQuery.of(context).size.height * 0.075,
             width: MediaQuery.of(context).size.width,
-            child: Text(
-              "Account Details",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.04,
-                fontWeight: FontWeight.bold,
-                color: primary,
-              ),
+            color: secondary,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    color: primary,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Flexible(
+                  flex: 4,
+                  fit: FlexFit.tight,
+                  child: TextWidget(
+                    str: "Student Details",
+                    size: MediaQuery.of(context).size.height * 0.03,
+                    color: primary,
+                    weight: bold,
+                    alignment: center,
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(
-            color: secondary,
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.9,
-              width: MediaQuery.of(context).size.width,
+          ScrollConfiguration(
+            behavior:
+                ScrollConfiguration.of(context).copyWith(scrollbars: false),
+            child: Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -134,166 +159,93 @@ class _AccountDetailState extends State<AccountDetail> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02,
-                              ),
-                              //Nama
-                              //NRP
                               Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: primary,
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(
-                                        MediaQuery.of(context).size.height *
-                                            0.05),
-                                  ),
-                                  color: Color.fromRGBO(255, 255, 255, 0.4),
-                                ),
                                 margin: EdgeInsets.fromLTRB(
                                     MediaQuery.of(context).size.height * 0.05,
                                     0,
                                     MediaQuery.of(context).size.height * 0.05,
                                     0),
                                 padding: EdgeInsets.fromLTRB(
-                                    MediaQuery.of(context).size.width * 0.05,
-                                    MediaQuery.of(context).size.height * 0.05,
-                                    MediaQuery.of(context).size.width * 0.05,
-                                    MediaQuery.of(context).size.height * 0.05),
+                                  0,
+                                  MediaQuery.of(context).size.height * 0.05,
+                                  0,
+                                  MediaQuery.of(context).size.height * 0.05,
+                                ),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      "Nama - NRP:",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              const Color.fromRGBO(0, 0, 0, 1)),
+                                    StudentDetailWidget(
+                                      strJudul: 'Name',
+                                      isiSnapshot: snapshot.data![0].name,
                                     ),
-                                    Text(
-                                        textAlign: TextAlign.center,
-                                        "${snapshot.data![0].name} - ${snapshot.data![0].nrp}",
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromRGBO(
-                                                60, 108, 180, 1))),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
+                                    StudentDetailWidget(
+                                      strJudul: 'NRP',
+                                      isiSnapshot:
+                                          snapshot.data![0].nrp.toUpperCase(),
                                     ),
-                                    //Jurusan
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      "Jurusan:",
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              const Color.fromRGBO(0, 0, 0, 1)),
+                                    StudentDetailWidget(
+                                      strJudul: 'Major',
+                                      isiSnapshot: snapshot.data![0].jurusan
+                                          .split(" - ")[1],
                                     ),
-                                    Text(snapshot.data![0].jurusan,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromRGBO(
-                                                60, 108, 180, 1))),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    //Angkatan
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      "Angkatan:",
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              const Color.fromRGBO(0, 0, 0, 1)),
-                                    ),
-                                    Text(snapshot.data![0].angkatan.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromRGBO(
-                                                60, 108, 180, 1))),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    //Porto
-
-                                    //if snapshot has portofolio
+                                    StudentDetailWidget(
+                                        strJudul: 'Batch',
+                                        isiSnapshot: snapshot.data![0].angkatan
+                                            .toString()),
                                     if (snapshot.data![0].portfolio != null)
-                                      Text(
-                                        textAlign: TextAlign.center,
-                                        "Portofolio:",
-                                        style: TextStyle(
-                                            fontSize: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.03,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color.fromRGBO(
-                                                0, 0, 0, 1)),
+                                      TextWidget(
+                                        str: 'Portfolio',
+                                        size:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                        color: black,
+                                        weight: bold,
+                                        alignment: center,
                                       ),
-
-                                    //if snapshot has no portofolio
                                     if (snapshot.data![0].portfolio != null)
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            8, 0, 8, 0),
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              // ignore: prefer_const_constructors
-                                              primary: primary),
-                                          onPressed: () async {
-                                            if (await canLaunchUrl(Uri.parse(
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                    if (snapshot.data![0].portfolio != null)
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: secondary,
+                                        ),
+                                        onPressed: () async {
+                                          if (await canLaunchUrl(
+                                            Uri.parse(
+                                              snapshot.data![0].portfolio
+                                                  .toString(),
+                                            ),
+                                          )) {
+                                            await launchUrl(
+                                              Uri.parse(
                                                 snapshot.data![0].portfolio
-                                                    .toString()))) {
-                                              await launchUrl(Uri.parse(snapshot
-                                                  .data![0].portfolio
-                                                  .toString()));
-                                            }
-                                          },
-                                          child: Text(
-                                            snapshot.data![0].portfolio
-                                                .toString(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: MediaQuery.of(context)
+                                                    .toString(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(
+                                              0,
+                                              MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.02,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                                  0.01,
+                                              0,
+                                              MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.01),
+                                          child: TextWidget(
+                                            str: "See Portfolio",
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
+                                            color: primary,
+                                            weight: bold,
+                                            alignment: center,
                                           ),
                                         ),
                                       ),
@@ -301,46 +253,52 @@ class _AccountDetailState extends State<AccountDetail> {
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.02,
+                                                0.03,
                                       ),
-                                    //Pengalaman card/popup
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      "Experience:",
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.03,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              const Color.fromRGBO(0, 0, 0, 1)),
+                                    TextWidget(
+                                      str: 'Experiences',
+                                      size: MediaQuery.of(context).size.height *
+                                          0.02,
+                                      color: black,
+                                      weight: bold,
+                                      alignment: center,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
                                     ),
                                     ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: secondary,
+                                      ),
                                       onPressed: () {
                                         _showDivisionDialog(
-                                            snapshot.data![0].pengalaman
-                                                .toString(),
-                                            heightposter);
+                                          snapshot.data![0].pengalaman
+                                              .toString(),
+                                          heightposter,
+                                        );
                                       },
-                                      child: Text(
-                                        "See Experience",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
+                                      child: Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            0,
+                                            MediaQuery.of(context).size.height *
+                                                0.01,
+                                            0,
+                                            MediaQuery.of(context).size.height *
+                                                0.01),
+                                        child: TextWidget(
+                                          str: "See Experiences",
+                                          size: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
+                                              0.025,
+                                          color: primary,
+                                          weight: bold,
+                                          alignment: center,
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.02,
                               ),
                             ],
                           );
@@ -352,6 +310,21 @@ class _AccountDetailState extends State<AccountDetail> {
                           );
                         }
                       },
+                    ),
+                    Container(
+                      height: 2,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      color: Colors.purple,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextWidget(
+                      str: "Testimonials",
+                      size: MediaQuery.of(context).size.height * 0.03,
+                      color: black,
+                      weight: bold,
+                      alignment: center,
                     ),
                     FutureBuilder<List<StudentTestimonial>>(
                       future: _studentTestimonials,
@@ -380,61 +353,63 @@ class _AccountDetailState extends State<AccountDetail> {
                                               0.02,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: primary,
-                                        ),
+                                      decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05),
+                                          Radius.circular(10),
                                         ),
-                                        color:
-                                            Color.fromRGBO(255, 255, 255, 0.4),
+                                        color: secondary,
                                       ),
                                       margin: EdgeInsets.fromLTRB(
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          0,
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          0),
+                                        MediaQuery.of(context).size.height *
+                                            0.05,
+                                        0,
+                                        MediaQuery.of(context).size.height *
+                                            0.05,
+                                        0,
+                                      ),
                                       padding: EdgeInsets.fromLTRB(
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
-                                          MediaQuery.of(context).size.width *
-                                              0.05,
-                                          MediaQuery.of(context).size.height *
-                                              0.05),
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                        MediaQuery.of(context).size.height *
+                                            0.02,
+                                        MediaQuery.of(context).size.width *
+                                            0.05,
+                                        MediaQuery.of(context).size.height *
+                                            0.02,
+                                      ),
                                       child: Column(
                                         children: [
-                                          Text(
-                                            textAlign: TextAlign.center,
-                                            snapshot.data![index].event,
-                                            style: TextStyle(
-                                                fontSize: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.03,
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color.fromRGBO(
-                                                    0, 0, 0, 1)),
+                                          TextWidget(
+                                            str: snapshot.data![index].event,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
+                                            color: primary,
+                                            weight: bold,
+                                            alignment: center,
                                           ),
-                                          Text(
-                                              snapshot.data![index].testimonial,
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .height *
-                                                          0.02,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: const Color.fromRGBO(
-                                                      60, 108, 180, 1))),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            color: Colors.purple,
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          TextWidget(
+                                            str: snapshot
+                                                .data![index].testimonial,
+                                            size: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.02,
+                                            color: black,
+                                            weight: regular,
+                                            alignment: left,
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -448,23 +423,18 @@ class _AccountDetailState extends State<AccountDetail> {
                         } else {
                           return SizedBox(
                             height: MediaQuery.of(context).size.height * 0.2,
-                            child: const Center(
-                              child: Text(
-                                "No testimonials",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: red,
-                                ),
+                            child: Center(
+                              child: TextWidget(
+                                str: "No testimonials",
+                                size: MediaQuery.of(context).size.height * 0.02,
+                                color: red,
+                                weight: regular,
+                                alignment: center,
                               ),
                             ),
                           );
                         }
                       },
-                    ),
-                    //logout button
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                     ElevatedButton(
                       onPressed: () {
@@ -473,7 +443,7 @@ class _AccountDetailState extends State<AccountDetail> {
                             .popUntil((route) => route.isFirst);
                       },
                       child: Text(
-                        "Logout",
+                        "Sign Out",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height * 0.02,

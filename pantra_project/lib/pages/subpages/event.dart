@@ -74,7 +74,7 @@ class _EventPageState extends State<EventPage> {
           children: [
             const TitleWidget(
                 str1: "Explore Events",
-                str2: "Click on Any event to see more details"),
+                str2: "Click on any event to see more details!"),
             filterEvent(
               "year",
               _futureEventYears,
