@@ -152,8 +152,6 @@ class _StudentDetailState extends State<StudentDetail> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.02,
                               ),
-                              //Nama
-                              //NRP
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -191,7 +189,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                         strJudul: 'Angkatan',
                                         isiSnapshot: snapshot.data![0].angkatan
                                             .toString()),
-                                    //Porto
+
                                     //if snapshot has portofolio
                                     if (snapshot.data![0].portfolio != null)
                                       TextWidget(
@@ -239,7 +237,6 @@ class _StudentDetailState extends State<StudentDetail> {
                                             MediaQuery.of(context).size.height *
                                                 0.03,
                                       ),
-                                    //Pengalaman card/popup
                                     TextWidget(
                                         str: 'Pengalaman',
                                         size:
@@ -349,6 +346,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                               color: black,
                                               weight: bold,
                                               alignment: center),
+                                          SizedBox(height: 8),
                                           TextWidget(
                                               str: snapshot
                                                   .data![index].testimonial,
@@ -358,7 +356,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                                   0.03,
                                               color: primary,
                                               weight: bold,
-                                              alignment: center),
+                                              alignment: justify),
                                         ],
                                       ),
                                     ),
