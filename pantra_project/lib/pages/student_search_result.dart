@@ -8,13 +8,11 @@ import 'package:pantra_project/utils/font_weight.dart';
 import 'package:pantra_project/widget/text.dart';
 
 class StudentSearchResult extends StatefulWidget {
-  final String nrp;
   final String name;
 
   // NOTE: use only one either nrp or name (don't combine them)
   const StudentSearchResult({
     Key? key,
-    this.nrp = "", // this is a default value
     this.name = "handrian", // this is a default value
   }) : super(key: key);
 
@@ -34,12 +32,10 @@ class _StudentDetailState extends State<StudentSearchResult> {
     super.initState();
 
     _studentDetails = _studentService.getAllData(
-      nrp: widget.nrp,
       name: widget.name,
     );
 
     setState(() {
-      nrp = widget.nrp;
       name = widget.name;
     });
   }
@@ -53,21 +49,42 @@ class _StudentDetailState extends State<StudentSearchResult> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.05,
             ),
-            TextWidget(
-                str: "Student Search Results",
-                color: primary,
-                size: MediaQuery.of(context).size.height * 0.035,
-                weight: bold,
-                alignment: center),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Flexible(
+                  flex: 4,
+                  fit: FlexFit.tight,
+                  child: Column(
+                    children: [
+                      TextWidget(
+                        str: 'Student Search Results',
+                        size: MediaQuery.of(context).size.height * 0.035,
+                        color: primary,
+                        weight: bold,
+                        alignment: center,
+                      ),
+                      TextWidget(
+                        str: "\"$name$nrp\"",
+                        color: primary,
+                        size: MediaQuery.of(context).size.height * 0.02,
+                        weight: bold,
+                        alignment: center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            TextWidget(
-                str: "\"$name$nrp\"",
-                color: primary,
-                size: MediaQuery.of(context).size.height * 0.02,
-                weight: bold,
-                alignment: center),
             const SizedBox(
               height: 25,
             ),

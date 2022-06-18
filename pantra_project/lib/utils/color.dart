@@ -6,3 +6,5 @@ const Color black = Color.fromRGBO(0, 0, 0, 1);
 const Color white = Color.fromRGBO(255, 255, 255, 1);
 const Color grey = Color.fromRGBO(255, 255, 255, 0.4);
 const Color red = Color.fromARGB(255, 230, 37, 12);
+const Color greyish = Color.fromRGBO(249, 234, 213, 1);
+const Color orange = Color.fromRGBO(253, 126, 20, 1);

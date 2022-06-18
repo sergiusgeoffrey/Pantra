@@ -12,6 +12,7 @@ import 'package:pantra_project/utils/division.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/font_weight.dart';
+import 'package:pantra_project/widget/title.dart';
 
 class StudentPage extends StatefulWidget {
   const StudentPage({Key? key}) : super(key: key);
@@ -71,27 +72,9 @@ class _StudentPageState extends State<StudentPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
-            TextWidget(
-                str: "Explore Petranesians",
-                size: MediaQuery.of(context).size.height * 0.04,
-                color: primary,
-                weight: bold,
-                alignment: center),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            TextWidget(
-                str: "Click on Petranesian to see more details!",
-                size: MediaQuery.of(context).size.height * 0.02,
-                color: primary,
-                weight: bold,
-                alignment: center),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
-            ),
+            const TitleWidget(
+                str1: "Explore Petranesians",
+                str2: "Click on Petranesian to see more details"),
             filterStudent(
               "experience",
               _futureStudentExperience,
