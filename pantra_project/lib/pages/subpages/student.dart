@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/models/student.dart';
-import 'package:pantra_project/pages/student_detail.dart';
+import 'package:pantra_project/pages/details/student.dart';
 import 'package:pantra_project/services/student.dart';
 import 'package:pantra_project/services/student_batch.dart';
 import 'package:pantra_project/services/student_faculty.dart';
@@ -66,233 +66,240 @@ class _StudentPageState extends State<StudentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          TextWidget(
-              str: "Explore Petranesians",
-              size: MediaQuery.of(context).size.height * 0.04,
-              color: primary,
-              weight: bold,
-              alignment: center),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          TextWidget(
-              str: "Click on Petranesian to see more details!",
-              size: MediaQuery.of(context).size.height * 0.02,
-              color: primary,
-              weight: bold,
-              alignment: center),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          filterStudent(
-            "experience",
-            _futureStudentExperience,
-            Icons.work_history,
-            _keyExperience,
-          ),
-          filterStudent(
-            "batch",
-            _futureStudentBatch,
-            Icons.calendar_month,
-            _keyBatch,
-          ),
-          filterStudent(
-            "faculty",
-            _futureStudentFaculty,
-            Icons.school,
-            _keyFaculty,
-          ),
-          filterStudent(
-            "major",
-            _futureStudentMajor,
-            Icons.code,
-            _keyMajor,
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          showResetFilterButton
-              ? Container(
-                  margin: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.05),
-                  child: SizedBox(
-                    width: 150,
-                    height: 50,
-                    child: showResetFilterButton
-                        ? ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: secondary,
-                            ),
-                            child: const Text(
-                              "Reset Filters",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            TextWidget(
+                str: "Explore Petranesians",
+                size: MediaQuery.of(context).size.height * 0.04,
+                color: primary,
+                weight: bold,
+                alignment: center),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            TextWidget(
+                str: "Click on Petranesian to see more details!",
+                size: MediaQuery.of(context).size.height * 0.02,
+                color: primary,
+                weight: bold,
+                alignment: center),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            filterStudent(
+              "experience",
+              _futureStudentExperience,
+              Icons.work_history,
+              _keyExperience,
+            ),
+            filterStudent(
+              "batch",
+              _futureStudentBatch,
+              Icons.calendar_month,
+              _keyBatch,
+            ),
+            filterStudent(
+              "faculty",
+              _futureStudentFaculty,
+              Icons.school,
+              _keyFaculty,
+            ),
+            filterStudent(
+              "major",
+              _futureStudentMajor,
+              Icons.code,
+              _keyMajor,
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+            showResetFilterButton
+                ? Container(
+                    margin: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).size.height * 0.05),
+                    child: SizedBox(
+                      width: 150,
+                      height: 50,
+                      child: showResetFilterButton
+                          ? ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                primary: secondary,
                               ),
-                            ),
-                            onPressed: () {
-                              setState(
-                                () {
-                                  batch = 0;
-                                  faculty = "";
-                                  major = "";
-                                  experience = "";
-
-                                  _futureStudents = _studentService.getAllData(
-                                    studentBatch: batch,
-                                    experience: experience,
-                                    faculty: faculty,
-                                    major: major,
-                                  );
-
-                                  _keyExperience.currentState?.reset();
-                                  _keyBatch.currentState?.reset();
-                                  _keyFaculty.currentState?.reset();
-                                  _keyMajor.currentState?.reset();
-
-                                  showResetFilterButton = false;
-                                },
-                              );
-                            },
-                          )
-                        : const SizedBox(
-                            width: 0,
-                            height: 0,
-                          ),
-                  ),
-                )
-              : const SizedBox(
-                  width: 0,
-                  height: 0,
-                ),
-          FutureBuilder<List<Student>>(
-            future: _futureStudents,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                return Text(snapshot.error.toString());
-              } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                List<Student> students = snapshot.data!;
-                return CarouselSlider(
-                  options: CarouselOptions(
-                      height: 500,
-                      viewportFraction: MediaQuery.of(context).size.width >
-                              MediaQuery.of(context).size.height
-                          ? 0.3
-                          : 0.6,
-                      autoPlayAnimationDuration:
-                          const Duration(milliseconds: 300),
-                      autoPlay: true,
-                      enlargeCenterPage: false,
-                      enableInfiniteScroll: false,
-                      disableCenter: true),
-                  items: students
-                      .map(
-                        (item) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          margin: EdgeInsets.fromLTRB(
-                              MediaQuery.of(context).size.height * 0.05,
-                              0,
-                              MediaQuery.of(context).size.height * 0.05,
-                              0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 250,
-                                height: 300,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return StudentDetail(nrp: item.nrp);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: item.photoFilepath != null
-                                        ? FadeInImage.assetNetwork(
-                                            placeholder: "images/ukp.png",
-                                            image: item.photoFilepath,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.network(
-                                            "images/ukp.png",
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
+                              child: const Text(
+                                "Reset Filters",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              TextWidget(
-                                  str: item.nama,
-                                  size: 17,
-                                  color: primary,
-                                  weight: bold,
-                                  alignment: left),
-                              TextWidget(
-                                  str: item.angkatan.toString(),
-                                  size: 15,
-                                  color: black,
-                                  weight: bold,
-                                  alignment: left),
-                              TextWidget(
-                                  str: item.program,
-                                  size: 15,
-                                  color: black,
-                                  weight: bold,
-                                  alignment: left),
-                              TextWidget(
-                                  str: item.fakultas,
-                                  size: 15,
-                                  color: black,
-                                  weight: bold,
-                                  alignment: left),
-                            ],
+                              onPressed: () {
+                                setState(
+                                  () {
+                                    batch = 0;
+                                    faculty = "";
+                                    major = "";
+                                    experience = "";
+
+                                    _futureStudents =
+                                        _studentService.getAllData(
+                                      studentBatch: batch,
+                                      experience: experience,
+                                      faculty: faculty,
+                                      major: major,
+                                    );
+
+                                    _keyExperience.currentState?.reset();
+                                    _keyBatch.currentState?.reset();
+                                    _keyFaculty.currentState?.reset();
+                                    _keyMajor.currentState?.reset();
+
+                                    showResetFilterButton = false;
+                                  },
+                                );
+                              },
+                            )
+                          : const SizedBox(
+                              width: 0,
+                              height: 0,
+                            ),
+                    ),
+                  )
+                : const SizedBox(
+                    width: 0,
+                    height: 0,
+                  ),
+            FutureBuilder<List<Student>>(
+              future: _futureStudents,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text(snapshot.error.toString());
+                } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                  List<Student> students = snapshot.data!;
+                  return CarouselSlider(
+                    options: CarouselOptions(
+                        height: 500,
+                        viewportFraction: MediaQuery.of(context).size.width >
+                                MediaQuery.of(context).size.height
+                            ? 0.2
+                            : 0.7,
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 300),
+                        autoPlay: true,
+                        enlargeCenterPage: false,
+                        enableInfiniteScroll: false,
+                        disableCenter: true),
+                    items: students
+                        .map(
+                          (item) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            margin: EdgeInsets.fromLTRB(
+                                MediaQuery.of(context).size.height * 0.05,
+                                0,
+                                MediaQuery.of(context).size.height * 0.05,
+                                0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 250,
+                                  height: 300,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return StudentDetail(nrp: item.nrp);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: item.photoFilepath != null
+                                          ? FadeInImage.assetNetwork(
+                                              placeholder: "images/ukp.png",
+                                              image: item.photoFilepath,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.network(
+                                              "images/ukp.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextWidget(
+                                    str: item.nama,
+                                    size: 19,
+                                    color: primary,
+                                    weight: bold,
+                                    alignment: center),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextWidget(
+                                    str: item.fakultas,
+                                    size: 17,
+                                    color: black,
+                                    weight: bold,
+                                    alignment: center),
+                                TextWidget(
+                                    str: item.program,
+                                    size: 17,
+                                    color: black,
+                                    weight: bold,
+                                    alignment: center),
+                                TextWidget(
+                                    str: item.angkatan.toString(),
+                                    size: 17,
+                                    color: black,
+                                    weight: bold,
+                                    alignment: center),
+                              ],
+                            ),
                           ),
+                        )
+                        .toList(),
+                  );
+                } else {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: const Center(
+                      child: Text(
+                        "No students found!",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: red,
                         ),
-                      )
-                      .toList(),
-                );
-              } else {
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  child: const Center(
-                    child: Text(
-                      "No students found!",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: red,
                       ),
                     ),
-                  ),
-                );
-              }
-            },
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-        ],
+                  );
+                }
+              },
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
+          ],
+        ),
       ),
     );
   }

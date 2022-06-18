@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student_creds.dart';
-import 'package:pantra_project/models/student_testimonial.dart';
-import 'package:pantra_project/pages/student_detail.dart';
+import 'package:pantra_project/pages/details/student.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
+import 'package:pantra_project/utils/font_weight.dart';
+import 'package:pantra_project/widget/text.dart';
 
 class StudentSearchResult extends StatefulWidget {
   final String nrp;
@@ -49,18 +50,24 @@ class _StudentDetailState extends State<StudentSearchResult> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
-            Text(
-              "Student Search Results\n\"$name$nrp\"",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+            TextWidget(
+                str: "Student Search Results",
                 color: primary,
-              ),
-              textAlign: TextAlign.center,
+                size: MediaQuery.of(context).size.height * 0.035,
+                weight: bold,
+                alignment: center),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
+            TextWidget(
+                str: "\"$name$nrp\"",
+                color: primary,
+                size: MediaQuery.of(context).size.height * 0.02,
+                weight: bold,
+                alignment: center),
             const SizedBox(
               height: 25,
             ),
@@ -110,41 +117,41 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            snapshot.data![index].name,
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            snapshot.data![index].nrp
-                                                .toUpperCase(),
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            snapshot.data![index].jurusan
-                                                .split(" - ")[0],
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            snapshot.data![index].jurusan
-                                                .split(" - ")[1],
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          Text(
-                                            snapshot.data![index].angkatan
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 18,
-                                            ),
-                                          ),
+                                          TextWidget(
+                                              str: snapshot.data![index].name,
+                                              color: primary,
+                                              size: 20,
+                                              weight: bold,
+                                              alignment: left),
+                                          TextWidget(
+                                              str: snapshot.data![index].nrp
+                                                  .toUpperCase(),
+                                              color: black,
+                                              size: 18,
+                                              weight: bold,
+                                              alignment: left),
+                                          TextWidget(
+                                              str: snapshot.data![index].jurusan
+                                                  .split(" - ")[0],
+                                              color: black,
+                                              size: 18,
+                                              weight: regular,
+                                              alignment: left),
+                                          TextWidget(
+                                              str: snapshot.data![index].jurusan
+                                                  .split(" - ")[1],
+                                              color: black,
+                                              size: 18,
+                                              weight: regular,
+                                              alignment: left),
+                                          TextWidget(
+                                              str: snapshot
+                                                  .data![index].angkatan
+                                                  .toString(),
+                                              color: black,
+                                              size: 18,
+                                              weight: regular,
+                                              alignment: left),
                                         ],
                                       ),
                                       snapshot.data![index].photoFilepath !=

@@ -15,24 +15,26 @@ class StudentDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
-        children: [
-          TextWidget(
-              str: strJudul,
-              size: MediaQuery.of(context).size.height * 0.025,
-              color: black,
-              weight: bold,
-              alignment: center),
-          TextWidget(
-              str: isiSnapshot,
-              size: MediaQuery.of(context).size.height * 0.03,
-              color: primary,
-              weight: bold,
-              alignment: center),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-        ],
-      );
+    return Column(
+      children: [
+        TextWidget(
+          str: strJudul,
+          size: MediaQuery.of(context).size.height * 0.02,
+          color: black,
+          weight: bold,
+          alignment: center,
+        ),
+        TextWidget(
+          str: isiSnapshot,
+          size: MediaQuery.of(context).size.height * 0.025,
+          color: primary,
+          weight: bold,
+          alignment: center,
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.02,
+        ),
+      ],
+    );
   }
 }
