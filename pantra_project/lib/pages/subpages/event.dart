@@ -50,7 +50,6 @@ class _EventPageState extends State<EventPage> {
   @override
   void initState() {
     super.initState();
-
     _futureEvents = _eventService.getAllData(
       eventYear: year,
       type: type,
@@ -186,6 +185,11 @@ class _EventPageState extends State<EventPage> {
                 List<Event> events = snapshot.data!;
                 return CarouselSlider(
                   options: CarouselOptions(
+                      //print index of current slide
+                      onPageChanged: (index, reason) {
+                        // PaintingBinding.instance.imageCache.clear();
+                        //clear cache of image to prevent memory leak
+                      },
                       height: 500,
                       viewportFraction: MediaQuery.of(context).size.width >
                               MediaQuery.of(context).size.height

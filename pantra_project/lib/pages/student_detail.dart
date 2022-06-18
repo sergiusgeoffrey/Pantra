@@ -174,9 +174,9 @@ class _StudentDetailState extends State<StudentDetail> {
                                     MediaQuery.of(context).size.height * 0.05,
                                     0),
                                 padding: EdgeInsets.fromLTRB(
-                                    0,
+                                    MediaQuery.of(context).size.width * 0.05,
                                     MediaQuery.of(context).size.height * 0.05,
-                                    0,
+                                    MediaQuery.of(context).size.width * 0.05,
                                     MediaQuery.of(context).size.height * 0.05),
                                 child: Column(
                                   children: [
@@ -379,41 +379,85 @@ class _StudentDetailState extends State<StudentDetail> {
                           );
                         } else if (snapshot.hasData &&
                             snapshot.data!.isNotEmpty) {
-                          return ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.02,
-                                  ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    snapshot.data![index].event,
-                                    style: TextStyle(
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        fontWeight: FontWeight.bold,
-                                        color:
-                                            const Color.fromRGBO(0, 0, 0, 1)),
-                                  ),
-                                  Text(snapshot.data![index].testimonial,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: MediaQuery.of(context)
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.05),
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: primary,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.02,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              60, 108, 180, 1))),
-                                ],
-                              );
-                            },
+                                              0.05),
+                                        ),
+                                        color:
+                                            Color.fromRGBO(255, 255, 255, 0.4),
+                                      ),
+                                      margin: EdgeInsets.fromLTRB(
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                          0,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                          0),
+                                      padding: EdgeInsets.fromLTRB(
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                          MediaQuery.of(context).size.height *
+                                              0.05),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            snapshot.data![index].event,
+                                            style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.03,
+                                                fontWeight: FontWeight.bold,
+                                                color: const Color.fromRGBO(
+                                                    0, 0, 0, 1)),
+                                          ),
+                                          Text(
+                                              snapshot.data![index].testimonial,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .height *
+                                                          0.02,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: const Color.fromRGBO(
+                                                      60, 108, 180, 1))),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                           );
                         } else if (snapshot.hasError) {
                           return Text("${snapshot.error}");
