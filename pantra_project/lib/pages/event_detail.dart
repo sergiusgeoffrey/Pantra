@@ -9,7 +9,7 @@ import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
 import 'package:pantra_project/widget/event_details.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:pantra_project/widget/event_url.dart';
 import 'package:pantra_project/widget/text.dart';
 
 class EventDetails extends StatefulWidget {
@@ -222,47 +222,7 @@ class _EventDetailsState extends State<EventDetails> {
                                     strJudul: "Event Year",
                                     isiSnapshot:
                                         snapshot.data!.year.toString()),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.1,
-                                  child: Column(
-                                    children: [
-                                      TextWidget(
-                                        str: "Event URL",
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        color: black,
-                                        weight: bold,
-                                        alignment: center,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            8, 0, 8, 0),
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            primary: primary,
-                                          ),
-                                          onPressed: () async {
-                                            await launchUrl(
-                                              Uri.parse(snapshot.data!.url),
-                                            );
-                                          },
-                                          child: TextWidget(
-                                            str: snapshot.data!.url,
-                                            size: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.02,
-                                            color: black,
-                                            weight: bold,
-                                            alignment: center,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                EventURLWidget(URL: snapshot.data!.url),
                                 SizedBox(
                                   child: Column(
                                     children: [
