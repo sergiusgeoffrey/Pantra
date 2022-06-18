@@ -175,7 +175,7 @@ class _LoginState extends State<Login> {
                         : _validatePass = false;
                   });
 
-                  String nrp = _nrpController.text;
+                  String nrp = _nrpController.text.toLowerCase();
                   String password = _passwordController.text;
 
                   if (nrp.isNotEmpty && password.isNotEmpty) {
@@ -194,6 +194,11 @@ class _LoginState extends State<Login> {
 
                         firebaseAuth(email: email, password: password).then(
                           (value) {
+                            setState(() {
+                              buttonText = "L O G I N";
+                              _nrpController.text = "";
+                              _passwordController.text = "";
+                            });
                             value == "Success"
                                 ? Navigator.push(
                                     context,

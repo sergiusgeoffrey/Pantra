@@ -27,46 +27,41 @@ class _EventDetailsState extends State<EventDetails> {
   String nrp = "";
 
   Future<bool> _onLikeButtonTapped(bool istapped) async {
-    //get nrp from authentication
-
     await Database.updateWishlist(nrp: nrp, eventID: widget.eventID.toString());
     setState(() {
       wishlist = !wishlist;
     });
-    wishlist?
-    ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Event added to wishlist",
-                                      ),
-                                      backgroundColor: red,
-                                      action: SnackBarAction(
-                                        label: "DISMISS",
-                                        textColor: Colors.white,
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .hideCurrentSnackBar();
-                                        },
-                                      ),
-                                    ),
-                                  )
-                                  :
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Event removed from wishlist",
-                                      ),
-                                      backgroundColor: red,
-                                      action: SnackBarAction(
-                                        label: "DISMISS",
-                                        textColor: Colors.white,
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .hideCurrentSnackBar();
-                                        },
-                                      ),
-                                    ),
-                                  );
+    wishlist
+        ? ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                "Event added to wishlist",
+              ),
+              backgroundColor: red,
+              action: SnackBarAction(
+                label: "DISMISS",
+                textColor: Colors.white,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                },
+              ),
+            ),
+          )
+        : ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                "Event removed from wishlist",
+              ),
+              backgroundColor: red,
+              action: SnackBarAction(
+                label: "DISMISS",
+                textColor: Colors.white,
+                onPressed: () {
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                },
+              ),
+            ),
+          );
     return wishlist;
   }
 
@@ -75,9 +70,6 @@ class _EventDetailsState extends State<EventDetails> {
     super.initState();
 
     nrp = FirebaseAuth.instance.currentUser!.email.toString().split('@')[0];
-
-    // wishlist = Database.getSpesificWishlist(
-    //     nrp: nrp, event_id: widget.eventID.toString()) as bool;
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.eventID,
     );
@@ -193,7 +185,7 @@ class _EventDetailsState extends State<EventDetails> {
                       Database.getSpecificWishlist(
                               nrp: nrp, eventID: widget.eventID.toString())
                           .then((value) => setState(() {
-                                wishlist = value as bool;
+                                wishlist = value;
                               }));
 
                       return Column(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:pantra_project/pages/subpages/account.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
 import 'package:pantra_project/pages/subpages/student.dart';
 import 'package:pantra_project/pages/wishlist.dart';
+import 'package:pantra_project/services/student_name.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -21,6 +24,99 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final user = FirebaseAuth.instance;
+
+  final StudentNameService _studentNameService = StudentNameService();
+  late Future<String> _futureStudentName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _futureStudentName = _studentNameService.getStudentName(
+      nrp: user.currentUser!.email.toString().split("@")[0],
+    );
+
+    Future(() {
+      _futureStudentName.then((value) {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) => AlertDialog(
+            title: TextWidget(
+              str: "Welcome back, $value! 👋",
+              size: 20,
+              color: primary,
+              weight: bold,
+              alignment: center,
+            ),
+          ),
+        );
+      });
+    });
+  }
+
+  Future<void> _signOut() async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: secondary,
+          title: const Text(
+            'Sign Out',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: primary,
+            ),
+          ),
+          content: const Text(
+            'Are you sure you want to sign out?',
+            style: TextStyle(
+              fontSize: 15,
+              color: primary,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.green),
+              ),
+              child: TextWidget(
+                str: 'Yes',
+                size: 14,
+                color: white,
+                weight: bold,
+                alignment: center,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(red),
+              ),
+              child: TextWidget(
+                str: 'No',
+                size: 14,
+                color: white,
+                weight: bold,
+                alignment: center,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    await FirebaseAuth.instance.signOut();
+  }
+
   List<Widget> pageList = <Widget>[
     const EventPage(),
     const StudentPage(),
@@ -79,7 +175,7 @@ class _HomeState extends State<Home> {
                   backgroundColor: MaterialStateProperty.all(red),
                 ),
                 child: TextWidget(
-                  str: 'CLOSE',
+                  str: 'Close',
                   size: 14,
                   color: white,
                   weight: bold,
@@ -91,7 +187,7 @@ class _HomeState extends State<Home> {
                   backgroundColor: MaterialStateProperty.all(primary),
                 ),
                 child: TextWidget(
-                  str: 'SEARCH',
+                  str: 'Search',
                   size: 14,
                   color: white,
                   weight: bold,
@@ -208,6 +304,23 @@ class _HomeState extends State<Home> {
         children: [
           SpeedDialChild(
             child: const Icon(
+              FontAwesomeIcons.arrowRightFromBracket,
+              color: red,
+            ),
+            labelWidget: TextWidget(
+              str: 'Sign Out',
+              size: 14,
+              color: primary,
+              weight: bold,
+              alignment: right,
+            ),
+            onTap: () {
+              _signOut();
+            },
+            backgroundColor: secondary,
+          ),
+          SpeedDialChild(
+            child: const Icon(
               FontAwesomeIcons.magnifyingGlass,
               color: primary,
             ),
@@ -247,7 +360,8 @@ class _HomeState extends State<Home> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => WishlistPage(
-                      nrp: user.currentUser!.email.toString().split("@")[0]),
+                    nrp: user.currentUser!.email.toString().split("@")[0],
+                  ),
                 ),
               );
             },

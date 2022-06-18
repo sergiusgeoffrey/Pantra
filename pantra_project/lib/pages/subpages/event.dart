@@ -175,7 +175,7 @@ class _EventPageState extends State<EventPage> {
                           // PaintingBinding.instance.imageCache.clear();
                           //clear cache of image to prevent memory leak
                         },
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: 650,
                         viewportFraction: MediaQuery.of(context).size.width >
                                 MediaQuery.of(context).size.height
                             ? 0.3
@@ -200,71 +200,82 @@ class _EventPageState extends State<EventPage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  width: 250,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return EventDetails(
-                                              eventID: item.id,
-                                            );
-                                          },
+                                Flexible(
+                                  flex: 2,
+                                  child: SizedBox(
+                                    width: 250,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return EventDetails(
+                                                eventID: item.id,
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: FadeInImage.assetNetwork(
+                                          placeholder: "images/ukp.png",
+                                          image: item.posterFilepath,
+                                          fit: BoxFit.cover,
                                         ),
-                                      );
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: FadeInImage.assetNetwork(
-                                        placeholder: "images/ukp.png",
-                                        image: item.posterFilepath,
-                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 10,
+                                Flexible(
+                                  flex: 1,
+                                  child: Column(
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextWidget(
+                                          str: item.name,
+                                          color: primary,
+                                          size: 19,
+                                          weight: bold,
+                                          alignment: center),
+                                      TextWidget(
+                                          str: item.type,
+                                          color: black,
+                                          size: 17,
+                                          weight: bold,
+                                          alignment: center),
+                                      TextWidget(
+                                          str: item.organizer,
+                                          color: black,
+                                          size: 17,
+                                          weight: bold,
+                                          alignment: center),
+                                      TextWidget(
+                                          str: item.year.toString(),
+                                          color: black,
+                                          size: 17,
+                                          weight: bold,
+                                          alignment: center),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      TextWidget(
+                                        str: item.status,
+                                        color: item.status == "Finished"
+                                            ? Colors.green
+                                            : item.status == "On Going"
+                                                ? orange
+                                                : grey,
+                                        size: 17,
+                                        weight: regular,
+                                        alignment: center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                TextWidget(
-                                    str: item.name,
-                                    color: primary,
-                                    size: 19,
-                                    weight: bold,
-                                    alignment: center),
-                                TextWidget(
-                                    str: item.type,
-                                    color: black,
-                                    size: 17,
-                                    weight: bold,
-                                    alignment: center),
-                                TextWidget(
-                                    str: item.organizer,
-                                    color: black,
-                                    size: 17,
-                                    weight: bold,
-                                    alignment: center),
-                                TextWidget(
-                                    str: item.year.toString(),
-                                    color: black,
-                                    size: 17,
-                                    weight: bold,
-                                    alignment: center),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                TextWidget(
-                                    str: item.status,
-                                    color: item.status == "Finished"
-                                        ? Colors.green
-                                        : item.status == "On Going"
-                                            ? orange
-                                            : grey,
-                                    size: 17,
-                                    weight: regular,
-                                    alignment: center),
                               ],
                             ),
                           ),
