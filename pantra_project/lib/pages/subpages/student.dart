@@ -270,7 +270,7 @@ class _StudentPageState extends State<StudentPage> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: red,
+                          color: grey,
                         ),
                       ),
                     ),

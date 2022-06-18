@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/pages/details/event.dart';
 import 'package:pantra_project/services/firestore.dart';
@@ -165,11 +163,11 @@ class _WishlistPageState extends State<WishlistPage> {
                 } else {
                   // TODO: position this text vertically in the center of the screen
                   return Text(
-                    "You don't have any events in your wishlist yet, add some!",
+                    "You don't have any events in your wishlist yet, go add some!",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                      color: Color.fromARGB(255, 230, 37, 12),
+                      color: grey,
                     ),
                     textAlign: center,
                   );

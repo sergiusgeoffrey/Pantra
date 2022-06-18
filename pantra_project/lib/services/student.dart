@@ -35,6 +35,7 @@ class StudentService {
 
     if (response.statusCode == 200) {
       final Map jsonData = json.decode(response.body);
+      print(jsonData);
 
       List<Student> students = [];
 

@@ -167,102 +167,98 @@ class _HomeState extends State<Home> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: white,
-          color: secondary,
-          onTap: (value) {
-            setState(() {
-              pageIndex = value;
-            });
-          },
-          items: const [
-            Icon(
-              Icons.celebration_rounded,
-              color: primary,
-            ),
-            Icon(
-              Icons.people_alt,
-              color: primary,
-            ),
-            Icon(
-              Icons.person,
-              color: primary,
-            ),
-          ],
-        ),
+      bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: white,
-        body: pageList[pageIndex],
-        floatingActionButton: SpeedDial(
-          backgroundColor: primary,
-          child: Icon(
-            fabOpened ? Icons.close : Icons.menu,
-            color: secondary,
+        color: secondary,
+        onTap: (value) {
+          setState(() {
+            pageIndex = value;
+          });
+        },
+        items: const [
+          Icon(
+            Icons.celebration_rounded,
+            color: primary,
           ),
-          onOpen: () {
-            setState(() {
-              fabOpened = true;
-            });
-          },
-          onClose: () {
-            setState(() {
-              fabOpened = false;
-            });
-          },
-          children: [
-            SpeedDialChild(
-              //give text beside icon
-              child: Icon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: primary,
-              ),
-              labelWidget: TextWidget(
-                str: 'Search Student by Name',
-                size: 14,
-                color: primary,
-                weight: bold,
-                alignment: right,
-              ),
-
-              onTap: () {
-                showDivisionDialog(heightposter);
-              },
-              backgroundColor: secondary,
+          Icon(
+            Icons.people_alt,
+            color: primary,
+          ),
+          Icon(
+            Icons.person,
+            color: primary,
+          ),
+        ],
+      ),
+      backgroundColor: white,
+      body: pageList[pageIndex],
+      floatingActionButton: SpeedDial(
+        overlayOpacity: 0.9,
+        backgroundColor: primary,
+        onOpen: () {
+          setState(() {
+            fabOpened = true;
+          });
+        },
+        onClose: () {
+          setState(() {
+            fabOpened = false;
+          });
+        },
+        children: [
+          SpeedDialChild(
+            child: const Icon(
+              FontAwesomeIcons.magnifyingGlass,
+              color: primary,
             ),
-            SpeedDialChild(
-              child: Icon(
-                FontAwesomeIcons.solidHeart,
-                color: primary,
-              ),
-              labelWidget: TextWidget(
-                str: 'Your Event Wishlist',
-                size: 14,
-                color: primary,
-                weight: bold,
-                alignment: right,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WishlistPage(
-                        nrp: user.currentUser!.email.toString().split("@")[0]),
-                  ),
-                );
-              },
-              backgroundColor: secondary,
+            labelWidget: TextWidget(
+              str: 'Search Student by Name',
+              size: 14,
+              color: primary,
+              weight: bold,
+              alignment: right,
             ),
-          ],
-        )
-        // FloatingActionButton(
-        //   backgroundColor: primary,
-        //   onPressed: () {
-        //     showDivisionDialog(heightposter);
-        //   },
-        //   child: const Icon(
-        //     Icons.search,
-        //     color: secondary,
-        //   ),
-        // ),
-        );
+            labelShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+            onTap: () {
+              showDivisionDialog(heightposter);
+            },
+            backgroundColor: secondary,
+          ),
+          SpeedDialChild(
+            child: const Icon(
+              FontAwesomeIcons.solidHeart,
+              color: primary,
+            ),
+            labelWidget: TextWidget(
+              str: 'Your Events Wishlist',
+              size: 14,
+              color: primary,
+              weight: bold,
+              alignment: right,
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WishlistPage(
+                      nrp: user.currentUser!.email.toString().split("@")[0]),
+                ),
+              );
+            },
+            backgroundColor: secondary,
+          ),
+        ],
+        child: Icon(
+          fabOpened ? Icons.close : Icons.menu,
+          color: secondary,
+        ),
+      ),
+    );
   }
 }

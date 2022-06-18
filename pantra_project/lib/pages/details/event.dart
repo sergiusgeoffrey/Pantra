@@ -27,8 +27,6 @@ class _EventDetailsState extends State<EventDetails> {
   String nrp = "";
 
   Future<bool> _onLikeButtonTapped(bool istapped) async {
-    //get nrp from authentication
-
     await Database.updateWishlist(nrp: nrp, eventID: widget.eventID.toString())
         .then((value) {
       setState(() {
@@ -37,11 +35,10 @@ class _EventDetailsState extends State<EventDetails> {
       wishlist
           ? ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(
+                content: const Text(
                   "Event added to wishlist",
                 ),
-                //make only 1 second snackbar
-                duration: Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 backgroundColor: Colors.green,
                 action: SnackBarAction(
                   label: "DISMISS",
@@ -54,10 +51,10 @@ class _EventDetailsState extends State<EventDetails> {
             )
           : ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(
+                content: const Text(
                   "Event removed from wishlist",
                 ),
-                duration: Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 backgroundColor: red,
                 action: SnackBarAction(
                   label: "DISMISS",
@@ -149,7 +146,7 @@ class _EventDetailsState extends State<EventDetails> {
     }
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: grey,
+        backgroundColor: secondary,
         onPressed: () {},
         child: LikeButton(
           isLiked: wishlist,
