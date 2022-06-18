@@ -9,7 +9,7 @@ import 'package:pantra_project/services/event_status.dart';
 import 'package:pantra_project/services/event_type.dart';
 import 'package:pantra_project/services/event_year.dart';
 import 'package:pantra_project/utils/color.dart';
-import 'package:pantra_project/widget/event_title.dart';
+import 'package:pantra_project/widget/title.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -70,7 +70,9 @@ class _EventPageState extends State<EventPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const EventTitleWidget(str1: "Explore Events", str2: "Click on Any event to see more details"),
+          const TitleWidget(
+              str1: "Explore Events",
+              str2: "Click on Any event to see more details"),
           filterEvent(
             "year",
             _futureEventYears,
@@ -171,7 +173,7 @@ class _EventPageState extends State<EventPage> {
                         // PaintingBinding.instance.imageCache.clear();
                         //clear cache of image to prevent memory leak
                       },
-                      height:  MediaQuery.of(context).size.height * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.9,
                       viewportFraction: MediaQuery.of(context).size.width >
                               MediaQuery.of(context).size.height
                           ? 0.3

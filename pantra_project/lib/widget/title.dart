@@ -4,10 +4,10 @@ import '../utils/color.dart';
 import '../utils/font_weight.dart';
 import 'text.dart';
 
-class EventTitleWidget extends StatelessWidget {
+class TitleWidget extends StatelessWidget {
   final String str1;
   final String str2;
-  const EventTitleWidget({Key? key, required this.str1, required this.str2}) : super(key: key);
+  const TitleWidget({Key? key, required this.str1, required this.str2}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
