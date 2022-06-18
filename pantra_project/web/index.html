@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAUK0pxo0jcA912rhFYkujXlE0K908BULk",
+      authDomain: "pantra-cf329.firebaseapp.com",
+      projectId: "pantra-cf329",
+      storageBucket: "pantra-cf329.appspot.com",
+      messagingSenderId: "568483008738",
+      appId: "1:568483008738:web:353a1fa9293a5a45c54ebb"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
   <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.

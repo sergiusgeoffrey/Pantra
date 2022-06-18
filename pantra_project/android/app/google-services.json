@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "568483008738",
+    "project_id": "pantra-cf329",
+    "storage_bucket": "pantra-cf329.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568483008738:android:8ae5908d16518f19c54ebb",
+        "android_client_info": {
+          "package_name": "com.example.pantra_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "568483008738-a475v3vi8qunst12p055jkfdf6fsutbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv2WkaYC3F1eeZOLncrfUAiecPV-f1FCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "568483008738-a475v3vi8qunst12p055jkfdf6fsutbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

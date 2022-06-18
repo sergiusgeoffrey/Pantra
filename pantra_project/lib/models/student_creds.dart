@@ -37,4 +37,19 @@ class StudentCreds {
       lastUpdated: json['last_updated'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nrp': nrp,
+      'name': name,
+      'angkatan': angkatan,
+      'jurusan': jurusan,
+      'pengalaman': pengalaman,
+      'portfolio': portfolio,
+      'date_of_birth': dateofBirth,
+      'instagram': instagram,
+      'photo_filepath': photoFilepath,
+      'last_updated': lastUpdated,
+    };
+  }
 }
