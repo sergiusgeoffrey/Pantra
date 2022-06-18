@@ -120,60 +120,69 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          TextWidget(
-                                              str: snapshot.data![index].name,
-                                              color: primary,
-                                              size: 20,
-                                              weight: bold,
-                                              alignment: left),
-                                          TextWidget(
-                                              str: snapshot.data![index].nrp
-                                                  .toUpperCase(),
-                                              color: black,
-                                              size: 18,
-                                              weight: bold,
-                                              alignment: left),
-                                          TextWidget(
-                                              str: snapshot.data![index].jurusan
-                                                  .split(" - ")[0],
-                                              color: black,
-                                              size: 18,
-                                              weight: regular,
-                                              alignment: left),
-                                          TextWidget(
-                                              str: snapshot.data![index].jurusan
-                                                  .split(" - ")[1],
-                                              color: black,
-                                              size: 18,
-                                              weight: regular,
-                                              alignment: left),
-                                          TextWidget(
-                                              str: snapshot
-                                                  .data![index].angkatan
-                                                  .toString(),
-                                              color: black,
-                                              size: 18,
-                                              weight: regular,
-                                              alignment: left),
-                                        ],
+                                      Flexible(
+                                        flex: 1,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            TextWidget(
+                                                str: snapshot.data![index].name,
+                                                color: primary,
+                                                size: 20,
+                                                weight: bold,
+                                                alignment: left),
+                                            TextWidget(
+                                                str: snapshot.data![index].nrp
+                                                    .toUpperCase(),
+                                                color: black,
+                                                size: 18,
+                                                weight: bold,
+                                                alignment: left),
+                                            TextWidget(
+                                                str: snapshot.data![index].jurusan
+                                                    .split(" - ")[0],
+                                                color: black,
+                                                size: 18,
+                                                weight: regular,
+                                                alignment: left),
+                                            TextWidget(
+                                                str: snapshot.data![index].jurusan
+                                                    .split(" - ")[1],
+                                                color: black,
+                                                size: 18,
+                                                weight: regular,
+                                                alignment: left),
+                                            TextWidget(
+                                                str: snapshot
+                                                    .data![index].angkatan
+                                                    .toString(),
+                                                color: black,
+                                                size: 18,
+                                                weight: regular,
+                                                alignment: left),
+                                          ],
+                                        ),
                                       ),
                                       snapshot.data![index].photoFilepath !=
                                               null
-                                          ? FadeInImage.assetNetwork(
-                                              placeholder: "images/ukp.png",
-                                              image: snapshot
-                                                  .data![index].photoFilepath,
-                                              fit: BoxFit.cover,
-                                              width: 100,
-                                              height: 100,
-                                            )
-                                          : Image.network(
-                                              "images/ukp.png",
-                                              fit: BoxFit.cover,
+                                          ? Flexible(
+                                            flex:1,
+                                            child: FadeInImage.assetNetwork(
+                                                placeholder: "images/ukp.png",
+                                                image: snapshot
+                                                    .data![index].photoFilepath,
+                                                fit: BoxFit.cover,
+                                                width: 100,
+                                                height: 100,
+                                              ),
+                                          )
+                                          : Flexible(
+                                              flex: 1,
+                                              child: Image.network(
+                                                "images/ukp.png",
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                     ],
                                   ),
