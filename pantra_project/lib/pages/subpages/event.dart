@@ -9,6 +9,7 @@ import 'package:pantra_project/services/event_status.dart';
 import 'package:pantra_project/services/event_type.dart';
 import 'package:pantra_project/services/event_year.dart';
 import 'package:pantra_project/utils/color.dart';
+import 'package:pantra_project/widget/event_title.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -69,27 +70,7 @@ class _EventPageState extends State<EventPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          TextWidget(
-              str: "Explore Events",
-              color: primary,
-              size: MediaQuery.of(context).size.height * 0.04,
-              weight: bold,
-              alignment: center),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          TextWidget(
-              str: "Click on any event to see more details",
-              color: primary,
-              size: MediaQuery.of(context).size.height * 0.02,
-              weight: bold,
-              alignment: center),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
+          const EventTitleWidget(str1: "Explore Events", str2: "Click on Any event to see more details"),
           filterEvent(
             "year",
             _futureEventYears,
