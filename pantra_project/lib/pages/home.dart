@@ -210,10 +210,19 @@ class _HomeState extends State<Home> {
           },
           children: [
             SpeedDialChild(
+              //give text beside icon
               child: Icon(
                 FontAwesomeIcons.magnifyingGlass,
                 color: primary,
               ),
+              labelWidget: TextWidget(
+                str: 'Search Student by Name',
+                size: 14,
+                color: primary,
+                weight: bold,
+                alignment: right,
+              ),
+
               onTap: () {
                 showDivisionDialog(heightposter);
               },
@@ -223,6 +232,13 @@ class _HomeState extends State<Home> {
               child: Icon(
                 FontAwesomeIcons.solidHeart,
                 color: primary,
+              ),
+              labelWidget: TextWidget(
+                str: 'Your Event Wishlist',
+                size: 14,
+                color: primary,
+                weight: bold,
+                alignment: right,
               ),
               onTap: () {
                 Navigator.push(
