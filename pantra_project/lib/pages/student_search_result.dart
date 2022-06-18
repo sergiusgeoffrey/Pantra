@@ -14,7 +14,7 @@ class StudentSearchResult extends StatefulWidget {
   const StudentSearchResult({
     Key? key,
     this.nrp = "", // this is a default value
-    this.name = "angel", // this is a default value
+    this.name = "handrian", // this is a default value
   }) : super(key: key);
 
   @override
@@ -81,7 +81,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
                         children: [
                           if (index == 0)
                             Text(
-                              "${snapshot.data!.length} results found",
+                              "${snapshot.data!.length} result(s) found",
                               textAlign: TextAlign.start,
                             ),
                           SizedBox(

@@ -25,9 +25,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    //get authenticated user
     final user = FirebaseAuth.instance;
-    print(user.currentUser!.email);
+
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: white,

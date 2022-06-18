@@ -1,10 +1,9 @@
 import 'package:pantra_project/models/event.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:pantra_project/models/string_obj.dart';
 
 import 'package:http/http.dart' as http;
-
-import '../models/string_obj.dart';
 
 class EventDetailService {
   Future<Event> getAllData({

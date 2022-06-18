@@ -1,9 +1,10 @@
-import 'dart:developer';
+import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pantra_project/pages/home.dart';
-import 'package:pantra_project/pages/register.dart';
+import 'package:pantra_project/services/login.dart';
 import 'package:pantra_project/utils/color.dart';
 
 class Login extends StatefulWidget {
@@ -14,21 +15,54 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  Future<String> login(
+  Future<String> firebaseAuth(
       {required String email, required String password}) async {
     try {
       final auth = FirebaseAuth.instance;
-      final user = await auth.signInWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
       return "Success";
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
+      if (e.code == "email-already-in-use") {
+        try {
+          final auth = FirebaseAuth.instance;
+          await auth.signInWithEmailAndPassword(
+              email: email, password: password);
+
+          return "Success";
+        } on FirebaseAuthException catch (e) {
+          return e.message.toString();
+        }
+      }
       return e.message.toString();
     }
   }
 
+  final LoginService _loginService = LoginService();
+  late Future<bool> _futureLogin;
+
   final _accountController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  final List<String> greeting = <String>[
+    "Welcome!",
+    "Bonjour!",
+    "Hola!",
+    "Privyet!",
+    "Ni Hao!",
+    "Hallo!",
+    "Ola!",
+    "Anyoung!",
+    "Ahlan!",
+    "Guten Tag!",
+    "Namaste",
+    "Shalom!",
+    "Aloha!",
+  ];
+  final _random = Random();
+
+  String buttonText = "L O G I N";
 
   @override
   void dispose() {
@@ -45,11 +79,12 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Namaste",
-              style: TextStyle(
-                fontSize: 30,
+            Text(
+              greeting[_random.nextInt(greeting.length)],
+              style: const TextStyle(
+                fontSize: 40,
                 color: primary,
+                fontWeight: FontWeight.bold,
                 fontFamily: 'Recoleta',
               ),
             ),
@@ -59,8 +94,11 @@ class _LoginState extends State<Login> {
             SizedBox(
               width: 300,
               child: TextField(
+                maxLength: 9,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
                 controller: _accountController,
                 decoration: InputDecoration(
+                  counterText: "",
                   filled: true,
                   prefixIcon: const Icon(Icons.person),
                   labelText: "NRP",
@@ -105,31 +143,84 @@ class _LoginState extends State<Login> {
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 12,
             ),
             SizedBox(
               width: 300,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  String username = _accountController.text;
+                  setState(() {
+                    buttonText = "LOGGING IN...";
+                  });
+
+                  String nrp = _accountController.text;
                   String password = _passwordController.text;
-                  String email = username + "@john.petra.ac.id";
-                  login(email: email, password: password).then((value) {
-                    value == "Success"
-                        ? Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Home(),
-                            ),
-                          )
-                        : ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  "Invalid NRP or Password. Please try again."),
-                            ),
-                          );
-                    ;
+
+                  _futureLogin = _loginService.login(
+                    nrp: nrp,
+                    password: password,
+                  );
+
+                  _futureLogin.then((bool success) {
+                    if (success) {
+                      String email = "$nrp@john.petra.ac.id";
+
+                      setState(() {
+                        buttonText = "LOGGING IN...";
+                      });
+
+                      firebaseAuth(email: email, password: password).then(
+                        (value) {
+                          value == "Success"
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Home(),
+                                  ),
+                                )
+                              : ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      value,
+                                    ),
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 204, 21, 15),
+                                    action: SnackBarAction(
+                                      label: "DISMISS",
+                                      textColor: Colors.white,
+                                      onPressed: () {
+                                        ScaffoldMessenger.of(context)
+                                            .hideCurrentSnackBar();
+                                      },
+                                    ),
+                                  ),
+                                );
+                        },
+                      );
+                    } else {
+                      setState(() {
+                        buttonText = "L O G I N";
+                      });
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text(
+                            "Invalid NRP or Password. Please try again.",
+                          ),
+                          backgroundColor:
+                              const Color.fromARGB(255, 204, 21, 15),
+                          action: SnackBarAction(
+                            label: "DISMISS",
+                            textColor: Colors.white,
+                            onPressed: () {
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                            },
+                          ),
+                        ),
+                      );
+                    }
                   });
                 },
                 style: ElevatedButton.styleFrom(
@@ -137,9 +228,9 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
-                child: const Text(
-                  "LOGIN",
-                  style: TextStyle(
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(
                       fontSize: 30,
                       color: Colors.white,
                       fontFamily: 'Recoleta'),
@@ -147,41 +238,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             const SizedBox(
-              height: 8,
-            ),
-            //register
-            Text("Don't have an account?",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: primary,
-                  fontFamily: 'Recoleta',
-                )),
-            const SizedBox(
-              height: 8,
-            ),
-            SizedBox(
-              width: 300,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Register()));
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                child: const Text(
-                  "Register",
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.white,
-                      fontFamily: 'Recoleta'),
-                ),
-              ),
+              height: 12,
             ),
             const Text(
               "est. MMXXII",
