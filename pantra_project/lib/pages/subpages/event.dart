@@ -257,7 +257,11 @@ class _EventPageState extends State<EventPage> {
                                 ),
                                 TextWidget(
                                     str: item.status,
-                                    color: black,
+                                    color: item.status == "Finished"
+                                        ? Colors.green
+                                        : item.status == "On Going"
+                                            ? orange
+                                            : grey,
                                     size: 17,
                                     weight: regular,
                                     alignment: center),

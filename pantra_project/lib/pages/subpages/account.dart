@@ -120,7 +120,7 @@ class _AccountDetailState extends State<AccountDetail> {
                   flex: 4,
                   fit: FlexFit.tight,
                   child: TextWidget(
-                    str: "Student Details",
+                    str: "Your Details",
                     size: MediaQuery.of(context).size.height * 0.03,
                     color: primary,
                     weight: bold,

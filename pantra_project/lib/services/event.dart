@@ -25,7 +25,10 @@ class EventService {
     String idStr = "";
 
     if (eventYear != 0) yearStr = "&year=$eventYear";
-    if (type != "") type = "&type=$type";
+    if (type != "") {
+      type.contains("&") ? type = type.replaceAll("&", "%26") : type = type;
+      type = "&type=$type";
+    }
     if (organizer != "") organizer = "&organizer=$organizer";
     if (status != "") status = "&status=$status";
     if (id != "") idStr = "&id=$id";

@@ -146,7 +146,7 @@ class _EventDetailsState extends State<EventDetails> {
     }
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: secondary,
+        backgroundColor: primary,
         onPressed: () {},
         child: LikeButton(
           isLiked: wishlist,

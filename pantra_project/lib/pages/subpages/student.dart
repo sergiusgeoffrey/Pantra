@@ -297,6 +297,7 @@ class _StudentPageState extends State<StudentPage> {
           if (snapshot.hasData) {
             return DropdownButtonFormField<StringObj>(
               key: key,
+              isExpanded: true,
               decoration: InputDecoration(
                 labelText: "Filter student by $element",
                 labelStyle: const TextStyle(

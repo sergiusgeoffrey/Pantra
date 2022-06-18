@@ -174,6 +174,9 @@ class _WishlistPageState extends State<WishlistPage> {
                 }
               },
             ),
+            const SizedBox(
+              height: 25,
+            ),
           ],
         ),
       ),
