@@ -4,6 +4,7 @@ import 'package:pantra_project/models/student_testimonial.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/services/student_testimonial.dart';
 import 'package:pantra_project/utils/color.dart';
+import 'package:pantra_project/widget/student_details.dart';
 import 'package:pantra_project/widget/text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -177,93 +178,19 @@ class _StudentDetailState extends State<StudentDetail> {
                                     MediaQuery.of(context).size.height * 0.05),
                                 child: Column(
                                   children: [
-                                    TextWidget(
-                                        str: 'Nama',
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        color: black,
-                                        weight: bold,
-                                        alignment: center),
-                                    TextWidget(
-                                        str: snapshot.data![0].name,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.02,
-                                        color: primary,
-                                        weight: bold,
-                                        alignment: center),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    TextWidget(
-                                        str: 'NRP',
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        color: black,
-                                        weight: bold,
-                                        alignment: center),
-                                    TextWidget(
-                                        str: snapshot.data![0].nrp,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.02,
-                                        color: primary,
-                                        weight: bold,
-                                        alignment: center),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    //Jurusan
-                                    TextWidget(
-                                        str: 'Jurusan',
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        color: black,
-                                        weight: bold,
-                                        alignment: center),
-                                    TextWidget(
-                                        str: snapshot.data![0].jurusan,
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.02,
-                                        color: primary,
-                                        weight: bold,
-                                        alignment: center),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
-                                    //Angkatan
-                                    TextWidget(
-                                        str: 'Angkatan',
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.03,
-                                        color: black,
-                                        weight: bold,
-                                        alignment: center),
-                                    TextWidget(
-                                        str: snapshot.data![0].angkatan
-                                            .toString(),
-                                        size:
-                                            MediaQuery.of(context).size.height *
-                                                0.02,
-                                        color: primary,
-                                        weight: bold,
-                                        alignment: center),
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
+                                    StudentDetailWidget(
+                                        strJudul: 'Nama',
+                                        isiSnapshot: snapshot.data![0].name),
+                                    StudentDetailWidget(
+                                        strJudul: 'NRP',
+                                        isiSnapshot: snapshot.data![0].nrp),
+                                    StudentDetailWidget(
+                                        strJudul: 'Jurusan',
+                                        isiSnapshot: snapshot.data![0].jurusan),
+                                    StudentDetailWidget(
+                                        strJudul: 'Angkatan',
+                                        isiSnapshot: snapshot.data![0].angkatan
+                                            .toString()),
                                     //Porto
                                     //if snapshot has portofolio
                                     if (snapshot.data![0].portfolio != null)
@@ -272,7 +199,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                           size: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.03,
+                                              0.025,
                                           color: black,
                                           weight: bold,
                                           alignment: center),
@@ -300,8 +227,8 @@ class _StudentDetailState extends State<StudentDetail> {
                                               size: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.02,
-                                              color:black,
+                                                  0.03,
+                                              color: black,
                                               weight: bold,
                                               alignment: center),
                                         ),
@@ -310,14 +237,14 @@ class _StudentDetailState extends State<StudentDetail> {
                                       SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.02,
+                                                0.03,
                                       ),
                                     //Pengalaman card/popup
                                     TextWidget(
                                         str: 'Pengalaman',
                                         size:
                                             MediaQuery.of(context).size.height *
-                                                0.03,
+                                                0.025,
                                         color: black,
                                         weight: bold,
                                         alignment: center),
@@ -333,7 +260,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                           size: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.02,
+                                              0.025,
                                           color: black,
                                           weight: bold,
                                           alignment: center),
@@ -428,7 +355,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                               size: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  0.02,
+                                                  0.03,
                                               color: primary,
                                               weight: bold,
                                               alignment: center),
