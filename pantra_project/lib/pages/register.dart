@@ -128,11 +128,11 @@ class _RegisterState extends State<Register> {
                                 await studentApi.getAllData(nrp: nrp);
                             //pakai authentication firebase jadi harus ubah nrp menjadi email dahulu
                             String email = nrp + "@john.petra.ac.id";
-                            _signUp(email: email, password: password);
+                            await _signUp(email: email, password: password);
                             //add data to firestore
                             for (StudentCreds student in data) {
                               student.portfolio ??= "";
-                              Database.addUser(student: student);
+                              await Database.addUser(student: student);
                             }
                           } catch (e) {
                             //if data is not exist in api, add empty data values to firestore
@@ -147,10 +147,10 @@ class _RegisterState extends State<Register> {
                                 photoFilepath: "",
                                 lastUpdated: "");
                             String email = nrp + "@john.petra.ac.id";
-                            _signUp(email: email, password: password);
+                            await _signUp(email: email, password: password);
 
                             //add data to firestore
-                            Database.addUser(student: student);
+                            await Database.addUser(student: student);
                           }
                           Navigator.pop(context);
                           // List<StudentCreds> data =
