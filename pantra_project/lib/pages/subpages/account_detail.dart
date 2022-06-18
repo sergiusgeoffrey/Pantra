@@ -454,7 +454,7 @@ class _AccountDetailState extends State<AccountDetail> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
-                                  color: Color.fromARGB(255, 230, 37, 12),
+                                  color: red,
                                 ),
                               ),
                             ),

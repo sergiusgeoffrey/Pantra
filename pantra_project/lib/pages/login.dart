@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(249, 234, 213, 1),
+      backgroundColor: greyish,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
               greeting[_random.nextInt(greeting.length)],
               style: const TextStyle(
                 fontSize: 40,
-                color: primary,
+                color: secondary,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Recoleta',
               ),
@@ -107,10 +107,9 @@ class _LoginState extends State<Login> {
                     borderSide: BorderSide.none,
                     //make the border transparent
                   ),
-                  fillColor: const Color.fromRGBO(253, 205, 95, 1),
+                  fillColor: primary,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromRGBO(253, 126, 20, 1), width: 2.0),
+                    borderSide: const BorderSide(color: orange, width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
@@ -133,10 +132,9 @@ class _LoginState extends State<Login> {
                     borderSide: BorderSide.none,
                     //make the border transparent
                   ),
-                  fillColor: const Color.fromRGBO(253, 205, 95, 1),
+                  fillColor: secondary,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromRGBO(253, 126, 20, 1), width: 2.0),
+                    borderSide: const BorderSide(color: orange, width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
@@ -184,8 +182,7 @@ class _LoginState extends State<Login> {
                                     content: Text(
                                       value,
                                     ),
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 204, 21, 15),
+                                    backgroundColor: red,
                                     action: SnackBarAction(
                                       label: "DISMISS",
                                       textColor: Colors.white,
@@ -208,8 +205,7 @@ class _LoginState extends State<Login> {
                           content: const Text(
                             "Invalid NRP or Password. Please try again.",
                           ),
-                          backgroundColor:
-                              const Color.fromARGB(255, 204, 21, 15),
+                          backgroundColor: red,
                           action: SnackBarAction(
                             label: "DISMISS",
                             textColor: Colors.white,

@@ -5,6 +5,8 @@ import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
+import 'package:pantra_project/utils/font_weight.dart';
+import 'package:pantra_project/widget/text.dart';
 
 class StudentSearchResult extends StatefulWidget {
   final String nrp;
@@ -52,14 +54,30 @@ class _StudentDetailState extends State<StudentSearchResult> {
             const SizedBox(
               height: 40,
             ),
-            Text(
-              "Student Search Results\n\"$name$nrp\"",
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: primary,
-              ),
-              textAlign: TextAlign.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Flexible(
+                  flex: 4,
+                  fit: FlexFit.tight,
+                  child: TextWidget(
+                    str: 'Student Search Results\n\"$name$nrp\"',
+                    size: MediaQuery.of(context).size.height * 0.04,
+                    color: primary,
+                    weight: bold,
+                    alignment: center,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 25,
