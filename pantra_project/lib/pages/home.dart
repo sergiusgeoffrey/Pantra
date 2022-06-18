@@ -1,14 +1,17 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:pantra_project/pages/student_search_result.dart';
 import 'package:pantra_project/pages/subpages/account.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
 import 'package:pantra_project/pages/subpages/student.dart';
+import 'package:pantra_project/pages/wishlist.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
 import 'package:pantra_project/widget/text.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -26,6 +29,7 @@ class _HomeState extends State<Home> {
   int pageIndex = 0;
 
   final _nameController = TextEditingController();
+  bool fabOpened = false;
 
   @override
   Widget build(BuildContext context) {
@@ -95,14 +99,14 @@ class _HomeState extends State<Home> {
                 ),
                 onPressed: () {
                   if (_nameController.text.isEmpty &&
-                      _nameController.text.length < 4) {
+                      _nameController.text.length < 3) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
                           backgroundColor: secondary,
                           title: TextWidget(
-                            str: 'Please enter at least 4 characters!',
+                            str: 'Please enter at least 3 characters!',
                             size: 16,
                             color: red,
                             weight: bold,
@@ -163,41 +167,86 @@ class _HomeState extends State<Home> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: white,
-        color: secondary,
-        onTap: (value) {
-          setState(() {
-            pageIndex = value;
-          });
-        },
-        items: const [
-          Icon(
-            Icons.celebration_rounded,
-            color: primary,
-          ),
-          Icon(
-            Icons.people_alt,
-            color: primary,
-          ),
-          Icon(
-            Icons.person,
-            color: primary,
-          ),
-        ],
-      ),
-      backgroundColor: white,
-      body: pageList[pageIndex],
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: primary,
-        onPressed: () {
-          showDivisionDialog(heightposter);
-        },
-        child: const Icon(
-          Icons.search,
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: white,
           color: secondary,
+          onTap: (value) {
+            setState(() {
+              pageIndex = value;
+            });
+          },
+          items: const [
+            Icon(
+              Icons.celebration_rounded,
+              color: primary,
+            ),
+            Icon(
+              Icons.people_alt,
+              color: primary,
+            ),
+            Icon(
+              Icons.person,
+              color: primary,
+            ),
+          ],
         ),
-      ),
-    );
+        backgroundColor: white,
+        body: pageList[pageIndex],
+        floatingActionButton: SpeedDial(
+          backgroundColor: primary,
+          child: Icon(
+            fabOpened ? Icons.close : Icons.menu,
+            color: secondary,
+          ),
+          onOpen: () {
+            setState(() {
+              fabOpened = true;
+            });
+          },
+          onClose: () {
+            setState(() {
+              fabOpened = false;
+            });
+          },
+          children: [
+            SpeedDialChild(
+              child: Icon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: primary,
+              ),
+              onTap: () {
+                showDivisionDialog(heightposter);
+              },
+              backgroundColor: secondary,
+            ),
+            SpeedDialChild(
+              child: Icon(
+                FontAwesomeIcons.solidHeart,
+                color: primary,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WishlistPage(
+                        nrp: user.currentUser!.email.toString().split("@")[0]),
+                  ),
+                );
+              },
+              backgroundColor: secondary,
+            ),
+          ],
+        )
+        // FloatingActionButton(
+        //   backgroundColor: primary,
+        //   onPressed: () {
+        //     showDivisionDialog(heightposter);
+        //   },
+        //   child: const Icon(
+        //     Icons.search,
+        //     color: secondary,
+        //   ),
+        // ),
+        );
   }
 }

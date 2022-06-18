@@ -29,9 +29,45 @@ class _EventDetailsState extends State<EventDetails> {
   Future<bool> _onLikeButtonTapped(bool istapped) async {
     //get nrp from authentication
 
-    await Database.updateWishlist(nrp: nrp, eventID: widget.eventID.toString());
-    setState(() {
-      wishlist = !wishlist;
+    await Database.updateWishlist(nrp: nrp, eventID: widget.eventID.toString())
+        .then((value) {
+      setState(() {
+        wishlist = !wishlist;
+      });
+      wishlist
+          ? ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Event added to wishlist",
+                ),
+                //make only 1 second snackbar
+                duration: Duration(seconds: 1),
+                backgroundColor: Colors.green,
+                action: SnackBarAction(
+                  label: "DISMISS",
+                  textColor: Colors.white,
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  },
+                ),
+              ),
+            )
+          : ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Event removed from wishlist",
+                ),
+                duration: Duration(seconds: 1),
+                backgroundColor: red,
+                action: SnackBarAction(
+                  label: "DISMISS",
+                  textColor: Colors.white,
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  },
+                ),
+              ),
+            );
     });
     return wishlist;
   }
@@ -42,8 +78,6 @@ class _EventDetailsState extends State<EventDetails> {
 
     nrp = FirebaseAuth.instance.currentUser!.email.toString().split('@')[0];
 
-    wishlist = Database.getSpecificWishlist(
-        nrp: nrp, eventID: widget.eventID.toString()) as bool;
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.eventID,
     );
@@ -164,12 +198,6 @@ class _EventDetailsState extends State<EventDetails> {
                   future: _futureEventDetail,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      Database.getSpecificWishlist(
-                              nrp: nrp, eventID: widget.eventID.toString())
-                          .then((value) => setState(() {
-                                wishlist = value;
-                              }));
-
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.min,
@@ -267,6 +295,11 @@ class _EventDetailsState extends State<EventDetails> {
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }
+                    Database.getSpecificWishlist(
+                            nrp: nrp, eventID: widget.eventID.toString())
+                        .then((value) => setState(() {
+                              wishlist = value;
+                            }));
                     return Column(
                       children: const [
                         CircularProgressIndicator(),
