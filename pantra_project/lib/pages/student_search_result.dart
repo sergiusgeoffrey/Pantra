@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student_creds.dart';
-import 'package:pantra_project/models/student_testimonial.dart';
 import 'package:pantra_project/pages/student_detail.dart';
 import 'package:pantra_project/services/student_creds.dart';
 import 'package:pantra_project/utils/alignment.dart';
@@ -9,13 +8,11 @@ import 'package:pantra_project/utils/font_weight.dart';
 import 'package:pantra_project/widget/text.dart';
 
 class StudentSearchResult extends StatefulWidget {
-  final String nrp;
   final String name;
 
   // NOTE: use only one either nrp or name (don't combine them)
   const StudentSearchResult({
     Key? key,
-    this.nrp = "", // this is a default value
     this.name = "handrian", // this is a default value
   }) : super(key: key);
 
@@ -35,12 +32,10 @@ class _StudentDetailState extends State<StudentSearchResult> {
     super.initState();
 
     _studentDetails = _studentService.getAllData(
-      nrp: widget.nrp,
       name: widget.name,
     );
 
     setState(() {
-      nrp = widget.nrp;
       name = widget.name;
     });
   }

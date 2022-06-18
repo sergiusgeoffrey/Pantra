@@ -190,7 +190,7 @@ class _EventPageState extends State<EventPage> {
                         // PaintingBinding.instance.imageCache.clear();
                         //clear cache of image to prevent memory leak
                       },
-                      height: 500,
+                      height:  MediaQuery.of(context).size.height * 0.9,
                       viewportFraction: MediaQuery.of(context).size.width >
                               MediaQuery.of(context).size.height
                           ? 0.3
@@ -241,7 +241,7 @@ class _EventPageState extends State<EventPage> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 8,
                               ),
                               TextWidget(
                                   str: item.name,
