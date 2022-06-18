@@ -11,39 +11,36 @@ class EventURLWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.1,
-      child: Column(
-        children: [
-          TextWidget(
-            str: "Event URL",
-            size: MediaQuery.of(context).size.height * 0.03,
-            color: black,
-            weight: bold,
-            alignment: center,
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: primary,
-              ),
-              onPressed: () async {
-                await launchUrl(
-                  Uri.parse(URL),
-                );
-              },
-              child: TextWidget(
-                str: URL,
-                size: MediaQuery.of(context).size.height * 0.02,
-                color: black,
-                weight: bold,
-                alignment: center,
-              ),
+    return Column(
+      children: [
+        TextWidget(
+          str: "Website or Instagram",
+          size: MediaQuery.of(context).size.height * 0.02,
+          color: black,
+          weight: bold,
+          alignment: center,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: secondary,
+            ),
+            onPressed: () async {
+              await launchUrl(
+                Uri.parse(URL),
+              );
+            },
+            child: TextWidget(
+              str: "See Website or Instagram",
+              size: MediaQuery.of(context).size.height * 0.025,
+              color: primary,
+              weight: bold,
+              alignment: center,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

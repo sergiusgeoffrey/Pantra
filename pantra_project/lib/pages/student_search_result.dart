@@ -56,6 +56,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
                   flex: 1,
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
+                    color: primary,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -64,23 +65,12 @@ class _StudentDetailState extends State<StudentSearchResult> {
                 Flexible(
                   flex: 4,
                   fit: FlexFit.tight,
-                  child: Column(
-                    children: [
-                      TextWidget(
-                        str: 'Student Search Results',
-                        size: MediaQuery.of(context).size.height * 0.035,
-                        color: primary,
-                        weight: bold,
-                        alignment: center,
-                      ),
-                      TextWidget(
-                        str: "\"$name$nrp\"",
-                        color: primary,
-                        size: MediaQuery.of(context).size.height * 0.02,
-                        weight: bold,
-                        alignment: center,
-                      ),
-                    ],
+                  child: TextWidget(
+                    str: 'Student Search Results',
+                    size: MediaQuery.of(context).size.height * 0.035,
+                    color: primary,
+                    weight: bold,
+                    alignment: center,
                   ),
                 ),
               ],
@@ -105,7 +95,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
                         children: [
                           if (index == 0)
                             Text(
-                              "${snapshot.data!.length} result(s) found",
+                              "${snapshot.data!.length} result(s) found for \"$name\"",
                               textAlign: TextAlign.start,
                             ),
                           SizedBox(

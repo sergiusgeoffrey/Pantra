@@ -108,6 +108,7 @@ class _StudentDetailState extends State<StudentDetail> {
                   flex: 1,
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios),
+                    color: primary,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -233,7 +234,7 @@ class _StudentDetailState extends State<StudentDetail> {
                                                 0.03,
                                       ),
                                     TextWidget(
-                                      str: 'Experience',
+                                      str: 'Experiences',
                                       size: MediaQuery.of(context).size.height *
                                           0.02,
                                       color: black,

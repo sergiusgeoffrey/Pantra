@@ -1,7 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/pages/student_search_result.dart';
 import 'package:pantra_project/pages/subpages/account.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
@@ -31,41 +30,58 @@ class _HomeState extends State<Home> {
     final nameController = TextEditingController();
 
     @override
+    // ignore: unused_element
     void dispose() {
       nameController.dispose();
       super.dispose();
     }
 
-    Future<void> _showDivisionDialog(double heightposter) async {
+    Future<void> showDivisionDialog(double heightposter) async {
       return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: secondary,
             title: TextWidget(
-                str: 'Search by Name',
-                size: MediaQuery.of(context).size.height * 0.03,
-                color: primary,
-                weight: bold,
-                alignment: center),
+              str: 'Search by Students by Name',
+              size: MediaQuery.of(context).size.height * 0.025,
+              color: primary,
+              weight: bold,
+              alignment: center,
+            ),
             content: SizedBox(
               width: heightposter,
               child: TextField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Search by Name',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: primary,
+                    ),
+                  ),
+                  focusColor: primary,
+                  labelText: 'Ex: Sergius Tanalandi',
+                  labelStyle: TextStyle(
+                    color: primary,
+                  ),
+                  suffixIcon: Icon(Icons.search),
+                  suffixIconColor: primary,
                 ),
                 controller: nameController,
               ),
             ),
             actions: <Widget>[
               TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(primary),
+                ),
                 child: TextWidget(
-                    str: 'Search',
-                    size: 14,
-                    color: primary,
-                    weight: bold,
-                    alignment: center),
+                  str: 'SEARCH',
+                  size: 14,
+                  color: white,
+                  weight: bold,
+                  alignment: center,
+                ),
                 onPressed: () {
                   var name = nameController.text;
                   Navigator.of(context).pop();
@@ -77,9 +93,11 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   );
-                  setState(() {
-                    nameController.clear();
-                  });
+                  setState(
+                    () {
+                      nameController.clear();
+                    },
+                  );
                 },
               ),
             ],
@@ -122,12 +140,15 @@ class _HomeState extends State<Home> {
       ),
       backgroundColor: white,
       body: pageList[pageIndex],
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         backgroundColor: primary,
         onPressed: () {
-          _showDivisionDialog(heightposter);
+          showDivisionDialog(heightposter);
         },
-        child: Icon(Icons.search),
+        child: const Icon(
+          Icons.search,
+          color: secondary,
+        ),
       ),
     );
   }
