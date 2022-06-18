@@ -18,10 +18,6 @@ class AccountDetail extends StatefulWidget {
   State<AccountDetail> createState() => _AccountDetailState();
 }
 
-Future<void> _signOut() async {
-  await FirebaseAuth.instance.signOut();
-}
-
 class _AccountDetailState extends State<AccountDetail> {
   final StudentCredsService _studentDetailService = StudentCredsService();
   late Future<List<StudentCreds>> _studentDetails;
@@ -435,21 +431,6 @@ class _AccountDetailState extends State<AccountDetail> {
                           );
                         }
                       },
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _signOut();
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                      },
-                      child: Text(
-                        "Sign Out",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.02,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,

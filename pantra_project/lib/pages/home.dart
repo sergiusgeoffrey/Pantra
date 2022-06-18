@@ -21,6 +21,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   List<Widget> pageList = <Widget>[
     const EventPage(),
     const StudentPage(),
@@ -248,6 +252,24 @@ class _HomeState extends State<Home> {
                         nrp: user.currentUser!.email.toString().split("@")[0]),
                   ),
                 );
+              },
+              backgroundColor: secondary,
+            ),
+            SpeedDialChild(
+              child: Icon(
+                FontAwesomeIcons.arrowRightFromBracket,
+                color: primary,
+              ),
+              labelWidget: TextWidget(
+                str: 'Sign Out',
+                size: 14,
+                color: primary,
+                weight: bold,
+                alignment: right,
+              ),
+              onTap: () {
+                _signOut();
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
               backgroundColor: secondary,
             ),
