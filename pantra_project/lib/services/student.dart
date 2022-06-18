@@ -23,7 +23,12 @@ class StudentService {
     if (studentBatch != 0) batchStr = "&batch=$studentBatch";
     if (experience != "") experience = "&division=$experience";
     if (faculty != "") faculty = "&faculty=$faculty";
-    if (major != "") major = "&major=$major";
+    if (major != "") {
+      major.contains("&")
+          ? major = major.replaceAll("&", "%26")
+          : major = major;
+      major = "&major=$major";
+    }
 
     final response = await http.get(
         Uri.parse(
