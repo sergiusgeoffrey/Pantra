@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/string_obj.dart';
 import 'package:pantra_project/services/event_details.dart';
+import 'package:pantra_project/services/firestoreservices.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -20,10 +23,28 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   final EventDetailService _eventDetailService = EventDetailService();
   late Future<Event> _futureEventDetail;
+  bool wishlist = false;
+  String nrp = "";
+
+  Future<bool> _onLikeButtonTapped(bool istapped) async {
+    //get nrp from authentication
+
+    await Database.updateWishlist(
+        nrp: nrp, event_id: widget.eventID.toString());
+    setState(() {
+      wishlist = !wishlist;
+    });
+    return wishlist;
+  }
 
   @override
   void initState() {
     super.initState();
+
+    nrp = FirebaseAuth.instance.currentUser!.email.toString().split('@')[0];
+
+    // wishlist = Database.getSpesificWishlist(
+    //     nrp: nrp, event_id: widget.eventID.toString()) as bool;
     _futureEventDetail = _eventDetailService.getAllData(
       id: widget.eventID,
     );
@@ -87,6 +108,14 @@ class _EventDetailsState extends State<EventDetails> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: grey,
+        onPressed: () {},
+        child: LikeButton(
+          isLiked: wishlist,
+          onTap: _onLikeButtonTapped,
+        ),
+      ),
       body: Column(
         children: [
           SizedBox(
@@ -128,6 +157,12 @@ class _EventDetailsState extends State<EventDetails> {
                   future: _futureEventDetail,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
+                      Database.getSpesificWishlist(
+                              nrp: nrp, event_id: widget.eventID.toString())
+                          .then((value) => setState(() {
+                                wishlist = value as bool;
+                              }));
+
                       return Column(
                         children: [
                           SizedBox(
