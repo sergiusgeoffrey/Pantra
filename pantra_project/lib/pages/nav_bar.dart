@@ -4,6 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:pantra_project/pages/home.dart';
 import 'package:pantra_project/pages/subpages/student_search_result.dart';
 import 'package:pantra_project/pages/account.dart';
 import 'package:pantra_project/pages/event.dart';
@@ -87,6 +88,7 @@ class _NavBarState extends State<NavBar> {
   }
 
   List<Widget> pageList = <Widget>[
+    const Home(),
     const EventPage(),
     const StudentPage(),
     const AccountDetail()
@@ -241,6 +243,10 @@ class _NavBarState extends State<NavBar> {
           });
         },
         items: const [
+          Icon(
+            Icons.home,
+            color: primary,
+          ),
           Icon(
             Icons.celebration_rounded,
             color: primary,

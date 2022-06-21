@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import 'package:pantra_project/services/student/student_name.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
@@ -16,37 +15,37 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // final user = FirebaseAuth.instance;
+  final user = FirebaseAuth.instance;
 
-  // final StudentNameService _studentNameService = StudentNameService();
-  // late Future<String> _futureStudentName;
+  final StudentNameService _studentNameService = StudentNameService();
+  late Future<String> _futureStudentName;
 
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  //   _futureStudentName = _studentNameService.getStudentName(
-  //     nrp: user.currentUser!.email.toString().split("@")[0],
-  //   );
+    _futureStudentName = _studentNameService.getStudentName(
+      nrp: user.currentUser!.email.toString().split("@")[0],
+    );
 
-  //   Future(() {
-  //     _futureStudentName.then((value) {
-  //       showDialog(
-  //         context: context,
-  //         barrierDismissible: true,
-  //         builder: (context) => AlertDialog(
-  //           title: TextWidget(
-  //             str: "Welcome back, $value! 👋",
-  //             size: 20,
-  //             color: primary,
-  //             weight: bold,
-  //             alignment: center,
-  //           ),
-  //         ),
-  //       );
-  //     });
-  //   });
-  // }
+    // Future(() {
+    //   _futureStudentName.then((value) {
+    //     showDialog(
+    //       context: context,
+    //       barrierDismissible: true,
+    //       builder: (context) => AlertDialog(
+    //         title: TextWidget(
+    //           str: "Welcome back, $value! 👋",
+    //           size: 20,
+    //           color: primary,
+    //           weight: bold,
+    //           alignment: center,
+    //         ),
+    //       ),
+    //     );
+    //   });
+    // });
+  }
 
   String getTime() {
     var now = DateTime.now();
@@ -61,6 +60,17 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    String titleCase(str) {
+      var splitStr = str.toLowerCase().split(' ');
+      for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i][0].toUpperCase() + splitStr[i].substring(1);
+      }
+      // Directly return the joined string
+      return splitStr.join(' ');
+    }
+
     return Scaffold(
       body: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
@@ -83,13 +93,22 @@ class _HomeState extends State<Home> {
                           weight: regular,
                           alignment: left,
                         ),
-                        TextWidget(
-                          str: "name! 👋",
-                          size: 24,
-                          color: primary,
-                          weight: bold,
-                          alignment: left,
-                        ),
+                        FutureBuilder<String>(
+                          future: _studentNameService.getStudentName(
+                            nrp: user.currentUser!.email
+                                .toString()
+                                .split("@")[0],
+                          ),
+                          builder: (context, snapshot) {
+                            return TextWidget(
+                              str: "${titleCase(snapshot.data.toString())} 👋",
+                              size: 24,
+                              color: primary,
+                              weight: bold,
+                              alignment: left,
+                            );
+                          },
+                        )
                       ],
                     ),
                     Image.network(

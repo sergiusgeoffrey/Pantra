@@ -68,6 +68,7 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       body: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
         child: SingleChildScrollView(
