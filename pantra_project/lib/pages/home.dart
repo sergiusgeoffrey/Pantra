@@ -1,376 +1,291 @@
-import 'dart:async';
-
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:pantra_project/pages/student_search_result.dart';
-import 'package:pantra_project/pages/subpages/account.dart';
-import 'package:pantra_project/pages/subpages/event.dart';
-import 'package:pantra_project/pages/subpages/student.dart';
-import 'package:pantra_project/pages/wishlist.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:pantra_project/services/student/student_name.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
 import 'package:pantra_project/widget/text.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  final user = FirebaseAuth.instance;
+  // final user = FirebaseAuth.instance;
 
-  final StudentNameService _studentNameService = StudentNameService();
-  late Future<String> _futureStudentName;
+  // final StudentNameService _studentNameService = StudentNameService();
+  // late Future<String> _futureStudentName;
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    _futureStudentName = _studentNameService.getStudentName(
-      nrp: user.currentUser!.email.toString().split("@")[0],
-    );
+  //   _futureStudentName = _studentNameService.getStudentName(
+  //     nrp: user.currentUser!.email.toString().split("@")[0],
+  //   );
 
-    Future(() {
-      _futureStudentName.then((value) {
-        showDialog(
-          context: context,
-          barrierDismissible: true,
-          builder: (context) => AlertDialog(
-            title: TextWidget(
-              str: "Welcome back, $value! 👋",
-              size: 20,
-              color: primary,
-              weight: bold,
-              alignment: center,
-            ),
-          ),
-        );
-      });
-    });
+  //   Future(() {
+  //     _futureStudentName.then((value) {
+  //       showDialog(
+  //         context: context,
+  //         barrierDismissible: true,
+  //         builder: (context) => AlertDialog(
+  //           title: TextWidget(
+  //             str: "Welcome back, $value! 👋",
+  //             size: 20,
+  //             color: primary,
+  //             weight: bold,
+  //             alignment: center,
+  //           ),
+  //         ),
+  //       );
+  //     });
+  //   });
+  // }
+
+  String getTime() {
+    var now = DateTime.now();
+    if (now.hour < 12) {
+      return 'Morning 🕊️';
+    } else if (now.hour < 18) {
+      return 'Afternoon 🌞';
+    } else {
+      return 'Evening 🌜';
+    }
   }
-
-  Future<void> _signOut() async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: secondary,
-          title: const Text(
-            'Sign Out',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: primary,
-            ),
-          ),
-          content: const Text(
-            'Are you sure you want to sign out?',
-            style: TextStyle(
-              fontSize: 15,
-              color: primary,
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.of(context).popUntil((route) => route.isFirst);
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green),
-              ),
-              child: TextWidget(
-                str: 'Yes',
-                size: 14,
-                color: white,
-                weight: bold,
-                alignment: center,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(red),
-              ),
-              child: TextWidget(
-                str: 'No',
-                size: 14,
-                color: white,
-                weight: bold,
-                alignment: center,
-              ),
-            ),
-          ],
-        );
-      },
-    );
-
-    await FirebaseAuth.instance.signOut();
-  }
-
-  List<Widget> pageList = <Widget>[
-    const EventPage(),
-    const StudentPage(),
-    const AccountDetail()
-  ];
-  int pageIndex = 0;
-
-  final _nameController = TextEditingController();
-  bool fabOpened = false;
 
   @override
   Widget build(BuildContext context) {
-    @override
-    // ignore: unused_element
-    void dispose() {
-      _nameController.dispose();
-      super.dispose();
-    }
-
-    Future<void> showDivisionDialog(double heightposter) async {
-      return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: secondary,
-            title: TextWidget(
-              str: 'Search by Students by Name',
-              size: MediaQuery.of(context).size.height * 0.025,
-              color: primary,
-              weight: bold,
-              alignment: center,
-            ),
-            content: SizedBox(
-              width: heightposter,
-              child: TextField(
-                controller: _nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: primary,
+    return Scaffold(
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            color: background,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextWidget(
+                          str: "Good ${getTime()}",
+                          size: 16,
+                          color: primary,
+                          weight: regular,
+                          alignment: left,
+                        ),
+                        TextWidget(
+                          str: "name! 👋",
+                          size: 24,
+                          color: primary,
+                          weight: bold,
+                          alignment: left,
+                        ),
+                      ],
+                    ),
+                    Image.network(
+                      'https://www.petra.ac.id/img/ukpetra-logo-text.0f91758d.png',
+                      fit: BoxFit.contain,
+                      width: 130,
+                      height: 40,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextWidget(
+                            str: "Welcome to Pantra!",
+                            size: 20,
+                            color: primary,
+                            weight: bold,
+                            alignment: left,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextWidget(
+                            str:
+                                "Pantra (Panitia Petra) aims to be able to help students maximize the potential and talents of interest in the campus environment.",
+                            size: 16,
+                            color: primary,
+                            weight: regular,
+                            alignment: left,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        'assets/images/student.jpg',
+                        fit: BoxFit.contain,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: TextWidget(
+                    str: "Explore Events",
+                    size: 20,
+                    color: primary,
+                    weight: bold,
+                    alignment: left,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Navigator.pushNamed(context, '/events');
+                  },
+                  child: Card(
+                    elevation: 5,
+                    color: light_secondary,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                TextWidget(
+                                  str:
+                                      "Are you a student who is looking for SKKK for organizations and committees?",
+                                  size: 18,
+                                  color: primary,
+                                  weight: bold,
+                                  alignment: left,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextWidget(
+                                  str:
+                                      "Check out the list of exciting organizing events for you now!",
+                                  size: 16,
+                                  color: primary,
+                                  weight: regular,
+                                  alignment: left,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              'https://instagram.fcgk30-1.fna.fbcdn.net/v/t51.2885-15/66472250_154684382282483_5718420059442705636_n.jpg?stp=dst-jpg_e35&_nc_ht=instagram.fcgk30-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=XTF3ZJGgCfcAX-limrD&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjEwNDYyMTMzNjI3MTA4MDg3OQ%3D%3D.2-ccb7-5&oh=00_AT-HvMbPlIQjjCWBzFe3pMvqEafYb4YbQ84FG7AKDUhJqw&oe=62B7AA6B&_nc_sid=30a2ef',
+                              fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              height: 170,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  labelText: 'Ex: Sergius Tanalandi',
-                  suffixIcon: Icon(Icons.search),
-                  suffixIconColor: primary,
                 ),
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(red),
+                const SizedBox(
+                  height: 30,
                 ),
-                child: TextWidget(
-                  str: 'Close',
-                  size: 14,
-                  color: white,
-                  weight: bold,
-                  alignment: center,
-                ),
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(primary),
-                ),
-                child: TextWidget(
-                  str: 'Search',
-                  size: 14,
-                  color: white,
-                  weight: bold,
-                  alignment: center,
-                ),
-                onPressed: () {
-                  if (_nameController.text.isEmpty &&
-                      _nameController.text.length < 3) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: secondary,
-                          title: TextWidget(
-                            str: 'Please enter at least 3 characters!',
-                            size: 16,
-                            color: red,
-                            weight: bold,
-                            alignment: center,
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  primary,
-                                ),
-                              ),
-                              child: TextWidget(
-                                str: 'OK',
-                                size: 14,
-                                color: white,
-                                weight: bold,
-                                alignment: center,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    var name = _nameController.text;
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StudentSearchResult(
-                          name: name,
-                        ),
-                      ),
-                    );
-
-                    setState(() {
-                      _nameController.clear();
-                    });
-                  }
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    final user = FirebaseAuth.instance;
-    double heightposter = 0;
-    if (MediaQuery.of(context).size.height >
-        MediaQuery.of(context).size.width) {
-      heightposter = (MediaQuery.of(context).size.width * 0.75);
-    } else {
-      heightposter = (MediaQuery.of(context).size.height * 0.75);
-    }
-    return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: white,
-        color: secondary,
-        onTap: (value) {
-          setState(() {
-            pageIndex = value;
-          });
-        },
-        items: const [
-          Icon(
-            Icons.celebration_rounded,
-            color: primary,
-          ),
-          Icon(
-            Icons.people_alt,
-            color: primary,
-          ),
-          Icon(
-            Icons.person,
-            color: primary,
-          ),
-        ],
-      ),
-      backgroundColor: white,
-      body: pageList[pageIndex],
-      floatingActionButton: SpeedDial(
-        overlayOpacity: 0.9,
-        backgroundColor: primary,
-        onOpen: () {
-          setState(() {
-            fabOpened = true;
-          });
-        },
-        onClose: () {
-          setState(() {
-            fabOpened = false;
-          });
-        },
-        children: [
-          SpeedDialChild(
-            child: const Icon(
-              FontAwesomeIcons.arrowRightFromBracket,
-              color: red,
-            ),
-            labelWidget: TextWidget(
-              str: 'Sign Out',
-              size: 14,
-              color: primary,
-              weight: bold,
-              alignment: right,
-            ),
-            onTap: () {
-              _signOut();
-            },
-            backgroundColor: secondary,
-          ),
-          SpeedDialChild(
-            child: const Icon(
-              FontAwesomeIcons.magnifyingGlass,
-              color: primary,
-            ),
-            labelWidget: TextWidget(
-              str: 'Search Student by Name',
-              size: 14,
-              color: primary,
-              weight: bold,
-              alignment: right,
-            ),
-            labelShadow: const [
-              BoxShadow(
-                color: Colors.black,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-            onTap: () {
-              showDivisionDialog(heightposter);
-            },
-            backgroundColor: secondary,
-          ),
-          SpeedDialChild(
-            child: const Icon(
-              FontAwesomeIcons.solidHeart,
-              color: primary,
-            ),
-            labelWidget: TextWidget(
-              str: 'Your Events Wishlist',
-              size: 14,
-              color: primary,
-              weight: bold,
-              alignment: right,
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => WishlistPage(
-                    nrp: user.currentUser!.email.toString().split("@")[0],
+                Container(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: TextWidget(
+                    str: "Explore Petranesians",
+                    size: 20,
+                    color: primary,
+                    weight: bold,
+                    alignment: right,
                   ),
                 ),
-              );
-            },
-            backgroundColor: secondary,
+                GestureDetector(
+                  onTap: () {
+                    // Navigator.pushNamed(context, '/events');
+                  },
+                  child: Card(
+                    elevation: 5,
+                    color: light_secondary,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.network(
+                              'https://instagram.fcgk30-1.fna.fbcdn.net/v/t51.2885-15/81127625_2528121307460324_3975439623927978525_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=instagram.fcgk30-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=zk2RrzJiWc8AX8NjkML&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT_igLZDka18GcBXMvTJNRPJqO09mXE3x8Y-gOymecLnNQ&oe=62B7B963&_nc_sid=8fd12b',
+                              fit: BoxFit.cover,
+                              width: MediaQuery.of(context).size.width * 0.35,
+                              height: 180,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Flexible(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                TextWidget(
+                                  str:
+                                      "Are you a student currently looking for members for a committee event?",
+                                  size: 18,
+                                  color: primary,
+                                  weight: bold,
+                                  alignment: right,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                TextWidget(
+                                  str:
+                                      "Find experienced students according to your criteria and type now!",
+                                  size: 16,
+                                  color: primary,
+                                  weight: regular,
+                                  alignment: right,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
-        ],
-        child: Icon(
-          fabOpened ? Icons.close : Icons.menu,
-          color: secondary,
         ),
       ),
     );

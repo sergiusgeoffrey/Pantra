@@ -93,6 +93,7 @@ class _AccountDetailState extends State<AccountDetail> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
+      backgroundColor: background,
       body: Column(
         children: [
           Container(

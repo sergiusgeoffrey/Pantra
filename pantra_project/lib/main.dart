@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pantra_project/pages/home.dart';
+import 'package:pantra_project/pages/nav_bar.dart';
 import 'package:pantra_project/pages/login.dart';
 import 'package:pantra_project/utils/color.dart';
 
@@ -16,7 +17,7 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Login(),
+      home: const Home(),
       theme: ThemeData(fontFamily: 'Recoleta'),
     ),
   );

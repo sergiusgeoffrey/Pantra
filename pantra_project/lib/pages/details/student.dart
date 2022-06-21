@@ -98,6 +98,7 @@ class _StudentDetailState extends State<StudentDetail> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
+      backgroundColor: background,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await launchUrl(

@@ -42,6 +42,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -112,6 +113,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                 );
                               },
                               child: Card(
+                                color: light_secondary,
                                 elevation: 5,
                                 child: Container(
                                   padding: const EdgeInsets.all(10),

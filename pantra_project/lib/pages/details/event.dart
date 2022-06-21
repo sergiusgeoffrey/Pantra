@@ -145,6 +145,7 @@ class _EventDetailsState extends State<EventDetails> {
       heightposter = (MediaQuery.of(context).size.height * 0.75);
     }
     return Scaffold(
+      backgroundColor: background,
       floatingActionButton: FloatingActionButton(
         backgroundColor: primary,
         onPressed: () {},

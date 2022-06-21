@@ -19,6 +19,7 @@ class _WishlistPageState extends State<WishlistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -85,6 +86,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                 );
                               },
                               child: Card(
+                                color: light_secondary,
                                 elevation: 5,
                                 child: Container(
                                   padding: const EdgeInsets.all(10),

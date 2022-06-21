@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pantra_project/pages/home.dart';
+import 'package:pantra_project/pages/nav_bar.dart';
 import 'package:pantra_project/services/login.dart';
 import 'package:pantra_project/utils/color.dart';
 
@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: greyish,
+      backgroundColor: background,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -203,7 +203,7 @@ class _LoginState extends State<Login> {
                                 ? Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const Home(),
+                                      builder: (context) => const NavBar(),
                                     ),
                                   )
                                 : ScaffoldMessenger.of(context).showSnackBar(
