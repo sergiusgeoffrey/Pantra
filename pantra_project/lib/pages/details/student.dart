@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student_creds.dart';
 import 'package:pantra_project/models/student_testimonial.dart';
-import 'package:pantra_project/services/student_creds.dart';
-import 'package:pantra_project/services/student_testimonial.dart';
+import 'package:pantra_project/services/student/student_creds.dart';
+import 'package:pantra_project/services/student/student_testimonial.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/widget/student_details.dart';
 import 'package:pantra_project/widget/text.dart';

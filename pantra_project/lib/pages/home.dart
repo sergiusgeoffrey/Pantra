@@ -9,7 +9,7 @@ import 'package:pantra_project/pages/subpages/account.dart';
 import 'package:pantra_project/pages/subpages/event.dart';
 import 'package:pantra_project/pages/subpages/student.dart';
 import 'package:pantra_project/pages/wishlist.dart';
-import 'package:pantra_project/services/student_name.dart';
+import 'package:pantra_project/services/student/student_name.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';

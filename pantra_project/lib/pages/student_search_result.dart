@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pantra_project/models/student_creds.dart';
 import 'package:pantra_project/pages/details/student.dart';
-import 'package:pantra_project/services/student_creds.dart';
+import 'package:pantra_project/services/student/student_creds.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
 import 'package:pantra_project/utils/font_weight.dart';
@@ -139,14 +139,16 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                                 weight: bold,
                                                 alignment: left),
                                             TextWidget(
-                                                str: snapshot.data![index].jurusan
+                                                str: snapshot
+                                                    .data![index].jurusan
                                                     .split(" - ")[0],
                                                 color: black,
                                                 size: 18,
                                                 weight: regular,
                                                 alignment: left),
                                             TextWidget(
-                                                str: snapshot.data![index].jurusan
+                                                str: snapshot
+                                                    .data![index].jurusan
                                                     .split(" - ")[1],
                                                 color: black,
                                                 size: 18,
@@ -166,8 +168,8 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                       snapshot.data![index].photoFilepath !=
                                               null
                                           ? Flexible(
-                                            flex:1,
-                                            child: FadeInImage.assetNetwork(
+                                              flex: 1,
+                                              child: FadeInImage.assetNetwork(
                                                 placeholder: "images/ukp.png",
                                                 image: snapshot
                                                     .data![index].photoFilepath,
@@ -175,7 +177,7 @@ class _StudentDetailState extends State<StudentSearchResult> {
                                                 width: 100,
                                                 height: 100,
                                               ),
-                                          )
+                                            )
                                           : Flexible(
                                               flex: 1,
                                               child: Image.network(

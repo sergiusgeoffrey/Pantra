@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/string_obj.dart';
-import 'package:pantra_project/services/event_details.dart';
+import 'package:pantra_project/services/event/event_details.dart';
 import 'package:pantra_project/services/firestore.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';

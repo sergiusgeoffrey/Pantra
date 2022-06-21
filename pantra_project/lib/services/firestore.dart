@@ -3,7 +3,7 @@ import 'dart:js';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/student_creds.dart';
-import 'package:pantra_project/services/event_details.dart';
+import 'package:pantra_project/services/event/event_details.dart';
 
 CollectionReference tbUser = FirebaseFirestore.instance.collection('tbUser');
 CollectionReference tbWishlist =
