@@ -80,7 +80,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return EventDetails(
-                                          eventID: snapshot.data![0].id);
+                                          eventID: snapshot.data![index].id);
                                     },
                                   ),
                                 );

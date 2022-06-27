@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:pantra_project/pages/home.dart';
+import 'package:pantra_project/pages/login.dart';
 import 'package:pantra_project/pages/subpages/student_search_result.dart';
 import 'package:pantra_project/pages/account.dart';
 import 'package:pantra_project/pages/event.dart';
@@ -51,7 +52,14 @@ class _NavBarState extends State<NavBar> {
             TextButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                //pop until first page
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Login(),
+                  ),
+                );
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.green),
@@ -84,7 +92,7 @@ class _NavBarState extends State<NavBar> {
       },
     );
 
-    await FirebaseAuth.instance.signOut();
+    // await FirebaseAuth.instance.signOut();
   }
 
   List<Widget> pageList = <Widget>[

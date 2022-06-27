@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,6 +63,25 @@ class _LoginState extends State<Login> {
   String buttonText = "L O G I N";
   bool _validateNRP = false;
   bool _validatePass = false;
+
+  Future<void> isLoggedin() async {
+    User? user = await FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const NavBar(),
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isLoggedin();
+  }
 
   @override
   void dispose() {
