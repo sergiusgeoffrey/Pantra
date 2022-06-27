@@ -58,6 +58,14 @@ From the list of available committee events, students can also filter by year, t
   <img src="https://user-images.githubusercontent.com/56993480/176003574-ded3df22-1234-4c61-98d0-905773a92476.jpg" width="272"/>
   <img src="https://user-images.githubusercontent.com/56993480/176003585-080a949c-4561-49f0-906e-e9897c3f313e.jpg" width="272"/>
 </p>
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/56993480/176022102-ef54bf82-8f4a-4554-9c7c-64e76fbf0650.jpg" width="272"/>
+  <img src="https://user-images.githubusercontent.com/56993480/176022130-8ae8b020-ddd2-44c9-b3f8-5596f67019da.jpg" width="272"/>
+</p>
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/56993480/176022278-9268de00-97c6-4256-9274-ebbbb910cc58.jpg" width="272"/>
+  <img src="https://user-images.githubusercontent.com/56993480/176022286-bc6a07ef-0285-423f-8cd3-485404ce211e.jpg" width="272"/>
+</p>
 
 ### Event Details
 
@@ -86,6 +94,14 @@ From the list of Petranesians, students can filter based on experience (division
 <p float="left">
   <img src="https://user-images.githubusercontent.com/56993480/176003870-a2a9420e-10f3-4b72-a900-ffd083a1c4c4.jpg" width="272"/>
   <img src="https://user-images.githubusercontent.com/56993480/176003674-5333e3ff-0bea-4f70-b3b5-1eb411cc2b0a.jpg" width="272"/>
+</p>
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/56993480/176022469-aaec0866-1412-402d-8d96-23d04b1d16c7.jpg" width="272"/>
+  <img src="https://user-images.githubusercontent.com/56993480/176022504-86d8f93b-4958-4388-819c-38896334f9ce.jpg" width="272"/>
+</p>
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/56993480/176022553-da59fc9d-4810-4eaa-9f6f-25ade1481ade.jpg" width="272"/>
+  <img src="https://user-images.githubusercontent.com/56993480/176022564-6b50060f-d785-49ac-aeb0-9089b6cc9867.jpg" width="272"/>
 </p>
 
 ### Student Details
