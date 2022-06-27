@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:pantra_project/pages/event.dart';
+import 'package:pantra_project/pages/nav_bar.dart';
+import 'package:pantra_project/pages/student.dart';
 import 'package:pantra_project/services/student/student_name.dart';
 import 'package:pantra_project/utils/alignment.dart';
 import 'package:pantra_project/utils/color.dart';
@@ -144,7 +147,14 @@ class _HomeState extends State<Home> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.pushNamed(context, '/events');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavBar(
+                          pageIndex: 1,
+                        ),
+                      ),
+                    );
                   },
                   child: Card(
                     elevation: 5,
@@ -212,7 +222,14 @@ class _HomeState extends State<Home> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.pushNamed(context, '/events');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavBar(
+                          pageIndex: 2,
+                        ),
+                      ),
+                    );
                   },
                   child: Card(
                     elevation: 5,
@@ -266,7 +283,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 25,
                 ),
               ],
             ),

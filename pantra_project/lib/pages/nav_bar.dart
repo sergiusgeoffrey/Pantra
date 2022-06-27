@@ -18,7 +18,11 @@ import 'package:pantra_project/widget/text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  final int pageIndex;
+  const NavBar({
+    Key? key,
+    this.pageIndex = 0,
+  }) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -26,6 +30,14 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   final user = FirebaseAuth.instance;
+  int pageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.pageIndex == 0 ? pageIndex = 0 : pageIndex = widget.pageIndex;
+  }
 
   Future<void> _signOut() async {
     showDialog(
@@ -91,8 +103,6 @@ class _NavBarState extends State<NavBar> {
         );
       },
     );
-
-    // await FirebaseAuth.instance.signOut();
   }
 
   List<Widget> pageList = <Widget>[
@@ -101,7 +111,6 @@ class _NavBarState extends State<NavBar> {
     const StudentPage(),
     const AccountDetail()
   ];
-  int pageIndex = 0;
 
   final _nameController = TextEditingController();
   bool fabOpened = false;
