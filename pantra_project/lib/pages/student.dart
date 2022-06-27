@@ -121,7 +121,7 @@ class _StudentPageState extends State<StudentPage> {
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: primary,
                                   ),
                                 ),
                                 onPressed: () {

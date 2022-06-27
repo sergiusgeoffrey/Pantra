@@ -121,7 +121,7 @@ class _EventPageState extends State<EventPage> {
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                    color: primary,
                                   ),
                                 ),
                                 onPressed: () {

@@ -18,34 +18,6 @@ class _HomeState extends State<Home> {
   final user = FirebaseAuth.instance;
 
   final StudentNameService _studentNameService = StudentNameService();
-  late Future<String> _futureStudentName;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _futureStudentName = _studentNameService.getStudentName(
-      nrp: user.currentUser!.email.toString().split("@")[0],
-    );
-
-    // Future(() {
-    //   _futureStudentName.then((value) {
-    //     showDialog(
-    //       context: context,
-    //       barrierDismissible: true,
-    //       builder: (context) => AlertDialog(
-    //         title: TextWidget(
-    //           str: "Welcome back, $value! 👋",
-    //           size: 20,
-    //           color: primary,
-    //           weight: bold,
-    //           alignment: center,
-    //         ),
-    //       ),
-    //     );
-    //   });
-    // });
-  }
 
   String getTime() {
     var now = DateTime.now();
@@ -63,11 +35,8 @@ class _HomeState extends State<Home> {
     String titleCase(str) {
       var splitStr = str.toLowerCase().split(' ');
       for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
         splitStr[i] = splitStr[i][0].toUpperCase() + splitStr[i].substring(1);
       }
-      // Directly return the joined string
       return splitStr.join(' ');
     }
 
@@ -83,39 +52,36 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextWidget(
-                          str: "Good ${getTime()}",
-                          size: 16,
-                          color: primary,
-                          weight: regular,
-                          alignment: left,
-                        ),
-                        FutureBuilder<String>(
-                          future: _studentNameService.getStudentName(
-                            nrp: user.currentUser!.email
-                                .toString()
-                                .split("@")[0],
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextWidget(
+                            str: "Good ${getTime()}",
+                            size: 16,
+                            color: primary,
+                            weight: regular,
+                            alignment: left,
                           ),
-                          builder: (context, snapshot) {
-                            return TextWidget(
-                              str: "${titleCase(snapshot.data.toString())} 👋",
-                              size: 24,
-                              color: primary,
-                              weight: bold,
-                              alignment: left,
-                            );
-                          },
-                        )
-                      ],
-                    ),
-                    Image.network(
-                      'https://www.petra.ac.id/img/ukpetra-logo-text.0f91758d.png',
-                      fit: BoxFit.contain,
-                      width: 130,
-                      height: 40,
+                          FutureBuilder<String>(
+                            future: _studentNameService.getStudentName(
+                              nrp: user.currentUser!.email
+                                  .toString()
+                                  .split("@")[0],
+                            ),
+                            builder: (context, snapshot) {
+                              return TextWidget(
+                                str:
+                                    "${titleCase(snapshot.data.toString())} 👋",
+                                size: 24,
+                                color: primary,
+                                weight: bold,
+                                alignment: left,
+                              );
+                            },
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -219,8 +185,8 @@ class _HomeState extends State<Home> {
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              'https://instagram.fcgk30-1.fna.fbcdn.net/v/t51.2885-15/66472250_154684382282483_5718420059442705636_n.jpg?stp=dst-jpg_e35&_nc_ht=instagram.fcgk30-1.fna.fbcdn.net&_nc_cat=111&_nc_ohc=XTF3ZJGgCfcAX-limrD&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MjEwNDYyMTMzNjI3MTA4MDg3OQ%3D%3D.2-ccb7-5&oh=00_AT-HvMbPlIQjjCWBzFe3pMvqEafYb4YbQ84FG7AKDUhJqw&oe=62B7AA6B&_nc_sid=30a2ef',
+                            child: Image.asset(
+                              'assets/images/explore_events.jpg',
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width * 0.35,
                               height: 170,
@@ -258,8 +224,8 @@ class _HomeState extends State<Home> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              'https://instagram.fcgk30-1.fna.fbcdn.net/v/t51.2885-15/81127625_2528121307460324_3975439623927978525_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=instagram.fcgk30-1.fna.fbcdn.net&_nc_cat=108&_nc_ohc=zk2RrzJiWc8AX8NjkML&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AT_igLZDka18GcBXMvTJNRPJqO09mXE3x8Y-gOymecLnNQ&oe=62B7B963&_nc_sid=8fd12b',
+                            child: Image.asset(
+                              'assets/images/explore_petranesians.jpg',
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width * 0.35,
                               height: 180,
