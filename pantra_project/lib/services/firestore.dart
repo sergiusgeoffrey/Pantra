@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pantra_project/models/event.dart';
 import 'package:pantra_project/models/student_creds.dart';

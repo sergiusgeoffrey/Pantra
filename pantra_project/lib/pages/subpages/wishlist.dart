@@ -52,8 +52,8 @@ class _WishlistPageState extends State<WishlistPage> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
             FutureBuilder<List<Event>>(
               future: Database.getWishlist(nrp: widget.nrp),

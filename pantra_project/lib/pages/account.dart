@@ -67,7 +67,7 @@ class _AccountDetailState extends State<AccountDetail> {
                 backgroundColor: MaterialStateProperty.all(Colors.red),
               ),
               child: TextWidget(
-                str: 'CLOSE',
+                str: 'Close',
                 size: 14,
                 color: white,
                 weight: bold,

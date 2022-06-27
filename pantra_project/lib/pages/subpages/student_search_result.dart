@@ -75,8 +75,8 @@ class _StudentDetailState extends State<StudentSearchResult> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 25,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
             FutureBuilder<List<StudentCreds>>(
               future: _studentDetails,

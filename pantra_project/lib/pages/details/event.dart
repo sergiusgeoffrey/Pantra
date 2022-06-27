@@ -119,7 +119,7 @@ class _EventDetailsState extends State<EventDetails> {
                 backgroundColor: MaterialStateProperty.all(Colors.red),
               ),
               child: TextWidget(
-                str: 'CLOSE',
+                str: 'Close',
                 size: 14,
                 color: white,
                 weight: bold,

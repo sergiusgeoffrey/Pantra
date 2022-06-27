@@ -244,23 +244,26 @@ class _EventPageState extends State<EventPage> {
                                             size: 19,
                                             weight: bold,
                                             alignment: center),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
                                         TextWidget(
                                             str: item.type,
                                             color: black,
                                             size: 17,
-                                            weight: bold,
+                                            weight: regular,
                                             alignment: center),
                                         TextWidget(
                                             str: item.organizer,
                                             color: black,
                                             size: 17,
-                                            weight: bold,
+                                            weight: regular,
                                             alignment: center),
                                         TextWidget(
                                             str: item.year.toString(),
                                             color: black,
                                             size: 17,
-                                            weight: bold,
+                                            weight: regular,
                                             alignment: center),
                                         const SizedBox(
                                           height: 10,
