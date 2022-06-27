@@ -86,6 +86,7 @@ class _EventDetailsState extends State<EventDetails> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          scrollable: true,
           backgroundColor: secondary,
           title: TextWidget(
             str: 'Available Divisions',

@@ -208,14 +208,17 @@ class _StudentDetailState extends State<StudentSearchResult> {
                       return Text("${snapshot.error}");
                     } else {
                       // TODO: position this text vertically in the center of the screen
-                      return Text(
-                        "No results found for\n\"$nrp$name\"\n\nPlease make sure the student you are looking for has a Curriculum Vitae at RE-ACH.",
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 230, 37, 12),
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Text(
+                          "No results found for\n\"$nrp$name\"\n\nPlease make sure the student you are looking for has a Curriculum Vitae at RE-ACH.",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 230, 37, 12),
+                          ),
+                          textAlign: center,
                         ),
-                        textAlign: center,
                       );
                     }
                   },

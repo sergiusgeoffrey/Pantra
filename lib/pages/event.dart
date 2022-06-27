@@ -184,7 +184,7 @@ class _EventPageState extends State<EventPage> {
                                 // PaintingBinding.instance.imageCache.clear();
                                 //clear cache of image to prevent memory leak
                               },
-                              height: 650,
+                              height: 750,
                               viewportFraction:
                                   MediaQuery.of(context).size.width >
                                           MediaQuery.of(context).size.height

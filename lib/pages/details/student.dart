@@ -51,6 +51,7 @@ class _StudentDetailState extends State<StudentDetail> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          scrollable: true,
           backgroundColor: secondary,
           title: TextWidget(
             str: 'View Experiences',
