@@ -203,11 +203,11 @@ class _AccountDetailState extends State<AccountDetail> {
                                                       .toString(),
                                                 ),
                                               )) {
-                                                await launchUrl(
-                                                  Uri.parse(
-                                                    snapshot.data![0].portfolio
-                                                        .toString(),
-                                                  ),
+                                                // ignore: deprecated_member_use
+                                                await launch(
+                                                  snapshot.data![0].portfolio
+                                                      .toString(),
+                                                  forceSafariVC: false,
                                                 );
                                               }
                                             },

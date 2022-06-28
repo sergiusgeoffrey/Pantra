@@ -105,8 +105,10 @@ class _StudentDetailState extends State<StudentDetail> {
           backgroundColor: background,
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
-              await launchUrl(
-                Uri.parse('https://www.instagram.com/$instagramURL'),
+              // ignore: deprecated_member_use
+              await launch(
+                'https://www.instagram.com/$instagramURL',
+                forceSafariVC: false,
               );
             },
             backgroundColor: primary,

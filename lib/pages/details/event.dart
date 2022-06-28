@@ -102,7 +102,8 @@ class _EventDetailsState extends State<EventDetails> {
               itemCount: divisions.length,
               itemBuilder: (BuildContext context, int index) {
                 return divisions[index].data == "BPH" ||
-                        divisions[index].data == "Badan Pengurus Harian"
+                        divisions[index].data == "Badan Pengurus Harian" ||
+                        divisions[index].data == "Pusat"
                     ? Container()
                     : TextWidget(
                         str: divisions[index].data,

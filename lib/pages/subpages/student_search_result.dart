@@ -207,9 +207,8 @@ class _StudentDetailState extends State<StudentSearchResult> {
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     } else {
-                      // TODO: position this text vertically in the center of the screen
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Text(
                           "No results found for\n\"$nrp$name\"\n\nPlease make sure the student you are looking for has a Curriculum Vitae at RE-ACH.",
                           style: const TextStyle(
