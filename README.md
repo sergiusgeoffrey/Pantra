@@ -20,7 +20,7 @@ Pantra (Panitia Petra) sebagai sistem informasi acara kepanitiaan di UK Petra da
 
 ## Testimoni Mahasiswa UK Petra 📽️
 <a href="https://www.youtube.com/shorts/ExzYsqyxUF0" target="_blank">
- <img src="https://i9.ytimg.com/vi/ExzYsqyxUF0/mq1.jpg?sqp=CJTL55UG&rs=AOn4CLCU_wDi61Btt8ffuObcOOOc_uljYg" alt="Watch the video"/>
+ <img src="https://img.youtube.com/vi/ExzYsqyxUF0/0.jpg" alt="Watch the video"/>
 </a>
 
 ## Preview
