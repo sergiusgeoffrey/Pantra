@@ -103,31 +103,13 @@ class _AccountDetailState extends State<AccountDetail> {
                 height: MediaQuery.of(context).size.height * 0.075,
                 width: MediaQuery.of(context).size.width,
                 color: secondary,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      flex: 1,
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        color: primary,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                    Flexible(
-                      flex: 4,
-                      fit: FlexFit.tight,
-                      child: TextWidget(
-                        str: "Your Details",
-                        size: MediaQuery.of(context).size.height * 0.03,
-                        color: primary,
-                        weight: bold,
-                        alignment: center,
-                      ),
-                    ),
-                  ],
+                alignment: Alignment.center,
+                child: TextWidget(
+                  str: "Your Details",
+                  size: MediaQuery.of(context).size.height * 0.03,
+                  color: primary,
+                  weight: bold,
+                  alignment: center,
                 ),
               ),
               ScrollConfiguration(
