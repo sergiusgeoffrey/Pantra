@@ -2,6 +2,8 @@
 
 Pantra merupakan singkatan dari Panitia Petra yang merupakan sistem informasi acara kepanitiaan atau kegiatan kemahasiswaan di Universitas Kristen Petra.
 
+<b>Project Showcase</b> 🚀 [Click here](https://youtu.be/O5Q9gTiU2v0)
+
 ## Framework, Language, & Toolkits
 ![Flutter](	https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
