@@ -29,7 +29,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  late AnimationController _contrtoller;
+  late AnimationController _animController;
   startTimer() async {
     Timer(const Duration(seconds: 4), nextScreen);
   }
@@ -41,11 +41,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-    _contrtoller = AnimationController(
+    _animController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 4),
     );
-    _contrtoller.forward();
+    _animController.forward();
     startTimer();
     super.initState();
   }
@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
-        parent: _contrtoller,
+        parent: _animController,
         curve: Interval(0.0, endInterval, curve: Curves.elasticOut),
       ),
     );
@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _contrtoller.dispose();
+    _animController.dispose();
     super.dispose();
   }
 
